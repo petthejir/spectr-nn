@@ -1160,6 +1160,9 @@ h1, h2, h3, h4, h5, h6 {
       -ms-flex-direction: column;
           flex-direction: column;
 }
+.main-contacts a {
+  color: black;
+}
 
 .call {
   position: fixed;
@@ -1526,6 +1529,7 @@ h1, h2, h3, h4, h5, h6 {
 .footer__right h1 {
   font-size: 22px;
   margin-top: 20px;
+  color: black;
 }
 .footer__right h2, .footer__right h1 {
   font-weight: bold;
