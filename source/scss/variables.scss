@@ -1,0 +1,28 @@
+$purple: #7348ff;
+
+%deselection {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+%background-gradient {
+    background: -webkit-linear-gradient(15deg, #bc69dc,#5d2df4);
+    background: linear-gradient(15deg, #bc69dc,#5d2df4);
+}
+
+%h1 {
+    color: $purple;
+    font-size: 28px;
+    font-weight: 700;
+    margin-left: 20px;
+    @extend %deselection;
+}
+%pages_main {
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);
+}

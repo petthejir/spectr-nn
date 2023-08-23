@@ -1,0 +1,267 @@
+html, body {
+    height: 100%;
+}
+html {
+    scroll-behavior: smooth;
+}
+body {
+    font-family: 'Roboto';
+}
+.wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+input {
+    &::placeholder {
+        font-size: 15px;
+        color: #858585;
+    }
+}
+.conteiner {
+    width: 85%;
+    display: flex;
+}
+.header {
+    margin-bottom: 5px;
+    width: 100%;
+    height: 90px;
+    box-shadow: 0 6px 4px -4px rgba(99, 99, 99, 0.2);
+    top: 0;
+    background-color: white;
+    display: flex;
+    flex: 0 0 auto;
+    justify-content: center;
+    z-index: 2;
+    &__title {
+        padding: 10px;
+        margin-left: -10px;
+    }
+    &__conteiner {
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__list {
+        display: flex;
+        &_alt {
+            opacity: 0;
+            z-index: -1;
+            width: 0%;
+        }
+    }
+    &__list a {
+        margin-inline: 10px;
+    }
+    &-a {
+        font-size: 18px;
+        padding: 10px;
+        transition: 200ms;
+        color: rgb(58, 58, 58);
+        &:hover {
+            color: $purple;
+        }
+    }
+    &__right {
+        display: flex;
+        align-items: center;
+    }
+    &__search {
+        border-radius: 50px;
+        padding-left: 15px;
+        background-image: url(../pics/search.svg);
+        background-repeat: no-repeat;
+        background-position: 65px 10px;
+        width: 100px;
+        cursor: pointer;
+        animation: 200ms forwards;
+        height: 40px;
+        z-index: 4;
+        &:hover {
+            &::placeholder {
+                color: $purple;
+            }
+        }
+        &_alt {
+            padding-right: 110px;
+            position: relative;
+            cursor: auto;
+            font-size: 20px;
+            animation-name: search_animation;
+            background-image: none;
+            padding-left: 25px;
+            border: 1.5px solid $purple;
+            @keyframes search_animation {
+                0% {
+                    height: 50px;
+                }
+                100% {
+                    width: 870px;
+                    height: 50px;
+                }
+            }
+            &:hover {
+                &::placeholder {
+                    color: #858585;
+                }
+            }
+            &::placeholder {
+                font-size: 20px;
+            }
+        }
+        &-buttons {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 70px;
+            height: 40px;
+            position: relative;
+            margin-left: 10px;
+            left: -100px;
+            &-empty {
+                z-index: -1;
+                opacity: 0;
+                display: flex;
+                &_alt {
+                    transition: 100ms;
+                    z-index: 4;
+                    opacity: 1;
+                }
+            }
+            & button {
+                width: 30px;
+            }
+        }
+        &-value-del {
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &-left, &-right{
+                content: "";
+                position: absolute; 
+                width: 18px; 
+                height: 2.5px;
+                border-radius: 100px; 
+                background: #9e9e9e;
+                transform: rotate(45deg);
+            }
+            &-left {
+                transform: rotate(-45deg);
+            }
+            &:hover &-left, &:hover &-right {
+                background: $purple;
+            }
+        }
+        &-line {
+            margin-left: 4px;
+            width: 2px;
+            height: 30px;
+            background-color: #dbdbdb;
+        }
+        &-search-button {
+            fill: #9e9e9e;
+            cursor: pointer;
+            padding: 5px;
+            z-index: -1;
+            opacity: 0;
+            animation: 200ms linear;
+            & svg {
+                margin-top: 3px;
+            }
+            &:hover {
+                fill: $purple;
+            }
+            &_alt {
+                z-index: 4;
+                opacity: 1;
+                transform: scale(1.1);
+                &-2 {
+                    animation-name: search-button-animation;
+                    @keyframes search-button-animation {
+                        20% {
+                            transform: translate(5px, 0);
+                            fill: red;
+                        }
+                        40% {
+                            transform: translate(-7px, 0);
+                        }
+                        60% {
+                            transform: translate(5px, 0);
+                        }
+                        80% {
+                            transform: translate(-7px, 0);
+                        }
+                        100% {
+                            transform: translate(5px, 0);
+                            fill: red;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &__cabinet-link {
+        padding: 10px;
+        margin-left: -60px;
+        &:hover .header__right-svg {
+            fill: $purple;
+        }
+    }
+    &__right-svg {
+        transition: 100ms;
+        fill: rgb(82, 82, 82);
+    }
+}
+.title {
+    font-size: 40px;
+    min-width: 240px;
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    background: -webkit-linear-gradient(15deg, #bc69dc,#5d2df4);
+    background: linear-gradient(15deg, #bc69dc,#5d2df4);
+    background-clip:content-box;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.header-search-closer {
+    position: fixed;
+    right: -200px;
+    top: 100px;
+    width: 1000px;
+    height: 1000px;
+    border-radius: 50%;
+    background-color: rgba(black, 0.6);
+    z-index: -1;
+    opacity: 0;
+    animation: 150ms forwards linear;
+    &_alt {
+        animation-name: header-search-closer;
+        z-index: 2;
+        opacity: 1;
+    }
+}
+@keyframes header-search-closer {
+    100% {
+        transform: scale(900%);
+    }
+}
+
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, .4);
+    width: 20px;
+    height: 20px;
+    animation: rippleEffect .4s ease-in-out;
+    @keyframes rippleEffect {
+        0% {
+            transform: scale(1);
+          } 
+        100% {
+            opacity: 0;
+            transform: scale(24);
+        }
+    }
+}
