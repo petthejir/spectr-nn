@@ -79,7 +79,6 @@ document.querySelector('.feedback__button').onclick = ()=> {
 }
 
 function coll_close() {
-    body_overflow()
     setTimeout(() => {
         coll_content.classList.remove('call__block_swipe')
     }, 150);

@@ -150,11 +150,6 @@ const header_search_closer = document.querySelector('#header-search-closer')
 const header__search_buttons_empty = document.querySelector('.header__search-buttons-empty')
 const header__search_value_del = document.querySelector('.header__search-value-del')
 const header__search_search_button = document.querySelector('.header__search-search-button')
-const body = document.querySelector('.body')
-
-function body_overflow() {
-    body.style.overflow = 'auto'
-}
 
 function header__search_value_do_empty() {
     return header__search.value == ''
@@ -180,8 +175,7 @@ function header_search_closer_full_size_remove() {
     header_search_closer.classList.remove('header-search-closer')
 }
 
-header__search.onclick = function() {
-    body.style.overflow = 'hidden'
+header__search.onclick = () => { 
     header__search.classList.add('header__search_alt')
     header__list.classList.add('header__list_alt')
     header_search_closer.classList.add('header-search-closer')
@@ -191,28 +185,27 @@ header__search.onclick = function() {
     slider_line_active_0()
 }
 
-header__search_search_button.onclick = function() {
+header__search_search_button.onclick = () => {
     header__search_search_button.classList.remove('header__search-search-button_alt-2')
-    setInterval(function() {
+    setInterval(() => {
         if (header__search_value_do_empty()) {
             header__search_search_button.classList.add('header__search-search-button_alt-2') 
         }
     }, 0)
 }
 
-header__search.oninput = function() {
+header__search.oninput = () => {
     header__search_buttons_empty.classList.add('header__search-buttons-empty_alt')
     if (header__search_value_do_empty()) header__search_buttons_empty_alt_remove()
 }
 
-header__search_value_del.onclick = function() {
+header__search_value_del.onclick = () => {
     header__search_value_remove()
     header__search_buttons_empty_alt_remove()
     header__search.focus()
 } 
 
-header_search_closer.onclick = function() {
-    body_overflow()
+header_search_closer.onclick = () => {
     header__search_buttons_remove()
     header_search_closer_full_size_remove()
     header__search_value_remove()
@@ -220,9 +213,8 @@ header_search_closer.onclick = function() {
     slider_underline()
 }
 
-document.addEventListener('keydown', function(e) {
+document.addEventListener('keydown', e => {
     if(e.key === "Escape" && header__search.classList.contains('header__search_alt')) {
-        body_overflow()
         header__search_value_remove()
         header_search_closer_full_size_remove()
         header__search_buttons_remove()
@@ -252,7 +244,7 @@ buttons.forEach(button => {
 
 
     //header swup position
-let footer = document.querySelector('.footer') 
+/* let footer = document.querySelector('.footer') 
 let header = document.querySelector('.header')
 
 const option = {
@@ -278,4 +270,4 @@ const callback_func = function(entries) {
     })
 }
 const observ = new IntersectionObserver(callback_func, option)
-observ.observe(footer)
+observ.observe(footer) */
