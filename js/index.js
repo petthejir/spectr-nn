@@ -180,7 +180,7 @@ function header_search_closer_full_size_remove() {
     header_search_closer.classList.remove('header-search-closer')
 }
 
-header__search.onclick = function() {
+header__search.onclick = function() { 
     body.style.overflow = 'hidden'
     header__search.classList.add('header__search_alt')
     header__list.classList.add('header__list_alt')
