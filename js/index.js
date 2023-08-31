@@ -132,17 +132,36 @@ const brands_left = document.querySelector('.brands__left')
 const brands_right = document.querySelector('.brands__right')
 const brands_slider_lane = document.querySelector('.brands__slider-lane')
 let brands_offset = 0
-brands_right.onclick = function() {
+brands_right.onclick = () => {
     if (brands_offset>=7) return
     brands_offset++    
     brands_slider_lane.style.left = -brands_offset*250 + 'px'
 }
-brands_left.onclick = function() {
+brands_left.onclick = () => {
     if (brands_offset<=0) return
     brands_offset--  
     brands_slider_lane.style.left = -brands_offset*250 + 'px'
 }
 
+    //slider cards
+let cards__sliders = document.querySelectorAll('.cards__slider')
+for (let i = 0; i < cards__sliders.length; i++) {
+    let cards__offset = 0
+    let cards__right = document.querySelectorAll('.cards__right')
+    let cards__lane = document.querySelectorAll('.cards__lane')
+    let cards__left = document.querySelectorAll('.cards__left')
+    let card = document.querySelectorAll('.cards__lane')[i].querySelectorAll('.card')
+    cards__right[i].onclick = () => { 
+        if (cards__offset-cards__lane[i].offsetWidth<-card.length*250) return
+        cards__offset -= cards__lane[i].offsetWidth
+        cards__lane[i].style.left = cards__offset - 10 + 'px' 
+    }
+    cards__left[i].onclick = () => {
+        if (cards__offset>=0) return
+        cards__offset += cards__lane[i].offsetWidth
+        cards__lane[i].style.left = cards__offset - 10 + 'px' 
+    }
+}
 
 const header__search = document.querySelector('.header__search')
 const header__list = document.querySelector('.header__list')
@@ -244,7 +263,7 @@ buttons.forEach(button => {
 
 
     //header swup position
-/* let footer = document.querySelector('.footer') 
+let footer = document.querySelector('.footer') 
 let header = document.querySelector('.header')
 
 const option = {
@@ -270,4 +289,25 @@ const callback_func = function(entries) {
     })
 }
 const observ = new IntersectionObserver(callback_func, option)
-observ.observe(footer) */
+observ.observe(footer)
+
+    //card
+let cards = document.querySelectorAll('.card')
+
+let card__like = [...document.querySelectorAll('.card__like')]
+card__like.forEach(like => like.onclick = () => like.classList.toggle('card__like_alternative'))
+
+for (let i = 0; i < cards.length; i++) {
+    let price_new = document.querySelectorAll('.card__price-new')
+    if (price_new[i].innerHTML != '') {
+        let price_old = document.querySelectorAll('.card__price-old')
+        let card__discount = document.querySelectorAll('.card__discount')
+        let price_old_value = (price_old[i].innerHTML + 1).toString(price_old[i]).slice(0, price_old[i].innerHTML.toString(price_old[i]).indexOf(','))
+        let price_new_value = (price_new[i].innerHTML + 1).toString(price_new[i]).slice(0, price_new[i].innerHTML.toString(price_old[i]).indexOf(','))
+        price_old[i].classList.add('card__price-old_alternative')
+        price_old[i].innerHTML = `<strike>${price_old[i].innerHTML}</strike>`
+        card__discount[i].innerHTML =`-${Math.round((price_old_value-price_new_value)/price_old_value * 100)}%`
+        card__discount[i].style.display = 'block'
+    }
+    else price_old[i].classList.remove('card__price-old_alternative') 
+}

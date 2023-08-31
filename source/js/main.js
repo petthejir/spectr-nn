@@ -131,14 +131,33 @@ const brands_left = document.querySelector('.brands__left')
 const brands_right = document.querySelector('.brands__right')
 const brands_slider_lane = document.querySelector('.brands__slider-lane')
 let brands_offset = 0
-brands_right.onclick = function() {
+brands_right.onclick = () => {
     if (brands_offset>=7) return
     brands_offset++    
     brands_slider_lane.style.left = -brands_offset*250 + 'px'
 }
-brands_left.onclick = function() {
+brands_left.onclick = () => {
     if (brands_offset<=0) return
     brands_offset--  
     brands_slider_lane.style.left = -brands_offset*250 + 'px'
 }
 
+    //slider cards
+let cards__sliders = document.querySelectorAll('.cards__slider')
+for (let i = 0; i < cards__sliders.length; i++) {
+    let cards__offset = 0
+    let cards__right = document.querySelectorAll('.cards__right')
+    let cards__lane = document.querySelectorAll('.cards__lane')
+    let cards__left = document.querySelectorAll('.cards__left')
+    let card = document.querySelectorAll('.cards__lane')[i].querySelectorAll('.card')
+    cards__right[i].onclick = () => { 
+        if (cards__offset-cards__lane[i].offsetWidth<-card.length*250) return
+        cards__offset -= cards__lane[i].offsetWidth
+        cards__lane[i].style.left = cards__offset - 10 + 'px' 
+    }
+    cards__left[i].onclick = () => {
+        if (cards__offset>=0) return
+        cards__offset += cards__lane[i].offsetWidth
+        cards__lane[i].style.left = cards__offset - 10 + 'px' 
+    }
+}

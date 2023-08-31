@@ -265,3 +265,111 @@ input {
         }
     }
 }
+
+.card {
+    min-width: 230px;
+    max-width: 230px;
+    height: 350px;
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    -webkit-box-shadow: 0px 4px 8px 0px rgba($purple, .2);
+    -moz-box-shadow: 0px 4px 8px 0px rgba($purple, .2);
+    box-shadow: 0px 4px 8px 0px rgba($purple, .2);
+    &__conteiner {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+    }
+    &__top {
+        width: 100%;
+        margin-top: 15px;
+        height: 25px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        & h3 {
+            font-size: 15px;
+            font-weight: bold;
+        }
+    }
+    &__discount {
+        position: absolute;
+        left: 0;
+        background-color: $purple;
+        padding: 5px 7px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 100px;
+        font-weight: bold;
+        font-size: 14px;
+        color: #fff;
+        display: none;
+    }
+    &__rating {
+        position: absolute;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &-icon {
+            fill: rgb(240, 208, 31);
+        }
+        &-value {
+            margin-left: 6px;
+        }
+    }
+    &__img-block {
+        height: 140px;
+        margin-top: 15px;
+    }
+    &__title {
+        width: 100%;
+        margin-top: 15px;
+        font-size: 15px;
+        font-weight: bold;
+    }
+    &__bottom {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        position: absolute;
+        bottom: 24px;
+    }
+    &__price {
+        font-size: 22px;
+        font-weight: bold;
+        &-old {
+            position: relative;
+            &_alternative {
+                color: rgb(182,186,194);
+                font-size: 16px;
+            }
+        }
+        &-new {
+            margin-top: 5px;
+            color: rgb(219,54,54);
+        }
+    }
+    &__like {
+        position: absolute;
+        right: 0;
+        fill: rgba(black, .1);
+        transition: 200ms;
+        &:hover {
+            fill: rgba($purple, .4);
+        }
+        &_alternative {
+            fill: $purple;
+        }
+    }
+    &:hover {
+        -webkit-box-shadow: 0px 0px 7px 2px rgba(0, 0, 0, 0.15);
+        -moz-box-shadow: 0px 0px 7px 2px rgba(0, 0, 0, 0.15);
+        box-shadow: 0px 0px 7px 2px rgba(0, 0, 0, 0.15);
+    }
+}
