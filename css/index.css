@@ -465,6 +465,144 @@ input::placeholder {
   }
 }
 
+.card {
+  min-width: 230px;
+  max-width: 230px;
+  height: 350px;
+  border-radius: 20px;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-shadow: 0px 4px 8px 0px rgba(115, 72, 255, 0.2);
+  box-shadow: 0px 4px 8px 0px rgba(115, 72, 255, 0.2);
+}
+.card__conteiner {
+  width: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+}
+.card__top {
+  width: 100%;
+  margin-top: 15px;
+  height: 25px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+}
+.card__top h3 {
+  font-size: 15px;
+  font-weight: bold;
+}
+.card__discount {
+  position: absolute;
+  left: 0;
+  background-color: #7348ff;
+  padding: 5px 7px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 100px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #fff;
+  display: none;
+}
+.card__rating {
+  position: absolute;
+  right: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.card__rating-icon {
+  fill: rgb(240, 208, 31);
+}
+.card__rating-value {
+  margin-left: 6px;
+}
+.card__img-block {
+  height: 140px;
+  margin-top: 15px;
+}
+.card__title {
+  width: 100%;
+  margin-top: 15px;
+  font-size: 15px;
+  font-weight: bold;
+}
+.card__bottom {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  position: absolute;
+  bottom: 24px;
+}
+.card__price {
+  font-size: 22px;
+  font-weight: bold;
+}
+.card__price-old {
+  position: relative;
+}
+.card__price-old_alternative {
+  color: rgb(182, 186, 194);
+  font-size: 16px;
+}
+.card__price-new {
+  margin-top: 5px;
+  color: rgb(219, 54, 54);
+}
+.card__like {
+  position: absolute;
+  right: 0;
+  fill: rgba(0, 0, 0, 0.1);
+  -webkit-transition: 200ms;
+  transition: 200ms;
+}
+.card__like:hover {
+  fill: rgba(115, 72, 255, 0.4);
+}
+.card__like_alternative {
+  fill: #7348ff;
+}
+.card:hover {
+  -webkit-box-shadow: 0px 0px 7px 2px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 0px 7px 2px rgba(0, 0, 0, 0.15);
+}
+
 .main {
   width: 100%;
   -webkit-box-flex: 1;
@@ -695,7 +833,6 @@ input::placeholder {
   width: 100%;
   height: 120px;
   position: relative;
-  margin-bottom: 60px;
 }
 .brands__slider {
   width: 100%;
@@ -781,7 +918,7 @@ input::placeholder {
   display: -ms-flexbox;
   display: flex;
   height: 340px;
-  margin-top: 40px;
+  margin-top: 60px;
 }
 .manufacture__left {
   display: -webkit-box;
@@ -864,6 +1001,79 @@ input::placeholder {
 
 .map {
   margin-top: 40px;
+}
+
+.cards {
+  margin-top: 60px;
+  width: 100%;
+}
+.cards__slider {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  position: relative;
+  padding: 20px 0;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  overflow: hidden;
+}
+.cards__lane {
+  min-width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 360px;
+  left: 0;
+  -webkit-transition: ease 400ms;
+  transition: ease 400ms;
+  position: relative;
+}
+.cards .card {
+  margin: 0 20px;
+}
+.cards__button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: white;
+  position: absolute;
+  z-index: 1;
+  border: 1px solid rgba(70, 70, 70, 0.3);
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.cards__button svg {
+  fill: #7348ff;
+}
+.cards__button:hover {
+  -webkit-box-shadow: 0 4px 3px 0 rgba(100, 100, 100, 0.2);
+          box-shadow: 0 4px 3px 0 rgba(100, 100, 100, 0.2);
+}
+.cards__left {
+  left: 0%;
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+}
+.cards__right {
+  right: 0%;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
 }
 
 .main-shops iframe {
@@ -1582,143 +1792,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 .main-catalog__right {
   width: 70%;
-}
-
-.card {
-  width: 250px;
-  height: 350px;
-  border-radius: 20px;
-  cursor: pointer;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-shadow: 0px 4px 8px 0px rgba(115, 72, 255, 0.2);
-  box-shadow: 0px 4px 8px 0px rgba(115, 72, 255, 0.2);
-}
-.card__conteiner {
-  width: 80%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  position: relative;
-}
-.card__top {
-  width: 100%;
-  margin-top: 15px;
-  height: 25px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  position: relative;
-}
-.card__top h3 {
-  font-size: 15px;
-  font-weight: bold;
-}
-.card__discount {
-  position: absolute;
-  left: 0;
-  background-color: #7348ff;
-  padding: 5px 7px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  border-radius: 100px;
-  font-weight: bold;
-  font-size: 14px;
-  color: #fff;
-  display: none;
-}
-.card__rating {
-  position: absolute;
-  right: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-.card__rating-icon {
-  fill: rgb(240, 208, 31);
-}
-.card__rating-value {
-  margin-left: 6px;
-}
-.card__img-block {
-  height: 140px;
-  margin-top: 15px;
-}
-.card__title {
-  width: 100%;
-  margin-top: 15px;
-  font-size: 15px;
-  font-weight: bold;
-}
-.card__bottom {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  width: 100%;
-  position: absolute;
-  bottom: 24px;
-}
-.card__price {
-  font-size: 22px;
-  font-weight: bold;
-}
-.card__price-old {
-  position: relative;
-}
-.card__price-old_alternative {
-  color: rgb(182, 186, 194);
-  font-size: 16px;
-}
-.card__price-new {
-  margin-top: 5px;
-  color: rgb(219, 54, 54);
-}
-.card__like {
-  position: absolute;
-  right: 0;
-  fill: rgba(0, 0, 0, 0.1);
-  -webkit-transition: 200ms;
-  transition: 200ms;
-}
-.card__like:hover {
-  fill: rgba(115, 72, 255, 0.4);
-}
-.card__like_alternative {
-  fill: #7348ff;
-}
-.card:hover {
-  -webkit-box-shadow: 0px 0px 7px 2px rgba(0, 0, 0, 0.15);
-  box-shadow: 0px 0px 7px 2px rgba(0, 0, 0, 0.15);
 }
 
 .footer {
