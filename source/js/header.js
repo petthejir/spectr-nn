@@ -135,14 +135,16 @@ card__like.forEach(like => like.onclick = () => like.classList.toggle('card__lik
 for (let i = 0; i < cards.length; i++) {
     let price_new = document.querySelectorAll('.card__price-new')
     if (price_new[i].innerHTML != '') {
-        let price_old = document.querySelectorAll('.card__price-old')
-        let card__discount = document.querySelectorAll('.card__discount')
-        let price_old_value = (price_old[i].innerHTML + 1).toString(price_old[i]).slice(0, price_old[i].innerHTML.toString(price_old[i]).indexOf(','))
-        let price_new_value = (price_new[i].innerHTML + 1).toString(price_new[i]).slice(0, price_new[i].innerHTML.toString(price_old[i]).indexOf(','))
-        price_old[i].classList.add('card__price-old_alternative')
-        price_old[i].innerHTML = `<strike>${price_old[i].innerHTML}</strike>`
-        card__discount[i].innerHTML =`-${Math.round((price_old_value-price_new_value)/price_old_value * 100)}%`
-        card__discount[i].style.display = 'block'
+        let price_old = document.querySelectorAll('.card__price-old') // инициализация старой цены
+        let card__discount = document.querySelectorAll('.card__discount') // инициализация скидки
+        let price_old_value = (price_old[i].innerHTML + 1).toString(price_old[i]).slice(0, price_old[i].innerHTML.toString(price_old[i]).indexOf(',')) // до запятой old
+        let price_new_value = (price_new[i].innerHTML + 1).toString(price_new[i]).slice(0, price_new[i].innerHTML.toString(price_old[i]).indexOf(',')) // до запятой new
+        price_old[i].classList.add('card__price-old_alternative') // применение классов к old
+        price_old[i].innerHTML = `<strike>${price_old[i].innerHTML}</strike>` // зачёркивание old
+        card__discount[i].innerHTML =`-${Math.round((price_old_value-price_new_value)/price_old_value * 100)}%` // рассчёт скидки
+        card__discount[i].style.display = 'block' // отображение скидки
     }
-    else price_old[i].classList.remove('card__price-old_alternative') 
 }
+
+
+
