@@ -262,7 +262,7 @@ buttons.forEach(button => {
 })
 
 
-    //header swup position
+/*     //header swup position
 let footer = document.querySelector('.footer') 
 let header = document.querySelector('.header')
 
@@ -289,27 +289,57 @@ const callback_func = function(entries) {
     })
 }
 const observ = new IntersectionObserver(callback_func, option)
-observ.observe(footer)
+observ.observe(footer) */
 
     //card
-let cards = document.querySelectorAll('.card')
-
-let card__like = [...document.querySelectorAll('.card__like')]
-card__like.forEach(like => like.onclick = () => like.classList.toggle('card__like_alternative'))
+let card_like = [...document.querySelectorAll('.card__like')]
+card_like.forEach(like => like.onclick = () => like.classList.toggle('card__like_alternative'))
+    
+let cards = document.querySelectorAll('.card') // все карты
+let price_new = [...document.querySelectorAll('.card__price-new')] // инициализация блока новой цены
+let price_new_value = price_new.map(price => price.getAttribute('data-new-price')) // value price new
+let price_old = [...document.querySelectorAll('.card__price-old')] // инициализация блока старой цены
+let price_old_value = price_old.map(price => price.getAttribute('data-old-price'))// value price old
+let card_discount = document.querySelectorAll('.card__discount') // инициализация скидки
+let card_discount_value = document.querySelectorAll('.card__discount-value') // value скидки
+let rating = document.querySelectorAll('.card__rating-value') 
 
 for (let i = 0; i < cards.length; i++) {
-    let price_new = document.querySelectorAll('.card__price-new')
-    if (price_new[i].innerHTML != '') {
-        let price_old = document.querySelectorAll('.card__price-old') // инициализация старой цены
-        let card__discount = document.querySelectorAll('.card__discount') // инициализация скидки
-        let price_old_value = (price_old[i].innerHTML + 1).toString(price_old[i]).slice(0, price_old[i].innerHTML.toString(price_old[i]).indexOf(',')) // до запятой old
-        let price_new_value = (price_new[i].innerHTML + 1).toString(price_new[i]).slice(0, price_new[i].innerHTML.toString(price_old[i]).indexOf(',')) // до запятой new
+    if (price_new_value[i] != '') {
         price_old[i].classList.add('card__price-old_alternative') // применение классов к old
         price_old[i].innerHTML = `<strike>${price_old[i].innerHTML}</strike>` // зачёркивание old
-        card__discount[i].innerHTML =`-${Math.round((price_old_value-price_new_value)/price_old_value * 100)}%` // рассчёт скидки
-        card__discount[i].style.display = 'block' // отображение скидки
+        card_discount_value[i].innerHTML = -Math.round((price_old_value[i]-price_new_value[i])/price_old_value[i] * 100) // рассчёт скидки
+        card_discount[i].style.display = 'block' // отображение скидки
     }
+    else price_new[i].innerHTML = ''
+}
+
+let array = []
+let array_sorted = []
+for (let i = 0; i < cards.length; i++) {
+    if (price_new_value[i] != '') price_old_value[i] = price_new_value[i]
+    if (card_discount_value[i].innerHTML === '') card_discount_value[i].innerHTML = 0
+    array.push(
+        {
+            card_index: i,
+            price_old_value: price_old_value[i],
+            card_discount: card_discount_value[i].innerHTML,
+            rating: -rating[i].innerHTML
+        }
+    )
 }
 
 
+
+function sort_function(sort) {
+    array.sort((a, b) => a[sort] - b[sort])
+    array.forEach(element => {
+        array_sorted.push(element.card_index)
+    })
+}
+
+sort_function('price_old_value')
+console.log(array)    
+console.log(array_sorted)  
+    
 

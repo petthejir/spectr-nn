@@ -29,3 +29,25 @@ sort.onclick = () => {
     })
 
 }
+ 
+let discont_filter = document.querySelector('.discont-filter')
+discont_filter.onclick = () => {
+    function card_toggle_remove() {
+        for (let i = 0; i < cards.length; i++) {
+            if (price_new_value[i] === '') {
+                cards[i].classList.toggle('remove')
+            }
+        }
+    }
+
+    let discont_filter_input = document.querySelector('.discont-filter__input')
+    if (discont_filter_input.checked === true) {
+        discont_filter_input.checked = false
+    }
+    else discont_filter_input.checked = true
+    if (discont_filter_input.checked === true) card_toggle_remove()
+    else card_toggle_remove()
+}
+
+
+
