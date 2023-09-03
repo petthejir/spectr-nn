@@ -358,6 +358,7 @@ input {
     &__like {
         position: absolute;
         right: 0;
+        bottom: 0px;
         fill: rgba(black, .1);
         transition: 200ms;
         &:hover {

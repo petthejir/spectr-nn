@@ -588,6 +588,7 @@ input::placeholder {
 .card__like {
   position: absolute;
   right: 0;
+  bottom: 0px;
   fill: rgba(0, 0, 0, 0.1);
   -webkit-transition: 200ms;
   transition: 200ms;
@@ -617,6 +618,7 @@ input::placeholder {
           justify-content: center;
 }
 .main__conteiner {
+  width: 77%;
   margin-top: 40px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -1792,9 +1794,8 @@ h1, h2, h3, h4, h5, h6 {
   width: 0px;
 }
 .main-catalog__right {
-  min-width: calc(80% - 40px);
-  max-width: calc(80% - 40px);
-  margin-left: 40px;
+  width: 80%;
+  margin-left: 80px;
 }
 .main-catalog__filters {
   width: 100%;
@@ -1858,6 +1859,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
   -webkit-transition: 200ms;
   transition: 200ms;
+  font-size: 15px;
 }
 .main-catalog__sort-choice li:hover {
   background-color: rgba(115, 72, 255, 0.15);
@@ -1878,11 +1880,11 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 40px;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr 29px 1fr 29px 1fr 29px 1fr;
+  -ms-grid-columns: 1fr 60px 1fr 60px 1fr 60px 1fr;
   grid-template-columns: repeat(4, 1fr);
-  -webkit-column-gap: 29px;
-     -moz-column-gap: 29px;
-          column-gap: 29px;
+  -webkit-column-gap: 60px;
+     -moz-column-gap: 60px;
+          column-gap: 60px;
   row-gap: 30px;
 }
 

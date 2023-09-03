@@ -11,32 +11,32 @@ for (let i = 0; i < categories.length; i++) {
 let sort = document.querySelector('.main-catalog__sort-block')
 sort.onclick = () => {
     let sort_choice = document.querySelector('.main-catalog__sort-choice')
-    let choice = [...document.querySelectorAll('.sort-choice')]
-    let sort_value = document.querySelector('.main-catalog__sort-value')
+    let sort_li = [...document.querySelectorAll('.sort-choice')]
     sort_choice.classList.toggle('main-catalog__sort-choice_alternative')
     document.addEventListener('keydown', e => {
         if(e.key === 'Escape') sort_choice.classList.remove('main-catalog__sort-choice_alternative')       
     })
-    choice.forEach(choicen => {
-        choicen.onclick = () => {
-            sort_value.innerHTML = choicen.innerHTML
+    sort_li.forEach(li => {
+        if (sort_value.getAttribute('data-sort-active') === li.getAttribute('data-sort')) li.style.display = 'none'
+        else li.style.display = 'block'
+        li.onclick = () => {
+            sort_value.setAttribute('data-sort-active', li.getAttribute('data-sort'))
+            sort_value.innerHTML = li.innerHTML
+            sort_function(`${sort_value.getAttribute('data-sort-active')}`)
             sort_choice.classList.remove('main-catalog__sort-choice_alternative')
         }
     })
     document.addEventListener('click', e => {
-        let on = e.composedPath().includes(sort);
-        if (!on) sort_choice.classList.remove('main-catalog__sort-choice_alternative')
+        let on_sort_choice = e.composedPath().includes(sort);
+        if (!on_sort_choice) sort_choice.classList.remove('main-catalog__sort-choice_alternative')
     })
-
 }
  
 let discont_filter = document.querySelector('.discont-filter')
 discont_filter.onclick = () => {
     function card_toggle_remove() {
         for (let i = 0; i < cards.length; i++) {
-            if (price_new_value[i] === '') {
-                cards[i].classList.toggle('remove')
-            }
+            if (card_discount_value[i].innerHTML === '') cards[i].classList.toggle('remove')
         }
     }
 
@@ -48,6 +48,5 @@ discont_filter.onclick = () => {
     if (discont_filter_input.checked === true) card_toggle_remove()
     else card_toggle_remove()
 }
-
 
 
