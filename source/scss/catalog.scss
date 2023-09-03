@@ -95,9 +95,8 @@
         }
     }
     &__right {
-        min-width: calc(80% - 40px);
-        max-width: calc(80% - 40px);
-        margin-left: 40px;
+        width: 80%;
+        margin-left: 80px;
     }
     &__filters {
         width: 100%;
@@ -148,6 +147,7 @@
                 cursor: pointer;
                 font-weight: bold;
                 transition: 200ms;
+                font-size: 15px;
                 &:hover {
                     background-color: rgba($purple, .15);
                     color: $purple;
@@ -172,7 +172,7 @@
         margin-top: 40px;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        column-gap: 29px;
+        column-gap: 60px;
         row-gap: 30px;
     }
 }
