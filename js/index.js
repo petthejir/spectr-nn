@@ -267,25 +267,19 @@ let footer = document.querySelector('.footer')
 let header = document.querySelector('.header')
 
 const option = {
-    rootMargin: `0px 0px 200px 0px`
+    rootMargin: `0px 0px 0px 0px`
 }
 
-const callback_func = function(entries) {
+const callback_func = entries => {
     entries.forEach(element => {
         const {isIntersecting} = element
-        if (isIntersecting) {
+        if (isIntersecting && document.documentElement.clientHeight != document.querySelector('.wrapper').clientHeight) {
             Object.assign(header.style, {
-                position: 'fixed',
                 transform: 'translateY(-100px)',
                 transition: '300ms ease-in',
             })
         }
-        else {
-            Object.assign(header.style, {
-                transform: 'translateY(0px)',
-                position: 'sticky',
-            })
-        }
+        else header.style.transform = 'translateY(0px)'
     })
 }
 const observ = new IntersectionObserver(callback_func, option)
@@ -298,7 +292,6 @@ card_like.forEach(like => like.onclick = () => like.classList.toggle('card__like
 let cards = [...document.querySelectorAll('.card')] // все карты
 let rating = document.querySelectorAll('.card__rating-value') 
 let sort_value = document.querySelector('.main-catalog__sort-value')
-let card_discount_value = document.querySelectorAll('.card__discount-value') // value скидки
 let cards_array = []
 
 for (let i = 0; i < cards.length; i++) {
@@ -306,6 +299,7 @@ for (let i = 0; i < cards.length; i++) {
     let price_old = [...document.querySelectorAll('.card__price-old')] // инициализация блока старой цены
     let price_old_value = price_old.map(price => price.getAttribute('data-old-price'))// value price old
     let card_discount = document.querySelectorAll('.card__discount') // инициализация скидки
+    let card_discount_value = document.querySelectorAll('.card__discount-value') // value скидки
     let price_new_value = price_new.map(price => price.getAttribute('data-new-price')) // value price new
     if (price_new_value[i] != '') {
         price_old[i].classList.add('card__price-old_alternative') // применение классов к old
@@ -332,21 +326,12 @@ for (let i = 0; i < cards.length; i++) {
     )
 }
 
-
-function sort_function(sort) {
-    let cards_array_sorted = []
-    let cards_node = document.querySelector('.main-catalog__cards')
-    cards_array.sort((a, b) => a[sort] - b[sort])
-    cards_array.forEach(element => cards_array_sorted.push(element.card_index))
-    for (let i = 0; i < cards_array_sorted.length; i++) {
-        for (let z = 0; z < cards.length; z++){
-            if (z === cards_array_sorted[i]) cards.push(cards[z])
-        }
-    }
-    let new_cards = cards.slice(cards_array_sorted.length, cards.length)
-    new_cards.forEach(new_card => cards_node.appendChild(new_card))
+    //profile
+let cabinet = document.querySelector('.header__cabinet-link')
+cabinet.onclick = () => {
     
 }
-sort_function(`${sort_value.getAttribute('data-sort-active')}`)
+
+
 
 

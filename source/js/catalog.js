@@ -49,4 +49,18 @@ discont_filter.onclick = () => {
     else card_toggle_remove()
 }
 
-
+function sort_function(sort) {
+    let cards_array_sorted = []
+    let cards_node = document.querySelector('.main-catalog__cards')
+    cards_array.sort((a, b) => a[sort] - b[sort])
+    cards_array.forEach(element => cards_array_sorted.push(element.card_index))
+    for (let i = 0; i < cards_array_sorted.length; i++) {
+        for (let z = 0; z < cards.length; z++){
+            if (z === cards_array_sorted[i]) cards.push(cards[z])
+        }
+    }
+    let new_cards = cards.slice(cards_array_sorted.length, cards.length)
+    new_cards.forEach(new_card => cards_node.appendChild(new_card))
+    
+}
+sort_function(`${sort_value.getAttribute('data-sort-active')}`)
