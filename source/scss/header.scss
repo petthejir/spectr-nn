@@ -34,10 +34,10 @@ input {
     justify-content: center;
     z-index: 2;
     position: fixed;
-    .header-search-closer {
+    &-search-closer {
         position: fixed;
         right: -200px;
-        top: 100px;
+        top: -200px;
         width: 1000px;
         height: 1000px;
         border-radius: 50%;
@@ -86,7 +86,7 @@ input {
     &__search {
         border-radius: 50px;
         padding-left: 15px;
-        background-image: url(../pics/search.svg);
+        background-image: url(/pics/search.svg);
         background-repeat: no-repeat;
         background-position: 65px 10px;
         width: 100px;
@@ -96,7 +96,7 @@ input {
         z-index: 4;
         &:hover {
             &::placeholder {
-                color: $purple;
+                color: $purple;          
             }
         }
         &_alt {
