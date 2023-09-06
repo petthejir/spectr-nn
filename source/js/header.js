@@ -5,8 +5,6 @@ const header__search_buttons_empty = document.querySelector('.header__search-but
 const header__search_value_del = document.querySelector('.header__search-value-del')
 const header__search_search_button = document.querySelector('.header__search-search-button')
 
-console.log(header__search)
-
 function header__search_value_do_empty() {
     return header__search.value == ''
 }
@@ -110,7 +108,7 @@ const option = {
 const callback_func = entries => {
     entries.forEach(element => {
         const {isIntersecting} = element
-        if (isIntersecting && document.documentElement.clientHeight != document.querySelector('.wrapper').clientHeight) {
+        if (isIntersecting && document.querySelector('.wrapper').clientHeight > 1000) {
             Object.assign(header.style, {
                 transform: 'translateY(-100px)',
                 transition: '300ms ease-in',
@@ -129,6 +127,7 @@ card_like.forEach(like => like.onclick = () => like.classList.toggle('card__like
 let cards = [...document.querySelectorAll('.card')] // все карты
 let rating = document.querySelectorAll('.card__rating-value') 
 let sort_value = document.querySelector('.main-catalog__sort-value')
+let card_discount_value = document.querySelectorAll('.card__discount-value') // value скидки
 let cards_array = []
 let card_discount_value = document.querySelectorAll('.card__discount-value') // value скидки
 
@@ -136,6 +135,8 @@ for (let i = 0; i < cards.length; i++) {
     let price_new = [...document.querySelectorAll('.card__price-new')] // инициализация блока новой цены
     let price_old = [...document.querySelectorAll('.card__price-old')] // инициализация блока старой цены
     let price_old_value = price_old.map(price => price.getAttribute('data-old-price'))// value price old
+    let card_discount = document.querySelectorAll('.card__discount') // инициализация скидки
+    let card_discount_value = document.querySelectorAll('.card__discount-value') // value скидки
     let price_new_value = price_new.map(price => price.getAttribute('data-new-price')) // value price new
     let card_discount = document.querySelectorAll('.card__discount') // инициализация скидки
     if (price_new_value[i] != '') {
@@ -163,13 +164,30 @@ for (let i = 0; i < cards.length; i++) {
     )
 }
 
-    //profile
-let cabinet = document.querySelector('.header__cabinet-link')
-cabinet.onclick = () => {
 
-    return false
+    //profile
+
+let cabinet = document.querySelector('.header__cabinet-link')
+let registration = document.querySelector('.registration')
+let registration_closer = document.querySelector('.registration__closer')
+cabinet.onclick = () => {
+    
 }
 
 
+registration_swap.onclick = () => {
+    if (registration_title.innerHTML === 'Вход') {
+        registration_title.innerHTML = 'Регистрация'
+        registration_question.innerHTML = 'Уже есть аккаунт?'
+        registration_swap.innerHTML = 'Войти'
+        registration_button.innerHTML = 'Зарегистрироваться'
+    }
+    else {
+        registration_title.innerHTML = 'Вход'
+        registration_question.innerHTML = 'Ещё нет аккаунта?'
+        registration_swap.innerHTML = 'Зарегистрироваться'
+        registration_button.innerHTML = 'Войти'
+    }
+}
 
 

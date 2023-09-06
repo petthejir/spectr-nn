@@ -40,8 +40,13 @@
                             <svg width="19" height="19" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="search-form__search-icon"><path d="M10.526 3a7.526 7.526 0 017.527 7.526 7.485 7.485 0 01-.7 3.156l3.29 4.429a1.81 1.81 0 01-2.532 2.532l-4.427-3.292a7.488 7.488 0 01-3.158.701 7.526 7.526 0 110-15.052zm0 12.744a5.217 5.217 0 100-10.436 5.218 5.218 0 000 10.436z"></path></svg>
                         </button>
                     </div>
+<<<<<<< HEAD
                     <a class="header__cabinet-link" href="../pages/cabinet.html">
                         <svg class="header__right-svg" width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" color="#B6BAC2"><path d="M12 0c1.73 0 3.299.62 4.421 1.745 1.137 1.14 1.69 2.674 1.56 4.318C17.72 9.337 15.04 12 12 12c-3.042 0-5.725-2.664-5.981-5.938-.13-1.66.42-3.196 1.55-4.327C8.687.616 10.26 0 12 0zM1.846 24h20.308c.265.003.529-.049.77-.152.242-.103.455-.255.626-.445.375-.416.526-.985.414-1.56-.487-2.508-2.007-4.614-4.395-6.093-2.122-1.313-4.81-2.036-7.569-2.036-2.76 0-5.447.723-7.569 2.036C2.043 17.229.523 19.336.036 21.844c-.112.575.04 1.143.414 1.56.17.19.384.34.626.444.241.103.505.155.77.152z"></path></svg>
+=======
+                    <a class="header__cabinet-link" href="cabinet.html">
+                        <svg class="header__right-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#B6BAC2"><path d="M12 0c1.73 0 3.299.62 4.421 1.745 1.137 1.14 1.69 2.674 1.56 4.318C17.72 9.337 15.04 12 12 12c-3.042 0-5.725-2.664-5.981-5.938-.13-1.66.42-3.196 1.55-4.327C8.687.616 10.26 0 12 0zM1.846 24h20.308c.265.003.529-.049.77-.152.242-.103.455-.255.626-.445.375-.416.526-.985.414-1.56-.487-2.508-2.007-4.614-4.395-6.093-2.122-1.313-4.81-2.036-7.569-2.036-2.76 0-5.447.723-7.569 2.036C2.043 17.229.523 19.336.036 21.844c-.112.575.04 1.143.414 1.56.17.19.384.34.626.444.241.103.505.155.77.152z"></path></svg>
+>>>>>>> catalog
                     </a>
                 </div>
             </div>
@@ -383,21 +388,29 @@
                 </div>
             </div>
         </footer>
-        <div class="call">
-            <div class="call__block ripple-parrent">
-                <div class="call__cross"></div>
-                <div class="call__title">Обратный звонок</div>
-                <div class="call__main">
-                    <div class="call__text">
-                        Введите свои данные и мы перезвоним вам в течение 15 минут (по будням c 10.00 до 19.00)
+        <div class="registration registration_alternative">
+            <div class="registration__block">
+                <h1 class="registration__title">Вход</h1>
+                <form class="registration__form" action="">
+                    <div class="registration__form-block">
+                        <input type="text" name="email" required="" data-reg-input>
+                        <label for="email">Почта</label>
                     </div>
-                    <input class="call__input" type="text" placeholder="Ваше имя">
-                    <input class="call__input" type="tel" placeholder="Номер телефона" required="required" >
-                    <button class="call__button" data-ripple>Отправить</button>
-                    <div class="call__warning">Нажимая на кнопку «Отправить», вы соглашаетесь на обработку ваших персональных данных.</div>
-                </div>
+                    <div class="registration__form-block">
+                        <input type="password" name="password" required="" data-reg-input>
+                        <label for="password">Пароль</label>
+                        <div class="registration__eye">
+                            <svg width="22px" height="22px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M6.30147 15.5771C4.77832 14.2684 3.6904 12.7726 3.18002 12C3.6904 11.2274 4.77832 9.73158 6.30147 8.42294C7.87402 7.07185 9.81574 6 12 6C14.1843 6 16.1261 7.07185 17.6986 8.42294C19.2218 9.73158 20.3097 11.2274 20.8201 12C20.3097 12.7726 19.2218 14.2684 17.6986 15.5771C16.1261 16.9282 14.1843 18 12 18C9.81574 18 7.87402 16.9282 6.30147 15.5771ZM12 4C9.14754 4 6.75717 5.39462 4.99812 6.90595C3.23268 8.42276 2.00757 10.1376 1.46387 10.9698C1.05306 11.5985 1.05306 12.4015 1.46387 13.0302C2.00757 13.8624 3.23268 15.5772 4.99812 17.0941C6.75717 18.6054 9.14754 20 12 20C14.8525 20 17.2429 18.6054 19.002 17.0941C20.7674 15.5772 21.9925 13.8624 22.5362 13.0302C22.947 12.4015 22.947 11.5985 22.5362 10.9698C21.9925 10.1376 20.7674 8.42276 19.002 6.90595C17.2429 5.39462 14.8525 4 12 4ZM10 12C10 10.8954 10.8955 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14C10.8955 14 10 13.1046 10 12ZM12 8C9.7909 8 8.00004 9.79086 8.00004 12C8.00004 14.2091 9.7909 16 12 16C14.2092 16 16 14.2091 16 12C16 9.79086 14.2092 8 12 8Z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <button class="registration__button" data-ripple>Войти</button>
+                </form>
+                <h3 class="registration__question">Ещё нет аккаунта?</h3>
+                <h2 class="registration__swap">Зарегистрироваться</h2>
             </div>
-            <div class="call__closer"></div>
+            <div class="registration__closer"></div>
         </div>
     </div>
     <script src="../source/js/header.js"></script>
