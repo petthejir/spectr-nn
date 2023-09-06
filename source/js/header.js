@@ -164,61 +164,62 @@ for (let i = 0; i < cards.length; i++) {
 
 
     //profile
-
 let cabinet = document.querySelector('.header__cabinet-link')
 let registration = document.querySelector('.registration')
-let registration_closer = document.querySelector('.registration__closer')
+
 cabinet.onclick = () => {
-    registration.classList.remove('registration_alternative')
+    let registration_closer = document.querySelector('.registration__closer')
+    let registration_close_button = document.querySelector('.registration__close-button')
+    registration.classList.remove('display-none')
     body.style.overflow = 'hidden'
-    return false
+    let registration_to_close = () => {
+        body.style.overflow = 'visible'
+        registration.classList.add('display-none')
+    }
+    registration_close_button.onclick = () => {
+        registration_to_close()
+    }
+    registration_closer.onclick = () => {
+        registration_to_close()
+    }
+    document.addEventListener('keydown', e => {
+        if(e.key === "Escape") {
+            registration_to_close()
+        }
+    })
+/*     return false */
 }
-
-function registration_to_close() {
-    body.style.overflow = 'visible'
-    registration.classList.add('registration_alternative')
-}
-
-registration_closer.onclick = () => {
-    registration_to_close()
-}
-
-document.addEventListener('keydown', e => {
-    if(e.key === "Escape") registration_to_close()
-})
 
 
     //registration 
 let registration_swap = document.querySelector('.registration__swap')
+registration_swap.onclick = () => {
+let entry_form = document.querySelector('.entry__form')
+let registration_form = document.querySelector('.registration__form')
 let registration_title = document.querySelector('.registration__title')
 let registration_question = document.querySelector('.registration__question')
-let registration_button = document.querySelector('.registration__button')
-let registration_inputs = [...document.querySelectorAll('[data-reg-input]')]
+entry_form.classList.toggle('display-none')
+registration_form.classList.toggle('display-none')
+if (entry_form.classList.contains('display-none')) {
+    registration_title.innerHTML = 'Вход'
+    registration_question.innerHTML = 'Ещё нет аккаунта?'
+    registration_swap.innerHTML = 'Зарегистрироваться'
+}
+else {
+    registration_title.innerHTML = 'Регистрация'
+    registration_question.innerHTML = 'Есть аккаунт?'
+    registration_swap.innerHTML = 'Авторизоваться'
+}
+}
+
 let registration_eye = document.querySelectorAll('.registration__eye')
-let registration_password = document.querySelectorAll('[type="password"]')
-
-
 for (let i = 0; i < registration_eye.length; i++) {
+    let registration_password = document.querySelectorAll('[type="password"]')
     registration_eye[i].onclick = () => {
         registration_eye[i].classList.toggle('registration__eye_alternative')
         if (registration_password[i].getAttribute('type') === 'password') registration_password[i].setAttribute('type', 'text')
         else registration_password[i].setAttribute('type', 'password')
     }
-
 }
 
 
-registration_swap.onclick = () => {
-    if (registration_title.innerHTML === 'Вход') {
-        registration_title.innerHTML = 'Регистрация'
-        registration_question.innerHTML = 'Уже есть аккаунт?'
-        registration_swap.innerHTML = 'Войти'
-        registration_button.innerHTML = 'Зарегистрироваться'
-    }
-    else {
-        registration_title.innerHTML = 'Вход'
-        registration_question.innerHTML = 'Ещё нет аккаунта?'
-        registration_swap.innerHTML = 'Зарегистрироваться'
-        registration_button.innerHTML = 'Войти'
-    }
-}

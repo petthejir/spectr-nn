@@ -6,9 +6,7 @@
     align-items: center;
     width: 100%;
     height: 100%;
-    &_alternative {
-        display: none;
-    }
+    flex-direction: column;
     &__block {
         width: 400px;
         background-color: white;
@@ -17,6 +15,38 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        position: relative;
+    }
+    &__close-button {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        cursor: pointer;
+        padding: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 200ms;
+        &:hover {
+            &:before, &:after {
+                background-color: rgb(137, 137, 137);
+            }
+        }
+        &:before, &:after {
+            content: ""; 
+            position: absolute; 
+            width: 18px; 
+            height: 3px; 
+            background: rgb(177, 177, 177);
+            border-radius: 12px;
+        }
+        &:before {
+            transform: rotate(45deg);
+        }
+        &:after {
+            transform: rotate(-45deg);
+        }
+
     }
     &__title {
         @extend %h1;
@@ -48,7 +78,6 @@
                 &:focus ~ label,
                 &:valid ~ label {
                     top: -16px;
-                    font-size: 15px;
                     color: $purple;
                     font-weight: bold;
                 }
@@ -57,7 +86,7 @@
                 position: absolute;
                 top: 8px;
                 left: 0;
-                font-size: 17px;
+                font-size: 15px;
                 color: black;
                 pointer-events: none;
                 transition: 200ms;
@@ -120,7 +149,7 @@
         font-weight: bold;
         font-size: 17px;
         margin-top: 5px;
-        margin-bottom: 40px;
+        margin-bottom: 30px;
         cursor: pointer;
         padding: 10px;
         @extend %deselection;
@@ -133,4 +162,9 @@
         height: 100%;
         background-color: rgba(black, .3);
     }
+}
+
+
+.display-none {
+    display: none;
 }
