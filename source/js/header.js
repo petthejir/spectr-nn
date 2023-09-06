@@ -129,16 +129,13 @@ let rating = document.querySelectorAll('.card__rating-value')
 let sort_value = document.querySelector('.main-catalog__sort-value')
 let card_discount_value = document.querySelectorAll('.card__discount-value') // value скидки
 let cards_array = []
-let card_discount_value = document.querySelectorAll('.card__discount-value') // value скидки
 
 for (let i = 0; i < cards.length; i++) {
     let price_new = [...document.querySelectorAll('.card__price-new')] // инициализация блока новой цены
     let price_old = [...document.querySelectorAll('.card__price-old')] // инициализация блока старой цены
     let price_old_value = price_old.map(price => price.getAttribute('data-old-price'))// value price old
     let card_discount = document.querySelectorAll('.card__discount') // инициализация скидки
-    let card_discount_value = document.querySelectorAll('.card__discount-value') // value скидки
     let price_new_value = price_new.map(price => price.getAttribute('data-new-price')) // value price new
-    let card_discount = document.querySelectorAll('.card__discount') // инициализация скидки
     if (price_new_value[i] != '') {
         price_old[i].classList.add('card__price-old_alternative') // применение классов к old
         price_old[i].innerHTML = `<strike>${price_old[i].innerHTML}</strike>` // зачёркивание old
