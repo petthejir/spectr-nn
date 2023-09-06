@@ -4,7 +4,6 @@ const header_search_closer = document.querySelector('#header-search-closer')
 const header__search_buttons_empty = document.querySelector('.header__search-buttons-empty')
 const header__search_value_del = document.querySelector('.header__search-value-del')
 const header__search_search_button = document.querySelector('.header__search-search-button')
-let body = document.querySelector('.body')
 
 function header__search_value_do_empty() {
     return header__search.value == ''
@@ -169,42 +168,7 @@ let cabinet = document.querySelector('.header__cabinet-link')
 let registration = document.querySelector('.registration')
 let registration_closer = document.querySelector('.registration__closer')
 cabinet.onclick = () => {
-    registration.classList.remove('registration_alternative')
-    body.style.overflow = 'hidden'
-    return false
-}
-
-function registration_to_close() {
-    body.style.overflow = 'visible'
-    registration.classList.add('registration_alternative')
-}
-
-registration_closer.onclick = () => {
-    registration_to_close()
-}
-
-document.addEventListener('keydown', e => {
-    if(e.key === "Escape") registration_to_close()
-})
-
-
-    //registration 
-let registration_swap = document.querySelector('.registration__swap')
-let registration_title = document.querySelector('.registration__title')
-let registration_question = document.querySelector('.registration__question')
-let registration_button = document.querySelector('.registration__button')
-let registration_inputs = [...document.querySelectorAll('[data-reg-input]')]
-let registration_eye = document.querySelectorAll('.registration__eye')
-let registration_password = document.querySelectorAll('[type="password"]')
-
-
-for (let i = 0; i < registration_eye.length; i++) {
-    registration_eye[i].onclick = () => {
-        registration_eye[i].classList.toggle('registration__eye_alternative')
-        if (registration_password[i].getAttribute('type') === 'password') registration_password[i].setAttribute('type', 'text')
-        else registration_password[i].setAttribute('type', 'password')
-    }
-
+    
 }
 
 
