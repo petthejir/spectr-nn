@@ -169,6 +169,7 @@ const header_search_closer = document.querySelector('#header-search-closer')
 const header__search_buttons_empty = document.querySelector('.header__search-buttons-empty')
 const header__search_value_del = document.querySelector('.header__search-value-del')
 const header__search_search_button = document.querySelector('.header__search-search-button')
+let body = document.querySelector('.body')
 
 function header__search_value_do_empty() {
     return header__search.value == ''
@@ -273,7 +274,7 @@ const option = {
 const callback_func = entries => {
     entries.forEach(element => {
         const {isIntersecting} = element
-        if (isIntersecting && document.documentElement.clientHeight != document.querySelector('.wrapper').clientHeight) {
+        if (isIntersecting && document.querySelector('.wrapper').clientHeight > 1000) {
             Object.assign(header.style, {
                 transform: 'translateY(-100px)',
                 transition: '300ms ease-in',
@@ -292,6 +293,7 @@ card_like.forEach(like => like.onclick = () => like.classList.toggle('card__like
 let cards = [...document.querySelectorAll('.card')] // все карты
 let rating = document.querySelectorAll('.card__rating-value') 
 let sort_value = document.querySelector('.main-catalog__sort-value')
+let card_discount_value = document.querySelectorAll('.card__discount-value') // value скидки
 let cards_array = []
 
 for (let i = 0; i < cards.length; i++) {
@@ -299,7 +301,6 @@ for (let i = 0; i < cards.length; i++) {
     let price_old = [...document.querySelectorAll('.card__price-old')] // инициализация блока старой цены
     let price_old_value = price_old.map(price => price.getAttribute('data-old-price'))// value price old
     let card_discount = document.querySelectorAll('.card__discount') // инициализация скидки
-    let card_discount_value = document.querySelectorAll('.card__discount-value') // value скидки
     let price_new_value = price_new.map(price => price.getAttribute('data-new-price')) // value price new
     if (price_new_value[i] != '') {
         price_old[i].classList.add('card__price-old_alternative') // применение классов к old
@@ -326,12 +327,65 @@ for (let i = 0; i < cards.length; i++) {
     )
 }
 
+
     //profile
+
 let cabinet = document.querySelector('.header__cabinet-link')
+let registration = document.querySelector('.registration')
+let registration_closer = document.querySelector('.registration__closer')
 cabinet.onclick = () => {
-    
+    registration.classList.remove('registration_alternative')
+    body.style.overflow = 'hidden'
+    return false
+}
+
+function registration_to_close() {
+    body.style.overflow = 'visible'
+    registration.classList.add('registration_alternative')
+}
+
+registration_closer.onclick = () => {
+    registration_to_close()
+}
+
+document.addEventListener('keydown', e => {
+    if(e.key === "Escape") registration_to_close()
+})
+
+
+    //registration 
+let registration_swap = document.querySelector('.registration__swap')
+let registration_title = document.querySelector('.registration__title')
+let registration_question = document.querySelector('.registration__question')
+let registration_button = document.querySelector('.registration__button')
+let registration_inputs = [...document.querySelectorAll('[data-reg-input]')]
+let registration_eye = document.querySelectorAll('.registration__eye')
+let registration_password = document.querySelectorAll('[type="password"]')
+
+
+for (let i = 0; i < registration_eye.length; i++) {
+    registration_eye[i].onclick = () => {
+        registration_eye[i].classList.toggle('registration__eye_alternative')
+        if (registration_password[i].getAttribute('type') === 'password') registration_password[i].setAttribute('type', 'text')
+        else registration_password[i].setAttribute('type', 'password')
+    }
+
 }
 
 
+registration_swap.onclick = () => {
+    if (registration_title.innerHTML === 'Вход') {
+        registration_title.innerHTML = 'Регистрация'
+        registration_question.innerHTML = 'Уже есть аккаунт?'
+        registration_swap.innerHTML = 'Войти'
+        registration_button.innerHTML = 'Зарегистрироваться'
+    }
+    else {
+        registration_title.innerHTML = 'Вход'
+        registration_question.innerHTML = 'Ещё нет аккаунта?'
+        registration_swap.innerHTML = 'Зарегистрироваться'
+        registration_button.innerHTML = 'Войти'
+    }
+}
 
 
