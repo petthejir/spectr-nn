@@ -218,7 +218,7 @@ input {
             }
         }
     }
-    &__cabinet-link {
+    &__favorite-products-link {
         padding: 10px;
         margin-left: -60px;
         cursor: pointer;
@@ -228,7 +228,7 @@ input {
     }
     &__right-svg {
         transition: 100ms;
-        fill: rgb(82, 82, 82);
+        fill: #9e9e9e;
     }
 }
 .title {
