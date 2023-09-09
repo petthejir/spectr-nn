@@ -1,7 +1,7 @@
 let categories = document.querySelectorAll('.main-catalog__category')
+let vertical = document.querySelectorAll('.main-catalog__category-plus-vertical')
+let products = document.querySelectorAll('.main-catalog__category-products')
 for (let i = 0; i < categories.length; i++) {
-    let vertical = document.querySelectorAll('.main-catalog__category-plus-vertical')
-    let products = document.querySelectorAll('.main-catalog__category-products')
     categories[i].onclick = () => {
         vertical[i].classList.toggle('main-catalog__category-plus-vertical_alternative')      
         products[i].classList.toggle('main-catalog__category-products_alternative') 
@@ -63,4 +63,4 @@ function sort_function(sort) {
     new_cards.forEach(new_card => cards_node.appendChild(new_card))
     
 }
-sort_function(`${sort_value.getAttribute('data-sort-active')}`)
+sort_function(sort_value.getAttribute('data-sort-active'))

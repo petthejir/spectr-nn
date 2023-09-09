@@ -392,18 +392,18 @@ input::placeholder {
     fill: red;
   }
 }
-.header__cabinet-link {
+.header__favorite-products-link {
   padding: 10px;
   margin-left: -60px;
   cursor: pointer;
 }
-.header__cabinet-link:hover .header__right-svg {
+.header__favorite-products-link:hover .header__right-svg {
   fill: #7348ff;
 }
 .header__right-svg {
   -webkit-transition: 100ms;
   transition: 100ms;
-  fill: rgb(82, 82, 82);
+  fill: #9e9e9e;
 }
 
 .title {
