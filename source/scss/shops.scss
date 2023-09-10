@@ -1,18 +1,10 @@
 .main-shops {
-    @extend %pages_main;
     iframe {
         margin-top: 20px;
     }
-    &__conteiner {
-        width: 60%;
-        margin-top: 60px;
-        margin-left: auto;
-        margin-right: auto;
-        flex-direction: column;
-    }
-
 }
 .city {
+    margin-top: 20px;
     width: 100%;
     margin-bottom: 40px;
     display: flex;

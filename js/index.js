@@ -243,7 +243,6 @@ document.addEventListener('keydown', e => {
     }
 })
 
-
     //ripple-buttons
 let buttons = document.querySelectorAll('[data-ripple]')
 buttons.forEach(button => {
@@ -286,13 +285,16 @@ const callback_func = entries => {
 const observ = new IntersectionObserver(callback_func, option)
 observ.observe(footer)
 
-    //card
+
+
+
+    //cards
 let card_like = [...document.querySelectorAll('.card__like')]
 card_like.forEach(like => like.onclick = () => like.classList.toggle('card__like_alternative'))
     
 let cards = [...document.querySelectorAll('.card')] // все карты
 let rating = document.querySelectorAll('.card__rating-value') 
-let sort_value = document.querySelector('.main-catalog__sort-value')
+let sort_value = document.querySelector('.filters__sort-value')
 let card_discount_value = document.querySelectorAll('.card__discount-value') // value скидки
 let cards_array = []
 let price_new = [...document.querySelectorAll('.card__price-new')] // инициализация блока новой цены
@@ -300,6 +302,8 @@ let price_old = [...document.querySelectorAll('.card__price-old')] // иници
 let price_old_value = price_old.map(price => price.getAttribute('data-old-price'))// value price old
 let card_discount = document.querySelectorAll('.card__discount') // инициализация скидки
 let price_new_value = price_new.map(price => price.getAttribute('data-new-price')) // value price new
+let current_price
+let discount
 
 for (let i = 0; i < cards.length; i++) {
     if (price_new_value[i] != '') {
@@ -309,9 +313,6 @@ for (let i = 0; i < cards.length; i++) {
         card_discount[i].style.display = 'block' // отображение скидки
     }
     else price_new[i].innerHTML = ''
-    
-    let current_price
-    let discount
     if (price_new_value[i] != '') current_price = price_new_value[i] 
     else current_price = price_old_value[i]
     if (card_discount_value[i].innerHTML != '') discount = card_discount_value[i].innerHTML
@@ -328,8 +329,68 @@ for (let i = 0; i < cards.length; i++) {
 }
 
 
+
+    //cards sort
+let sort = document.querySelector('.filters__sort-block')
+sort.onclick = () => {
+    let sort_choice = document.querySelector('.filters__sort-choice')
+    let sort_li = [...document.querySelectorAll('.sort-choice')]
+    sort_choice.classList.toggle('filters__sort-choice_alternative')
+    document.addEventListener('keydown', e => {
+        if(e.key === 'Escape') sort_choice.classList.remove('filters__sort-choice_alternative')       
+    })
+    sort_li.forEach(li => {
+        if (sort_value.getAttribute('data-sort-active') === li.getAttribute('data-sort')) li.style.display = 'none'
+        else li.style.display = 'block'
+        li.onclick = () => {
+            sort_value.setAttribute('data-sort-active', li.getAttribute('data-sort'))
+            sort_value.innerHTML = li.innerHTML
+            sort_function(`${sort_value.getAttribute('data-sort-active')}`)
+            sort_choice.classList.remove('filters__sort-choice_alternative')
+        }
+    })
+    document.addEventListener('click', e => {
+        let on_sort_choice = e.composedPath().includes(sort);
+        if (!on_sort_choice) sort_choice.classList.remove('filters__sort-choice_alternative')
+    })
+}
+     
+let discont_filter = document.querySelector('.discont-filter')
+discont_filter.onclick = () => {
+    function card_toggle_remove() {
+        for (let i = 0; i < cards.length; i++) {
+            if (card_discount_value[i].innerHTML === '') cards[i].classList.toggle('remove')
+        }
+    }
+
+    let discont_filter_input = document.querySelector('.discont-filter__input')
+    if (discont_filter_input.checked === true) {
+        discont_filter_input.checked = false
+    }
+    else discont_filter_input.checked = true
+    if (discont_filter_input.checked === true) card_toggle_remove()
+    else card_toggle_remove()
+}
+
+function sort_function(sort) {
+    let cards_array_sorted = []
+    let cards_node = document.querySelector('#cards')
+    cards_array.sort((a, b) => a[sort] - b[sort])
+    cards_array.forEach(element => cards_array_sorted.push(element.card_index))
+    for (let i = 0; i < cards_array_sorted.length; i++) {
+        for (let z = 0; z < cards.length; z++){
+            if (z === cards_array_sorted[i]) cards.push(cards[z])
+        }
+    }
+    let new_cards = cards.slice(cards_array_sorted.length, cards.length)
+    new_cards.forEach(new_card => cards_node.appendChild(new_card))
+    
+}
+sort_function(sort_value.getAttribute('data-sort-active'))
+
+
     //profile
-let cabinet = document.querySelector('.header__cabinet-link')
+let cabinet = document.querySelector('.header__favorite-products-link')
 let registration = document.querySelector('.registration')
 
 cabinet.onclick = () => {
