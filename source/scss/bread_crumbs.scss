@@ -1,6 +1,4 @@
 .bread-crumbs {
-    margin-top: 20px;
-    margin-left: 40px;
     ul {
         display: flex;
         align-items: center;
@@ -12,6 +10,9 @@
         @extend %deselection;
         padding: 7px;
         color: black;
+        & svg {
+            margin-left: -7px;
+        }
     }
     &__home {
         width: 18px;
