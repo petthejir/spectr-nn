@@ -94,6 +94,98 @@ input {
         animation: 200ms forwards;
         height: 40px;
         z-index: 4;
+        &-cards {
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 55px;
+            position: relative;
+            padding-bottom: 30px;
+        }
+        &-card {
+            width: 90%;
+            height: 70px;
+            margin-top: 40px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            & img {
+                height: 100%;
+            }
+            &-main {
+                margin-left: 20px;
+            }
+            &-title {
+                font-weight: bold;
+                font-size: 15px;
+            }
+            &-discount {
+                position: absolute;
+                left: 0;
+                top: 0;
+                background-color: $purple;
+                padding: 4px 5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 100px;
+                font-weight: bold;
+                font-size: 11px;
+                color: #fff;
+            }
+            &-rating {
+                margin-top: 7px;
+                display: flex;
+                align-items: center;
+                & svg {
+                    fill: rgb(240, 208, 31);
+                    width: 16px;
+                }
+                &-value {
+                    margin-left: 6px;
+                    font-size: 14px;
+                }
+            }
+            &-right {
+                display: flex;
+                position: absolute;
+                right: 0;
+            }
+            &-like {
+                cursor: pointer;
+                fill: rgba(black, .1);
+                transition: 200ms;
+                &:hover {
+                    fill: rgba($purple, .4);
+                }
+                &_alternative {
+                    fill: $purple;
+                }
+            }
+            &-price {
+                font-weight: bold;
+                margin-right: 30px;
+                &-old {
+                    position: relative;
+                    font-size: 18px;
+                    &_alternative {
+                        color: rgb(182,186,194);
+                        font-size: 15px;
+                    }
+                }
+                &-new {
+                    font-size: 18px;
+                    margin-top: 5px;
+                    color: rgb(219,54,54);
+                }
+            }
+        }
+        &-block {
+            position: relative;
+            display: flex;
+        }
         &:hover {
             &::placeholder {
                 color: $purple;          
@@ -113,7 +205,7 @@ input {
                     height: 50px;
                 }
                 100% {
-                    width: 870px;
+                    width: 620px;
                     height: 50px;
                 }
             }
@@ -124,6 +216,18 @@ input {
             }
             &::placeholder {
                 font-size: 20px;
+            }
+        }
+        &-result {
+            position: absolute;
+            width: 100%;
+            background-color: white;
+            top: 0;
+            z-index: 3;
+            border-radius: 25px;
+/*             display: none; */
+            &_alternative {
+
             }
         }
         &-buttons {
