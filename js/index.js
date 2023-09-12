@@ -201,8 +201,10 @@ header__search.onclick = () => {
     header_search_closer.classList.add('header-search-closer')
     header_search_closer.classList.add('header-search-closer_alt')
     header__search_search_button.classList.add('header__search-search-button_alt')
-    clearTimeout(timeout)
-    slider_line_active_0()
+    if (document.querySelector('.auto-slider') != null) {
+        clearTimeout(timeout)
+        slider_line_active_0()
+    }
 }
 
 header__search_search_button.onclick = () => {
@@ -212,11 +214,6 @@ header__search_search_button.onclick = () => {
             header__search_search_button.classList.add('header__search-search-button_alt-2') 
         }
     }, 0)
-}
-
-header__search.oninput = () => {
-    header__search_buttons_empty.classList.add('header__search-buttons-empty_alt')
-    if (header__search_value_do_empty()) header__search_buttons_empty_alt_remove()
 }
 
 header__search_value_del.onclick = () => {
@@ -289,7 +286,7 @@ observ.observe(footer)
 
 
     //cards
-let card_like = [...document.querySelectorAll('.card__like')]
+let card_like = [...document.querySelectorAll('[data-like]')]
 card_like.forEach(like => like.onclick = () => like.classList.toggle('card__like_alternative'))
     
 let cards = [...document.querySelectorAll('.card')] // все карты
@@ -302,6 +299,7 @@ let price_old = [...document.querySelectorAll('.card__price-old')] // иници
 let price_old_value = price_old.map(price => price.getAttribute('data-old-price'))// value price old
 let card_discount = document.querySelectorAll('.card__discount') // инициализация скидки
 let price_new_value = price_new.map(price => price.getAttribute('data-new-price')) // value price new
+let card_title = [...document.querySelectorAll('.card__title-value')]
 let current_price
 let discount
 
@@ -313,13 +311,15 @@ for (let i = 0; i < cards.length; i++) {
         card_discount[i].style.display = 'block' // отображение скидки
     }
     else price_new[i].innerHTML = ''
+
     if (price_new_value[i] != '') current_price = price_new_value[i] 
-    else current_price = price_old_value[i]
+        else current_price = price_old_value[i]
     if (card_discount_value[i].innerHTML != '') discount = card_discount_value[i].innerHTML
-    else discount = 0
+        else discount = 0
     cards_array.push(
         {
-            card_index: i,
+            title: card_title[i].innerHTML, 
+            index: i,
             current_price: current_price,
             discount: discount,
             rating: -rating[i].innerHTML,
@@ -328,9 +328,39 @@ for (let i = 0; i < cards.length; i++) {
     )
 }
 
-
+    //search
+header__search.oninput = function() {
+    header__search_buttons_empty.classList.add('header__search-buttons-empty_alt')
+    if (header__search_value_do_empty()) header__search_buttons_empty_alt_remove()
+    
+    let value = this.value.trim()
+    if (value != 0) {
+        cards_array.forEach(card => {
+            if (card.title.toLowerCase().includes(value.toLowerCase())) {
+                console.log(card)
+            }
+        })
+    }
+}
 
     //cards sort
+function sort_function(sort) {
+    let cards_array_sorted = []
+    let cards_node = document.querySelector('#cards')
+    cards_array.sort((a, b) => a[sort] - b[sort])
+    cards_array.forEach(card => cards_array_sorted.push(card.card_index)) //отсортированный массив индексов
+    for (let i = 0; i < cards_array_sorted.length; i++) {
+        for (let z = 0; z < cards.length; z++){
+            if (z === cards_array_sorted[i]) cards.push(cards[z])
+        }
+    }
+    let new_cards = cards.slice(cards_array_sorted.length, cards.length)
+    new_cards.forEach(new_card => cards_node.appendChild(new_card))
+}
+sort_function(sort_value.getAttribute('data-sort-active'))
+
+
+    //отображение блока выбора сортировки
 let sort = document.querySelector('.filters__sort-block')
 sort.onclick = () => {
     let sort_choice = document.querySelector('.filters__sort-choice')
@@ -354,7 +384,8 @@ sort.onclick = () => {
         if (!on_sort_choice) sort_choice.classList.remove('filters__sort-choice_alternative')
     })
 }
-     
+
+    //скрыть/показать карту discont.value != ''
 let discont_filter = document.querySelector('.discont-filter')
 discont_filter.onclick = () => {
     function card_toggle_remove() {
@@ -371,23 +402,6 @@ discont_filter.onclick = () => {
     if (discont_filter_input.checked === true) card_toggle_remove()
     else card_toggle_remove()
 }
-
-function sort_function(sort) {
-    let cards_array_sorted = []
-    let cards_node = document.querySelector('#cards')
-    cards_array.sort((a, b) => a[sort] - b[sort])
-    cards_array.forEach(element => cards_array_sorted.push(element.card_index))
-    for (let i = 0; i < cards_array_sorted.length; i++) {
-        for (let z = 0; z < cards.length; z++){
-            if (z === cards_array_sorted[i]) cards.push(cards[z])
-        }
-    }
-    let new_cards = cards.slice(cards_array_sorted.length, cards.length)
-    new_cards.forEach(new_card => cards_node.appendChild(new_card))
-    
-}
-sort_function(sort_value.getAttribute('data-sort-active'))
-
 
     //profile
 let cabinet = document.querySelector('.header__favorite-products-link')
@@ -415,7 +429,6 @@ cabinet.onclick = () => {
     })
 /*     return false */
 }
-
 
     //registration 
 let registration_swap = document.querySelector('.registration__swap')
@@ -447,5 +460,4 @@ for (let i = 0; i < registration_eye.length; i++) {
         else registration_password[i].setAttribute('type', 'password')
     }
 }
-
 
