@@ -176,6 +176,7 @@ input::placeholder {
   margin-top: 55px;
   position: relative;
   padding-bottom: 30px;
+  display: none;
 }
 .header__search-card {
   width: 90%;
