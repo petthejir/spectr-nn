@@ -151,7 +151,7 @@ input::placeholder {
 .header__search {
   border-radius: 50px;
   padding-left: 15px;
-  background-image: url(/pics/search.svg);
+  background-image: url("data:image/svg+xml,%3Csvg width='18' height='18' viewBox='0 0 26 26' fill='%239e9e9e' xmlns='http://www.w3.org/2000/svg' color='%2350b946' class='search-form__search-icon'%3E%3Cpath d='M10.526 3a7.526 7.526 0 017.527 7.526 7.485 7.485 0 01-.7 3.156l3.29 4.429a1.81 1.81 0 01-2.532 2.532l-4.427-3.292a7.488 7.488 0 01-3.158.701 7.526 7.526 0 110-15.052zm0 12.744a5.217 5.217 0 100-10.436 5.218 5.218 0 000 10.436z'%3E%3C/path%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: 65px 10px;
   width: 100px;
@@ -252,7 +252,7 @@ input::placeholder {
   transition: 200ms;
 }
 .header__search-card-like:hover {
-  fill: rgba(115, 72, 255, 0.4);
+  fill: rgba(128, 0, 128, 0.4);
 }
 .header__search-card-like_alternative {
   fill: #7348ff;
@@ -590,8 +590,8 @@ input::placeholder {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-shadow: 0px 4px 8px 0px rgba(115, 72, 255, 0.2);
-  box-shadow: 0px 4px 8px 0px rgba(115, 72, 255, 0.2);
+  -webkit-box-shadow: 0px 4px 8px 0px rgba(128, 0, 128, 0.2);
+  box-shadow: 0px 4px 8px 0px rgba(128, 0, 128, 0.2);
 }
 .card__conteiner {
   width: 80%;
@@ -707,7 +707,7 @@ input::placeholder {
   transition: 200ms;
 }
 .card__like:hover {
-  fill: rgba(115, 72, 255, 0.4);
+  fill: rgba(128, 0, 128, 0.4);
 }
 .card__like_alternative {
   fill: #7348ff;
