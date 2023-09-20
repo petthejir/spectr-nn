@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/index.css">
+    <? require '../php/db.php' ?>
 </head>
 <body class="body contacts">
     <div class="wrapper">
@@ -91,24 +92,43 @@
                 <div class="main-catalog__content">
                     <div class="main-catalog__left">
                         <div class="main-catalog__category">
-                            <div class="main-catalog__category-name">
-                                <img src="../pics/categories/sale.png" alt="">
-                                <p>Товары по скидке</p>
-                                <div class="main-catalog__category-plus"><span class="main-catalog__category-plus-vertical"></span></div>
-                            </div>
-                            <div class="main-catalog__category-products">
+
+                        <? 
+                            $categories = $db->query("SELECT category FROM card");
+                            $unique_category = [];
+                            foreach ($categories as $categories) {
+                                array_push($unique_category, $categories["category"]);
+                            }
+                            $unique_category = array_unique($unique_category);
+
+                            foreach ($unique_category as $unique_category) {
+                                $subgroups = $db->query("SELECT subgroup FROM card WHERE category LIKE '$unique_category'");
+                                $unique_subgroups = [];
+                                foreach ($subgroups as $subgroups) {
+                                    array_push($unique_subgroups, $subgroups["subgroup"]);
+                                }
+                                $unique_subgroups = array_unique($unique_subgroups);
+                                echo "
+                                    <div class='main-catalog__category-name'>
+                                        <p>$unique_category</p>
+                                        <div class='main-catalog__category-name-plus'><span class='main-catalog__category-name-plus-vertical'></span></div>
+                                    </div>
+                                    <div class='main-catalog__category-subgroups main-catalog__category-subgroups_alternative'>
+                                    ";                                
+                                        foreach ($unique_subgroups as $unique_subgroups) {
+                                            echo "
+                                                <li class='subgroup-li'>
+                                                    <input class='subgroup-checkbox' type='checkbox'>
+                                                    <p class='subgroup-p'>$unique_subgroups</p>
+                                                </li>
+                                            ";
+                                        }
+                                    echo "</div>";
+                                ;
+                            }
+                        ?>
                                 
-                            </div>
-                        </div>
-                        <div class="main-catalog__category">
-                            <div class="main-catalog__category-name">
-                                <img src="../pics/categories/sale.png" alt="">
-                                <p>Товары по скидке</p>
-                                <div class="main-catalog__category-plus"><span class="main-catalog__category-plus-vertical"></span></div>
-                            </div>
-                            <div class="main-catalog__category-products">
-                                <div></div>
-                            </div>
+                                                   
                         </div>
                     </div>
                     <div class="main-catalog__right">

@@ -252,7 +252,7 @@ input::placeholder {
   transition: 200ms;
 }
 .header__search-card-like:hover {
-  fill: rgba(128, 0, 128, 0.4);
+  fill: rgba(115, 72, 255, 0.4);
 }
 .header__search-card-like_alternative {
   fill: #7348ff;
@@ -707,7 +707,7 @@ input::placeholder {
   transition: 200ms;
 }
 .card__like:hover {
-  fill: rgba(128, 0, 128, 0.4);
+  fill: rgba(115, 72, 255, 0.4);
 }
 .card__like_alternative {
   fill: #7348ff;
@@ -1802,7 +1802,6 @@ h1, h2, h3, h4, h5, h6 {
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   cursor: pointer;
   position: relative;
   -webkit-box-orient: vertical;
@@ -1819,37 +1818,18 @@ h1, h2, h3, h4, h5, h6 {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  position: relative;
 }
-.main-catalog__category-products {
-  width: 100%;
-  height: 0px;
-  -webkit-transition: 200ms;
-  transition: 200ms;
-}
-.main-catalog__category-products_alternative {
-  height: 100%;
-}
-.main-catalog__category img {
-  width: 40px;
-  margin-left: 10px;
-}
-.main-catalog__category p {
-  font-weight: bold;
-  margin-left: 10px;
-  font-size: 16px;
-  -webkit-transition: 200ms;
-  transition: 200ms;
-}
-.main-catalog__category:hover p {
+.main-catalog__category-name:hover p {
   color: #7348ff;
 }
-.main-catalog__category:hover .main-catalog__category-plus {
+.main-catalog__category-name:hover .main-catalog__category-name-plus {
   background-color: #7348ff;
 }
-.main-catalog__category:hover .main-catalog__category-plus-vertical {
+.main-catalog__category-name:hover .main-catalog__category-name-plus-vertical {
   background-color: #7348ff;
 }
-.main-catalog__category-plus {
+.main-catalog__category-name-plus {
   content: "";
   background-color: rgb(110, 110, 110);
   width: 14px;
@@ -1870,7 +1850,7 @@ h1, h2, h3, h4, h5, h6 {
       -ms-flex-align: center;
           align-items: center;
 }
-.main-catalog__category-plus-vertical {
+.main-catalog__category-name-plus-vertical {
   content: "";
   background-color: rgb(110, 110, 110);
   width: 14px;
@@ -1882,8 +1862,69 @@ h1, h2, h3, h4, h5, h6 {
   -webkit-transition: 200ms;
   transition: 200ms;
 }
-.main-catalog__category-plus-vertical_alternative {
+.main-catalog__category-name-plus-vertical_alternative {
   width: 0px;
+}
+.main-catalog__category-subgroups {
+  width: 100%;
+  list-style: none;
+}
+.main-catalog__category-subgroups li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 20px;
+  cursor: pointer;
+}
+.main-catalog__category-subgroups li p {
+  position: relative;
+  padding-left: 20px;
+}
+.main-catalog__category-subgroups li p:before, .main-catalog__category-subgroups li p:after {
+  content: "";
+  position: absolute;
+  left: -15px;
+  top: -3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  -webkit-transition: 200ms;
+  transition: 200ms;
+  background-image: url("data:image/svg+xml,%3Csvg width='20px' height='20px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 12L9.89075 14.8907V14.8907C9.95114 14.951 10.049 14.9511 10.1094 14.8907V14.8907L17 8' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.main-catalog__category-subgroups li p:before {
+  background-color: white;
+  border: 1px solid rgb(190, 190, 190);
+}
+.main-catalog__category-subgroups li:hover p:before {
+  border: 1px solid rgba(115, 72, 255, 0.6);
+}
+.main-catalog__category-subgroups li input {
+  cursor: pointer;
+  pointer-events: none;
+  display: none;
+}
+.main-catalog__category-subgroups li input:checked ~ .subgroup-p:after {
+  background-color: rgba(115, 72, 255, 0.8);
+}
+.main-catalog__category-subgroups_alternative {
+  display: none;
+}
+.main-catalog__category img {
+  width: 40px;
+  margin-left: 10px;
+}
+.main-catalog__category p {
+  font-weight: bold;
+  margin-left: 10px;
+  font-size: 16px;
+  -webkit-transition: 200ms;
+  transition: 200ms;
 }
 .main-catalog__right {
   width: 80%;
@@ -2196,6 +2237,7 @@ h1, h2, h3, h4, h5, h6 {
       -ms-flex-align: center;
           align-items: center;
   height: 70px;
+  margin-top: 20px;
 }
 .filters h1 {
   width: 100%;

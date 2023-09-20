@@ -159,7 +159,7 @@ input {
                 fill: rgba(black, .1);
                 transition: 200ms;
                 &:hover {
-                    fill: rgba(purple, .4);
+                    fill: rgba($purple, .4);
                 }
                 &_alternative {
                     fill: $purple;
@@ -469,7 +469,7 @@ input {
         fill: rgba(black, .1);
         transition: 200ms;
         &:hover {
-            fill: rgba(purple, .4);
+            fill: rgba($purple, .4);
         }
         &_alternative {
             fill: $purple;
