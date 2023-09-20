@@ -116,10 +116,16 @@
                                     <div class='main-catalog__category-subgroups main-catalog__category-subgroups_alternative'>
                                     ";                                
                                         foreach ($unique_subgroups as $unique_subgroups) {
+                                            $subgroups_count = $db->query("SELECT subgroup FROM card WHERE subgroup LIKE '$unique_subgroups'");
+                                            $counter = 0;
+                                            foreach ($subgroups_count as $subgroups_count) {
+                                                $counter++; 
+                                            }
                                             echo "
                                                 <li class='subgroup-li'>
                                                     <input class='subgroup-checkbox' type='checkbox'>
                                                     <p class='subgroup-p'>$unique_subgroups</p>
+                                                    <h4 class='subgroup-count'>($counter)</h4>
                                                 </li>
                                             ";
                                         }
