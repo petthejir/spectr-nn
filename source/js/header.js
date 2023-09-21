@@ -132,9 +132,11 @@ let cards_array = []
 let price_new = [...document.querySelectorAll('.card__price-new')] // инициализация блока новой цены
 let price_old = [...document.querySelectorAll('.card__price-old')] // инициализация блока старой цены
 let price_old_value = price_old.map(price => price.getAttribute('data-old-price'))// value price old
-let card_discount = document.querySelectorAll('.card__discount') // инициализация скидки
 let price_new_value = price_new.map(price => price.getAttribute('data-new-price')) // value price new
+let card_discount = document.querySelectorAll('.card__discount') // инициализация скидки
 let card_title = [...document.querySelectorAll('.card__title-value')]
+let subgroup = [...document.querySelectorAll('[data-subgroup]')]
+let subgroup_value = subgroup.map(subgroup => subgroup.getAttribute('data-subgroup'))
 let current_price
 let discount
 
@@ -159,31 +161,16 @@ for (let i = 0; i < cards.length; i++) {
             discount: discount,
             rating: -rating[i].innerHTML,
             _current_price: -current_price,
+            subgroup: subgroup_value[i],
         }
     )
 }
 
-    //search
-header__search.oninput = function() {
-    header__search_buttons_empty.classList.add('header__search-buttons-empty_alt')
-    if (header__search_value_do_empty()) header__search_buttons_empty_alt_remove()
-    
-    let value = this.value.trim()
-    if (value != 0) {
-        cards_array.forEach(card => {
-            if (card.title.toLowerCase().includes(value.toLowerCase())) {
-                console.log(card)
-            }
-        })
-    }
-}
-
     //cards sort
 function sort_function(sort) {
-    let cards_array_sorted = []
     let cards_node = document.querySelector('#cards')
     cards_array.sort((a, b) => a[sort] - b[sort])
-    cards_array.forEach(card => cards_array_sorted.push(card.card_index)) //отсортированный массив индексов
+    let cards_array_sorted = cards_array.map(card => card.index) //отсортированный массив индексов
     for (let i = 0; i < cards_array_sorted.length; i++) {
         for (let z = 0; z < cards.length; z++){
             if (z === cards_array_sorted[i]) cards.push(cards[z])
@@ -223,20 +210,39 @@ sort.onclick = () => {
     //скрыть/показать карту discont.value != ''
 let discont_filter = document.querySelector('.discont-filter')
 discont_filter.onclick = () => {
-    function card_toggle_remove() {
+    let discont_filter_input = document.querySelector('.discont-filter__input')
+    if (discont_filter_input.checked === true) discont_filter_input.checked = false
+        else discont_filter_input.checked = true
+    if (discont_filter_input.checked === true) {
         for (let i = 0; i < cards.length; i++) {
-            if (card_discount_value[i].innerHTML === '') cards[i].classList.toggle('remove')
+            if (card_discount_value[i].innerHTML === '') cards[i].classList.add('remove')
         }
     }
-
-    let discont_filter_input = document.querySelector('.discont-filter__input')
-    if (discont_filter_input.checked === true) {
-        discont_filter_input.checked = false
+    else {
+        for (let i = 0; i < cards.length; i++) {
+            if (card_discount_value[i].innerHTML === '') {
+                cards[i].classList.remove('remove')
+                subgroup_()
+            }
+        }
     }
-    else discont_filter_input.checked = true
-    if (discont_filter_input.checked === true) card_toggle_remove()
-    else card_toggle_remove()
 }
+
+    //search
+header__search.oninput = function() {
+    header__search_buttons_empty.classList.add('header__search-buttons-empty_alt')
+    if (header__search_value_do_empty()) header__search_buttons_empty_alt_remove()
+    
+    let value = this.value.trim()
+    if (value != 0) {
+        cards_array.forEach(card => {
+            if (card.title.toLowerCase().includes(value.toLowerCase())) {
+                console.log(card)
+            }
+        })
+    }
+}
+
 
     //profile
 let cabinet = document.querySelector('.header__favorite-products-link')
