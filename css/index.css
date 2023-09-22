@@ -161,6 +161,12 @@ input::placeholder {
   height: 40px;
   z-index: 4;
 }
+.header__search-no-card {
+  font-size: 17px;
+  width: 100%;
+  margin-top: 15px;
+  padding: 25px 0px 5px 25px;
+}
 .header__search-cards {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -173,15 +179,18 @@ input::placeholder {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-top: 55px;
+  margin-top: 40px;
   position: relative;
-  padding-bottom: 30px;
-  display: none;
+  padding-bottom: 25px;
+}
+.header__search-cards h2 {
+  font-weight: bold;
+  font-size: 17px;
 }
 .header__search-card {
   width: 90%;
   height: 70px;
-  margin-top: 40px;
+  margin-top: 30px;
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -200,6 +209,7 @@ input::placeholder {
 .header__search-card-title {
   font-weight: bold;
   font-size: 15px;
+  width: 70%;
 }
 .header__search-card-discount {
   position: absolute;
@@ -220,6 +230,7 @@ input::placeholder {
   font-weight: bold;
   font-size: 11px;
   color: #fff;
+  display: none;
 }
 .header__search-card-rating {
   margin-top: 7px;
@@ -260,6 +271,16 @@ input::placeholder {
 .header__search-card-price {
   font-weight: bold;
   margin-right: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 .header__search-card-price-old {
   position: relative;
@@ -356,12 +377,15 @@ input::placeholder {
 }
 .header__search-result {
   position: absolute;
-  width: 100%;
-  background-color: white;
+  width: 620px;
   top: 0;
   z-index: 3;
   border-radius: 25px;
-  /*             display: none; */
+  margin-top: 20px;
+  background-color: white;
+}
+.header__search-result_alternative {
+  display: none;
 }
 .header__search-buttons {
   display: -webkit-box;

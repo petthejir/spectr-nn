@@ -45,8 +45,8 @@
                             </li>
                         </a>
                         <svg class="bread-crumbs__arrow" version="1.0" xmlns="http://www.w3.org/2000/svg"
-                        width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000"
-                        preserveAspectRatio="xMidYMid meet">
+                            width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000"
+                            preserveAspectRatio="xMidYMid meet">
     
                            <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
                            stroke="none">
@@ -152,10 +152,10 @@
                                     $subgroup = $all_cards["subgroup"];
 
                                     echo  "
-                                        <div class='card' data-subgroup='$subgroup' data-category='$category'>
+                                        <div class='card' main-card data-subgroup='$subgroup' data-category='$category'>
                                             <div class='card__conteiner'>
                                                 <div class='card__top'>
-                                                    <h3 class='card__discount'><span class='card__discount-value'></span>%</h3>
+                                                    <h3 class='card__discount' data-discount><span class='card__discount-value'></span>%</h3>
                                                     <div class='card__rating'>
                                                         <div class='card__rating-icon'>
                                                             <svg height='20px' width='20px' version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' 
