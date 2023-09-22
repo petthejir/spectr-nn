@@ -385,7 +385,10 @@ discont_filter.onclick = () => {
     }
     else {
         for (let i = 0; i < cards.length; i++) {
-            if (card_discount_value[i].innerHTML === '') cards[i].classList.remove('remove')
+            if (card_discount_value[i].innerHTML === '') {
+                cards[i].classList.remove('remove')
+                subgroup_()
+            }
         }
     }
 }
