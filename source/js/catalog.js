@@ -31,7 +31,7 @@ function subgroup_() {
 for (let i = 0; i < subgroup_li.length; i++) {
     subgroup_li[i].onclick = () => {
         if (subgroup_checkbox[i].checked === true) subgroup_checkbox[i].checked = false
-            else subgroup_checkbox[i].checked = true
+        else subgroup_checkbox[i].checked = true
         for (let z = 0; z < subgroup_checkbox.length; z++) {
             if (subgroup_checkbox[z].checked === true) {
                 if (choisen_subgroups.indexOf(subgroup_li[z].getAttribute('li-data-subgroup')) === -1) {
@@ -45,6 +45,7 @@ for (let i = 0; i < subgroup_li.length; i++) {
             }     
         }
         subgroup_()
+        if (discont_filter_input.checked === true) discont_active()
     }
 }
 
