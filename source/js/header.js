@@ -7,7 +7,12 @@ const header__search_search_button = document.querySelector('.header__search-sea
 let body = document.querySelector('.body')
 
 function header__search_value_do_empty() {
-    return header__search.value == ''
+    return header__search.value === ''
+}
+
+function header__search_value_remove() {
+    header__search.value = ''
+    search_by_value(header__search.value)
 }
 
 function header__search_buttons_remove() {
@@ -16,10 +21,6 @@ function header__search_buttons_remove() {
 
 function header__search_buttons_empty_alt_remove() {
     header__search_buttons_empty.classList.remove('header__search-buttons-empty_alt')
-}
-
-function header__search_value_remove() {
-    header__search.value = ''
 }
 
 function header_search_closer_full_size_remove() {
@@ -124,21 +125,41 @@ observ.observe(footer)
 let card_like = [...document.querySelectorAll('[data-like]')]
 card_like.forEach(like => like.onclick = () => like.classList.toggle('card__like_alternative'))
     
-let cards = [...document.querySelectorAll('.card')] // все карты
+let cards = [...document.querySelectorAll('[main-card]')] // main карты
 let rating = document.querySelectorAll('.card__rating-value') 
 let sort_value = document.querySelector('.filters__sort-value')
+let card_discount = document.querySelectorAll('[data-discount]') // инициализация скидки
 let card_discount_value = document.querySelectorAll('.card__discount-value') // value скидки
 let cards_array = []
-let price_new = [...document.querySelectorAll('.card__price-new')] // инициализация блока новой цены
-let price_old = [...document.querySelectorAll('.card__price-old')] // инициализация блока старой цены
-let price_old_value = price_old.map(price => price.getAttribute('data-old-price'))// value price old
+let price_new = [...document.querySelectorAll('[data-new-price]')] // инициализация блока новой цены
 let price_new_value = price_new.map(price => price.getAttribute('data-new-price')) // value price new
-let card_discount = document.querySelectorAll('.card__discount') // инициализация скидки
+let price_old = [...document.querySelectorAll('[data-old-price]')] // инициализация блока старой цены
+let price_old_value = price_old.map(price => price.getAttribute('data-old-price'))// value price old
 let card_title = [...document.querySelectorAll('.card__title-value')]
 let subgroup = [...document.querySelectorAll('[data-subgroup]')]
 let subgroup_value = subgroup.map(subgroup => subgroup.getAttribute('data-subgroup'))
 let current_price
 let discount
+
+let header_cards = [...document.querySelectorAll('[header-card]')] // header карты
+let header_cards_title = [...document.querySelectorAll('.header__search-card-title')]
+let header_price_new = [...document.querySelectorAll('[data-header-new-price]')] // инициализация блока новой цены
+let header_price_new_value = header_price_new.map(price => price.getAttribute('data-header-new-price')) // value price new
+let header_price_old = [...document.querySelectorAll('[data-header-old-price]')] // инициализация блока старой цены
+let header_price_old_value = header_price_old.map(price => price.getAttribute('data-header-old-price'))// value price old
+let header_card_discount = document.querySelectorAll('[header-discount]') // инициализация скидки
+let header_card_discount_value = document.querySelectorAll('.card__header-discount-value') // value скидки
+
+for (let i = 0; i < header_cards.length; i++) {
+    if (header_price_new_value[i] != '') {
+        header_price_old[i].classList.add('card__price-old_alternative') // применение классов к old
+        header_price_old[i].innerHTML = `<strike>${header_price_old[i].innerHTML}</strike>` // зачёркивание old
+        header_card_discount_value[i].innerHTML = -Math.round((header_price_old_value[i]-header_price_new_value[i])/header_price_old_value[i] * 100) // рассчёт скидки
+        header_card_discount[i].style.display = 'block' // отображение скидки
+    }
+    else header_price_new[i].innerHTML = ''
+}
+
 
 for (let i = 0; i < cards.length; i++) {
     if (price_new_value[i] != '') {
@@ -163,8 +184,8 @@ for (let i = 0; i < cards.length; i++) {
             _current_price: -current_price,
             subgroup: subgroup_value[i],
         }
-    )
-}
+    )   
+}    
 
     //cards sort
 function sort_function(sort) {
@@ -215,34 +236,62 @@ discont_filter.onclick = () => {
         else discont_filter_input.checked = true
     if (discont_filter_input.checked === true) {
         for (let i = 0; i < cards.length; i++) {
-            if (card_discount_value[i].innerHTML === '') cards[i].classList.add('remove')
+            if (card_discount_value[i].innerHTML === '') {
+                cards[i].classList.add('remove')
+            }
         }
     }
     else {
         for (let i = 0; i < cards.length; i++) {
             if (card_discount_value[i].innerHTML === '') {
                 cards[i].classList.remove('remove')
-                subgroup_()
             }
         }
+        subgroup_()
     }
 }
 
     //search
-header__search.oninput = function() {
-    header__search_buttons_empty.classList.add('header__search-buttons-empty_alt')
-    if (header__search_value_do_empty()) header__search_buttons_empty_alt_remove()
-    
-    let value = this.value.trim()
-    if (value != 0) {
-        cards_array.forEach(card => {
-            if (card.title.toLowerCase().includes(value.toLowerCase())) {
-                console.log(card)
+let header_search_result = document.querySelector('.header__search-result')
+function search_by_value(value) {
+    let header_search_no_card = document.querySelector('.header__search-no-card')
+    let hidden_header_card_counter = 0
+    if (value.length > 1) {
+        header_search_result.classList.remove('header__search-result_alternative')
+        for (let i = 0; i < header_cards.length; i++) {
+            if (header_cards_title[i].innerHTML.toLowerCase().includes(value.toLowerCase())) {
+                header_cards[i].classList.remove('remove')
+            } 
+            else {
+                header_cards[i].classList.add('remove')
+            }  
+        }
+        header_cards.forEach(header_card => {
+            if (header_card.classList.contains('remove')) {
+                hidden_header_card_counter++
             }
+        })
+        if (hidden_header_card_counter === header_cards.length) {
+            header_search_no_card.classList.remove('remove')
+        }
+        else {
+            header_search_no_card.classList.add('remove')
+        }
+    }
+    if (value.length <= 1) {
+        header_search_result.classList.add('header__search-result_alternative')
+        header_cards.forEach(header_card => {
+            header_card.classList.add('remove')            
         })
     }
 }
 
+header__search.oninput = function() {
+    header__search_buttons_empty.classList.add('header__search-buttons-empty_alt')
+    if (header__search_value_do_empty()) header__search_buttons_empty_alt_remove()
+    header__search.value = this.value.trim()
+    search_by_value(header__search.value)
+}
 
     //profile
 let cabinet = document.querySelector('.header__favorite-products-link')

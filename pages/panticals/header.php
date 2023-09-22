@@ -13,6 +13,64 @@
         </ul>
         <div class="header__right">
             <input class="header__search" placeholder="Поиск">
+
+            <div class="header__search-result header__search-result_alternative">
+                <div class="header__search-cards">
+                    <h1 class="header__search-no-card remove">Товары не найдены, попробуйте изменить запрос</h1>
+                    <?
+                        $all_cards = $db->query("SELECT * FROM card");
+                        foreach ($all_cards as $all_cards) {
+                            $id = $all_cards["id"];
+                            $title = $all_cards["title"];
+                            $old_price =  $all_cards["old_price"];
+                            $new_price = $all_cards["new_price"];
+                            $image = $all_cards["image"];
+                            $description = $all_cards["description"];
+                            $category = $all_cards["category"];
+                            $subgroup = $all_cards["subgroup"];
+                        
+                            echo "
+                                <div class='header__search-card remove' header-card>
+                                    <img src='$image' alt=''>
+                                    <div class='header__search-card-main'>
+                                        <h3 class='header__search-card-title'>$title</h3>
+                                        <div class='header__search-card-rating'>
+                                            <svg height='20px' width='20px' version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' 
+                                                                 viewBox='0 0 47.94 47.94' xml:space='preserve'>
+                                                            <path d='M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
+                                                                c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
+                                                                c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
+                                                                c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
+                                                                c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
+                                                                C22.602,0.567,25.338,0.567,26.285,2.486z'/>
+                                            </svg>
+                                            <h3 class='header__search-card-rating-value'></h3>
+                                        </div>
+                                    </div>
+                                    <div class='header__search-card-discount' header-discount><span class='card__header-discount-value'></span>%</div>
+                                    <div class='header__search-card-right'>
+                                        <div class='header__search-card-price'>
+                                            <h2 class='header__search-card-price-old' data-header-old-price='$old_price'>$old_price,99 ₽</h2>
+                                            <h2 class='header__search-card-price-new' data-header-new-price='$new_price'>$new_price,99 ₽</h2>
+                                        </div>
+                                        <div class='header__search-card-like' data-like>
+                                            <svg height='35px' width='35px' version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' 
+                                                                 viewBox='0 0 50 50' xml:space='preserve'>
+                                                            <path d='M24.85,10.126c2.018-4.783,6.628-8.125,11.99-8.125c7.223,0,12.425,6.179,13.079,13.543
+                                                                c0,0,0.353,1.828-0.424,5.119c-1.058,4.482-3.545,8.464-6.898,11.503L24.85,48L7.402,32.165c-3.353-3.038-5.84-7.021-6.898-11.503
+                                                                c-0.777-3.291-0.424-5.119-0.424-5.119C0.734,8.179,5.936,2,13.159,2C18.522,2,22.832,5.343,24.85,10.126z'/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            ";
+                        }
+                    
+                    ?>
+                </div>
+            </div>           
+
+
             <div class="header__search-buttons">
                 <div class="header__search-buttons-empty">
                     <button class="header__search-value-del">
