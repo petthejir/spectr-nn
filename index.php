@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/index.css">
+    <? require './php/db.php' ?>
 </head>
 <body class="body">
     <div class="wrapper">
@@ -111,23 +112,70 @@
                     <div class="auto-slider__line"></div>
                     <div class="auto-slider__line-active"></div>
                 </div>
-                <div class="brands">
-                    <h1 class="main-titles">
-                        Бренды
-                    </h1>
-                    <div class="brands__slider">
-                        <div class="brands__slider-wrapper">
-                            <div class="brands__left brands__button">
-                                <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="12pt" height="15pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
-                                    <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" stroke="none">
-                                        <path d="M2496 3999 c-127 -21 -86 16 -1274 -1148 -606 -594 -1115 -1095
-                                        -1131 -1113 -127 -147 -117 -370 24 -511 115 -115 293 -144 442 -72 53 26 98
-                                        67 1467 1325 290 267 531 485 536 485 5 0 246 -218 536 -485 1369 -1258 1414
-                                        -1299 1467 -1325 230 -112 496 20 548 272 22 104 -12 230 -82 311 -56 64
-                                        -2205 2166 -2243 2193 -77 57 -194 84 -290 68z"/>
-                                    </g>
-                                </svg>
+                <? 
+                    $categories = $db->query("SELECT category FROM card");
+                    $unique_category = [];
+                    foreach ($categories as $categories) {
+                        array_push($unique_category, $categories["category"]);
+                    }
+                    $unique_category = array_unique($unique_category);
+                    $normaly_unique_category = [];
+                    foreach ($unique_category as $unique_category) {
+                        array_push($normaly_unique_category, $unique_category);
+                    }
+                    $categories_counter = 0;
+                    $category = $db->query("SELECT * FROM card WHERE category LIKE '$normaly_unique_category[$categories_counter]'"); 
+                    echo "
+                        <div class='cards'>
+                            <h1 class='main-titles'>$normaly_unique_category[$categories_counter]</h1>
+                            <div class='cards__slider'>
+                                <div class='cards__button cards__left'>
+                                    <svg version='1.0' xmlns='http://www.w3.org/2000/svg' width='12pt' height='15pt' viewBox='0 0 512.000000 512.000000' preserveAspectRatio='xMidYMid meet'>
+                                                <g transform='translate(0.000000,512.000000) scale(0.100000,-0.100000)' stroke='none'>
+                                                    <path d='M2496 3999 c-127 -21 -86 16 -1274 -1148 -606 -594 -1115 -1095
+                                                    -1131 -1113 -127 -147 -117 -370 24 -511 115 -115 293 -144 442 -72 53 26 98
+                                                    67 1467 1325 290 267 531 485 536 485 5 0 246 -218 536 -485 1369 -1258 1414
+                                                    -1299 1467 -1325 230 -112 496 20 548 272 22 104 -12 230 -82 311 -56 64
+                                                    -2205 2166 -2243 2193 -77 57 -194 84 -290 68z'/>
+                                                </g>
+                                    </svg>
+                                </div>
+                                <div class='cards__button cards__right'>
+                                    <svg version='1.0' xmlns='http://www.w3.org/2000/svg' width='12pt' height='15pt' viewBox='0 0 512.000000 512.000000' preserveAspectRatio='xMidYMid meet'>
+                                                <g transform='translate(0.000000,512.000000) scale(0.100000,-0.100000)' stroke='none'>
+                                                    <path d='M2496 3999 c-127 -21 -86 16 -1274 -1148 -606 -594 -1115 -1095
+                                                    -1131 -1113 -127 -147 -117 -370 24 -511 115 -115 293 -144 442 -72 53 26 98
+                                                    67 1467 1325 290 267 531 485 536 485 5 0 246 -218 536 -485 1369 -1258 1414
+                                                    -1299 1467 -1325 230 -112 496 20 548 272 22 104 -12 230 -82 311 -56 64
+                                                    -2205 2166 -2243 2193 -77 57 -194 84 -290 68z'/>
+                                                </g>
+                                    </svg>
+                                </div>
+                                <div class='cards__lane'>";
+                                    pseudo_destructuring_and_echo($category);
+                                echo "</div>
                             </div>
+                        </div> 
+                    ";
+                    $categories_counter++;
+                ?>
+                <div class="brands">
+                        <h1 class="main-titles">
+                            Бренды
+                        </h1>
+                        <div class="brands__slider">
+                            <div class="brands__slider-wrapper">
+                                <div class="brands__left brands__button">
+                                    <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="12pt" height="15pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
+                                        <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" stroke="none">
+                                            <path d="M2496 3999 c-127 -21 -86 16 -1274 -1148 -606 -594 -1115 -1095
+                                            -1131 -1113 -127 -147 -117 -370 24 -511 115 -115 293 -144 442 -72 53 26 98
+                                            67 1467 1325 290 267 531 485 536 485 5 0 246 -218 536 -485 1369 -1258 1414
+                                            -1299 1467 -1325 230 -112 496 20 548 272 22 104 -12 230 -82 311 -56 64
+                                            -2205 2166 -2243 2193 -77 57 -194 84 -290 68z"/>
+                                        </g>
+                                    </svg>
+                                </div>
                             <div class="brands__right brands__button">
                                 <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="12pt" height="15pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
                                     <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" stroke="none">
@@ -139,696 +187,59 @@
                                     </g>
                                 </svg>
                             </div>
-                            <div class="brands__slider-lane">
-                                <img class="brands__img" src="./pics/brands/cola.png">
-                                <img class="brands__img" src="./pics/brands/whiskas.png">
-                                <img class="brands__img" src="./pics/brands/danone.png">
-                                <img class="brands__img" src="./pics/brands/nestle.png">
-                                <img class="brands__img" src="./pics/brands/nescafe.png">
-                                <img class="brands__img" src="./pics/brands/pedigree.png">
-                                <img class="brands__img" src="./pics/brands/jacobs.png">
-                                <img class="brands__img" src="./pics/brands/nesquik.png">
-                                <img class="brands__img" src="./pics/brands/heinz.png">
-                                <img class="brands__img" src="./pics/brands/dobry.png">
-                                <img class="brands__img" src="./pics/brands/purina.png">
-                                <img class="brands__img" src="./pics/brands/heineken.png">
+                                <div class="brands__slider-lane">
+                                    <img class="brands__img" src="./pics/brands/cola.png">
+                                    <img class="brands__img" src="./pics/brands/whiskas.png">
+                                    <img class="brands__img" src="./pics/brands/danone.png">
+                                    <img class="brands__img" src="./pics/brands/nestle.png">
+                                    <img class="brands__img" src="./pics/brands/nescafe.png">
+                                    <img class="brands__img" src="./pics/brands/pedigree.png">
+                                    <img class="brands__img" src="./pics/brands/jacobs.png">
+                                    <img class="brands__img" src="./pics/brands/nesquik.png">
+                                    <img class="brands__img" src="./pics/brands/heinz.png">
+                                    <img class="brands__img" src="./pics/brands/dobry.png">
+                                    <img class="brands__img" src="./pics/brands/purina.png">
+                                    <img class="brands__img" src="./pics/brands/heineken.png">
+                                </div>
                             </div>
                         </div>
-                    </div>
                 </div>
-                <div class="cards">
-                    <h1 class="main-titles">Скидки</h1>
-                    <div class="cards__slider">
-                        <div class="cards__button cards__left">
-                            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="12pt" height="15pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
-                                <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" stroke="none">
-                                    <path d="M2496 3999 c-127 -21 -86 16 -1274 -1148 -606 -594 -1115 -1095
-                                    -1131 -1113 -127 -147 -117 -370 24 -511 115 -115 293 -144 442 -72 53 26 98
-                                    67 1467 1325 290 267 531 485 536 485 5 0 246 -218 536 -485 1369 -1258 1414
-                                    -1299 1467 -1325 230 -112 496 20 548 272 22 104 -12 230 -82 311 -56 64
-                                    -2205 2166 -2243 2193 -77 57 -194 84 -290 68z"/>
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="cards__button cards__right">
-                            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="12pt" height="15pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
-                                <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" stroke="none">
-                                    <path d="M2496 3999 c-127 -21 -86 16 -1274 -1148 -606 -594 -1115 -1095
-                                    -1131 -1113 -127 -147 -117 -370 24 -511 115 -115 293 -144 442 -72 53 26 98
-                                    67 1467 1325 290 267 531 485 536 485 5 0 246 -218 536 -485 1369 -1258 1414
-                                    -1299 1467 -1325 230 -112 496 20 548 272 22 104 -12 230 -82 311 -56 64
-                                    -2205 2166 -2243 2193 -77 57 -194 84 -290 68z"/>
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="cards__lane">
-                            <div class="card">
-                                <div class="card__conteiner">
-                                    <div class="card__top">
-                                        <h3 class="card__discount"><span class="card__discount-value"></span>%</h3>
-                                        <div class="card__rating">
-                                            <div class="card__rating-icon">
-                                                <svg height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                                         viewBox="0 0 47.94 47.94" xml:space="preserve">
-                                                    <path d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
-                                                        c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
-                                                        c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
-                                                        c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
-                                                        c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
-                                                        C22.602,0.567,25.338,0.567,26.285,2.486z"/>
-                                                </svg>
-                                            </div>
-                                            <h3 class="card__rating-value">3.7</h3>
-                                        </div>
-                                    </div>
-                                    <img class="card__img-block" src="../pics/test.jpg" alt="">
-                                    <div class="card__title">
-                                        <h4>
-                                            Сэндвич-ролл с омлетом, ветчиной и сыром Шеф Перекресток, 180г
-                                        </h4>
-                                    </div>
-                                    <div class="card__bottom">
-                                        <div class="card__price">
-                                            <h2 class="card__price-old" data-old-price="134">134,99 ₽</h2>
-                                            <h2 class="card__price-new" data-new-price="">,99 ₽</h2>
-                                        </div>
-                                        <div class="card__like">
-                                            <svg height="35px" width="35px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                                     viewBox="0 0 50 50" xml:space="preserve">
-                                                <path d="M24.85,10.126c2.018-4.783,6.628-8.125,11.99-8.125c7.223,0,12.425,6.179,13.079,13.543
-                                                    c0,0,0.353,1.828-0.424,5.119c-1.058,4.482-3.545,8.464-6.898,11.503L24.85,48L7.402,32.165c-3.353-3.038-5.84-7.021-6.898-11.503
-                                                    c-0.777-3.291-0.424-5.119-0.424-5.119C0.734,8.179,5.936,2,13.159,2C18.522,2,22.832,5.343,24.85,10.126z"/>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card__conteiner">
-                                    <div class="card__top">
-                                        <h3 class="card__discount"><span class="card__discount-value"></span>%</h3>
-                                        <div class="card__rating">
-                                            <div class="card__rating-icon">
-                                                <svg height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                                         viewBox="0 0 47.94 47.94" xml:space="preserve">
-                                                    <path d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
-                                                        c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
-                                                        c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
-                                                        c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
-                                                        c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
-                                                        C22.602,0.567,25.338,0.567,26.285,2.486z"/>
-                                                </svg>
-                                            </div>
-                                            <h3 class="card__rating-value">4.7</h3>
-                                        </div>
-                                    </div>
-                                    <img class="card__img-block" src="../pics/test.jpg" alt="">
-                                    <div class="card__title">
-                                        <h4>
-                                            Сэндвич-ролл с омлетом, ветчиной и сыром Шеф Перекресток, 180г
-                                        </h4>
-                                    </div>
-                                    <div class="card__bottom">
-                                        <div class="card__price">
-                                            <h2 class="card__price-old" data-old-price="124">124,99 ₽</h2>
-                                            <h2 class="card__price-new" data-new-price="114">114,99 ₽</h2>
-                                        </div>
-                                        <div class="card__like">
-                                            <svg height="35px" width="35px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                                     viewBox="0 0 50 50" xml:space="preserve">
-                                                <path d="M24.85,10.126c2.018-4.783,6.628-8.125,11.99-8.125c7.223,0,12.425,6.179,13.079,13.543
-                                                    c0,0,0.353,1.828-0.424,5.119c-1.058,4.482-3.545,8.464-6.898,11.503L24.85,48L7.402,32.165c-3.353-3.038-5.84-7.021-6.898-11.503
-                                                    c-0.777-3.291-0.424-5.119-0.424-5.119C0.734,8.179,5.936,2,13.159,2C18.522,2,22.832,5.343,24.85,10.126z"/>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card__conteiner">
-                                    <div class="card__top">
-                                        <h3 class="card__discount"><span class="card__discount-value"></span>%</h3>
-                                        <div class="card__rating">
-                                            <div class="card__rating-icon">
-                                                <svg height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                                         viewBox="0 0 47.94 47.94" xml:space="preserve">
-                                                    <path d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
-                                                        c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
-                                                        c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
-                                                        c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
-                                                        c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
-                                                        C22.602,0.567,25.338,0.567,26.285,2.486z"/>
-                                                </svg>
-                                            </div>
-                                            <h3 class="card__rating-value">0.7</h3>
-                                        </div>
-                                    </div>
-                                    <img class="card__img-block" src="../pics/test.jpg" alt="">
-                                    <div class="card__title">
-                                        <h4>
-                                            Сэндвич-ролл с омлетом, ветчиной и сыром Шеф Перекресток, 180г
-                                        </h4>
-                                    </div>
-                                    <div class="card__bottom">
-                                        <div class="card__price">
-                                            <h2 class="card__price-old" data-old-price="124">124,99 ₽</h2>
-                                            <h2 class="card__price-new" data-new-price="">,99 ₽</h2>
-                                        </div>
-                                        <div class="card__like">
-                                            <svg height="35px" width="35px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                                     viewBox="0 0 50 50" xml:space="preserve">
-                                                <path d="M24.85,10.126c2.018-4.783,6.628-8.125,11.99-8.125c7.223,0,12.425,6.179,13.079,13.543
-                                                    c0,0,0.353,1.828-0.424,5.119c-1.058,4.482-3.545,8.464-6.898,11.503L24.85,48L7.402,32.165c-3.353-3.038-5.84-7.021-6.898-11.503
-                                                    c-0.777-3.291-0.424-5.119-0.424-5.119C0.734,8.179,5.936,2,13.159,2C18.522,2,22.832,5.343,24.85,10.126z"/>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card__conteiner">
-                                    <div class="card__top">
-                                        <h3 class="card__discount"><span class="card__discount-value"></span>%</h3>
-                                        <div class="card__rating">
-                                            <div class="card__rating-icon">
-                                                <svg height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                                         viewBox="0 0 47.94 47.94" xml:space="preserve">
-                                                    <path d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
-                                                        c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
-                                                        c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
-                                                        c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
-                                                        c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
-                                                        C22.602,0.567,25.338,0.567,26.285,2.486z"/>
-                                                </svg>
-                                            </div>
-                                            <h3 class="card__rating-value">2.7</h3>
-                                        </div>
-                                    </div>
-                                    <img class="card__img-block" src="../pics/test.jpg" alt="">
-                                    <div class="card__title">
-                                        <h4>
-                                            Сэндвич-ролл с омлетом, ветчиной и сыром Шеф Перекресток, 180г
-                                        </h4>
-                                    </div>
-                                    <div class="card__bottom">
-                                        <div class="card__price">
-                                            <h2 class="card__price-old" data-old-price="114">114,99 ₽</h2>
-                                            <h2 class="card__price-new" data-new-price="92">92,99 ₽</h2>
-                                        </div>
-                                        <div class="card__like">
-                                            <svg height="35px" width="35px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                                     viewBox="0 0 50 50" xml:space="preserve">
-                                                <path d="M24.85,10.126c2.018-4.783,6.628-8.125,11.99-8.125c7.223,0,12.425,6.179,13.079,13.543
-                                                    c0,0,0.353,1.828-0.424,5.119c-1.058,4.482-3.545,8.464-6.898,11.503L24.85,48L7.402,32.165c-3.353-3.038-5.84-7.021-6.898-11.503
-                                                    c-0.777-3.291-0.424-5.119-0.424-5.119C0.734,8.179,5.936,2,13.159,2C18.522,2,22.832,5.343,24.85,10.126z"/>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card__conteiner">
-                                    <div class="card__top">
-                                        <h3 class="card__discount"><span class="card__discount-value"></span>%</h3>
-                                        <div class="card__rating">
-                                            <div class="card__rating-icon">
-                                                <svg height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                                         viewBox="0 0 47.94 47.94" xml:space="preserve">
-                                                    <path d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
-                                                        c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
-                                                        c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
-                                                        c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
-                                                        c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
-                                                        C22.602,0.567,25.338,0.567,26.285,2.486z"/>
-                                                </svg>
-                                            </div>
-                                            <h3 class="card__rating-value">1.7</h3>
-                                        </div>
-                                    </div>
-                                    <img class="card__img-block" src="../pics/test.jpg" alt="">
-                                    <div class="card__title">
-                                        <h4>
-                                            Сэндвич-ролл с омлетом, ветчиной и сыром Шеф Перекресток, 180г
-                                        </h4>
-                                    </div>
-                                    <div class="card__bottom">
-                                        <div class="card__price">
-                                            <h2 class="card__price-old" data-old-price="154">154,99 ₽</h2>
-                                            <h2 class="card__price-new" data-new-price="">,99 ₽</h2>
-                                        </div>
-                                        <div class="card__like">
-                                            <svg height="35px" width="35px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                                     viewBox="0 0 50 50" xml:space="preserve">
-                                                <path d="M24.85,10.126c2.018-4.783,6.628-8.125,11.99-8.125c7.223,0,12.425,6.179,13.079,13.543
-                                                    c0,0,0.353,1.828-0.424,5.119c-1.058,4.482-3.545,8.464-6.898,11.503L24.85,48L7.402,32.165c-3.353-3.038-5.84-7.021-6.898-11.503
-                                                    c-0.777-3.291-0.424-5.119-0.424-5.119C0.734,8.179,5.936,2,13.159,2C18.522,2,22.832,5.343,24.85,10.126z"/>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card__conteiner">
-                                    <div class="card__top">
-                                        <h3 class="card__discount"><span class="card__discount-value"></span>%</h3>
-                                        <div class="card__rating">
-                                            <div class="card__rating-icon">
-                                                <svg height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                                         viewBox="0 0 47.94 47.94" xml:space="preserve">
-                                                    <path d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
-                                                        c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
-                                                        c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
-                                                        c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
-                                                        c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
-                                                        C22.602,0.567,25.338,0.567,26.285,2.486z"/>
-                                                </svg>
-                                            </div>
-                                            <h3 class="card__rating-value">3.7</h3>
-                                        </div>
-                                    </div>
-                                    <img class="card__img-block" src="../pics/test.jpg" alt="">
-                                    <div class="card__title">
-                                        <h4>
-                                            Сэндвич-ролл с омлетом, ветчиной и сыром Шеф Перекресток, 180г
-                                        </h4>
-                                    </div>
-                                    <div class="card__bottom">
-                                        <div class="card__price">
-                                            <h2 class="card__price-old" data-old-price="134">134,99 ₽</h2>
-                                            <h2 class="card__price-new" data-new-price="">,99 ₽</h2>
-                                        </div>
-                                        <div class="card__like">
-                                            <svg height="35px" width="35px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                                     viewBox="0 0 50 50" xml:space="preserve">
-                                                <path d="M24.85,10.126c2.018-4.783,6.628-8.125,11.99-8.125c7.223,0,12.425,6.179,13.079,13.543
-                                                    c0,0,0.353,1.828-0.424,5.119c-1.058,4.482-3.545,8.464-6.898,11.503L24.85,48L7.402,32.165c-3.353-3.038-5.84-7.021-6.898-11.503
-                                                    c-0.777-3.291-0.424-5.119-0.424-5.119C0.734,8.179,5.936,2,13.159,2C18.522,2,22.832,5.343,24.85,10.126z"/>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card__conteiner">
-                                    <div class="card__top">
-                                        <h3 class="card__discount"><span class="card__discount-value"></span>%</h3>
-                                        <div class="card__rating">
-                                            <div class="card__rating-icon">
-                                                <svg height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                                         viewBox="0 0 47.94 47.94" xml:space="preserve">
-                                                    <path d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
-                                                        c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
-                                                        c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
-                                                        c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
-                                                        c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
-                                                        C22.602,0.567,25.338,0.567,26.285,2.486z"/>
-                                                </svg>
-                                            </div>
-                                            <h3 class="card__rating-value">4.7</h3>
-                                        </div>
-                                    </div>
-                                    <img class="card__img-block" src="../pics/test.jpg" alt="">
-                                    <div class="card__title">
-                                        <h4>
-                                            Сэндвич-ролл с омлетом, ветчиной и сыром Шеф Перекресток, 180г
-                                        </h4>
-                                    </div>
-                                    <div class="card__bottom">
-                                        <div class="card__price">
-                                            <h2 class="card__price-old" data-old-price="124">124,99 ₽</h2>
-                                            <h2 class="card__price-new" data-new-price="114">114,99 ₽</h2>
-                                        </div>
-                                        <div class="card__like">
-                                            <svg height="35px" width="35px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                                     viewBox="0 0 50 50" xml:space="preserve">
-                                                <path d="M24.85,10.126c2.018-4.783,6.628-8.125,11.99-8.125c7.223,0,12.425,6.179,13.079,13.543
-                                                    c0,0,0.353,1.828-0.424,5.119c-1.058,4.482-3.545,8.464-6.898,11.503L24.85,48L7.402,32.165c-3.353-3.038-5.84-7.021-6.898-11.503
-                                                    c-0.777-3.291-0.424-5.119-0.424-5.119C0.734,8.179,5.936,2,13.159,2C18.522,2,22.832,5.343,24.85,10.126z"/>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card__conteiner">
-                                    <div class="card__top">
-                                        <h3 class="card__discount"><span class="card__discount-value"></span>%</h3>
-                                        <div class="card__rating">
-                                            <div class="card__rating-icon">
-                                                <svg height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                                         viewBox="0 0 47.94 47.94" xml:space="preserve">
-                                                    <path d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
-                                                        c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
-                                                        c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
-                                                        c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
-                                                        c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
-                                                        C22.602,0.567,25.338,0.567,26.285,2.486z"/>
-                                                </svg>
-                                            </div>
-                                            <h3 class="card__rating-value">0.7</h3>
-                                        </div>
-                                    </div>
-                                    <img class="card__img-block" src="../pics/test.jpg" alt="">
-                                    <div class="card__title">
-                                        <h4>
-                                            Сэндвич-ролл с омлетом, ветчиной и сыром Шеф Перекресток, 180г
-                                        </h4>
-                                    </div>
-                                    <div class="card__bottom">
-                                        <div class="card__price">
-                                            <h2 class="card__price-old" data-old-price="124">124,99 ₽</h2>
-                                            <h2 class="card__price-new" data-new-price="">,99 ₽</h2>
-                                        </div>
-                                        <div class="card__like">
-                                            <svg height="35px" width="35px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                                     viewBox="0 0 50 50" xml:space="preserve">
-                                                <path d="M24.85,10.126c2.018-4.783,6.628-8.125,11.99-8.125c7.223,0,12.425,6.179,13.079,13.543
-                                                    c0,0,0.353,1.828-0.424,5.119c-1.058,4.482-3.545,8.464-6.898,11.503L24.85,48L7.402,32.165c-3.353-3.038-5.84-7.021-6.898-11.503
-                                                    c-0.777-3.291-0.424-5.119-0.424-5.119C0.734,8.179,5.936,2,13.159,2C18.522,2,22.832,5.343,24.85,10.126z"/>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card__conteiner">
-                                    <div class="card__top">
-                                        <h3 class="card__discount"><span class="card__discount-value"></span>%</h3>
-                                        <div class="card__rating">
-                                            <div class="card__rating-icon">
-                                                <svg height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                                         viewBox="0 0 47.94 47.94" xml:space="preserve">
-                                                    <path d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
-                                                        c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
-                                                        c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
-                                                        c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
-                                                        c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
-                                                        C22.602,0.567,25.338,0.567,26.285,2.486z"/>
-                                                </svg>
-                                            </div>
-                                            <h3 class="card__rating-value">2.7</h3>
-                                        </div>
-                                    </div>
-                                    <img class="card__img-block" src="../pics/test.jpg" alt="">
-                                    <div class="card__title">
-                                        <h4>
-                                            Сэндвич-ролл с омлетом, ветчиной и сыром Шеф Перекресток, 180г
-                                        </h4>
-                                    </div>
-                                    <div class="card__bottom">
-                                        <div class="card__price">
-                                            <h2 class="card__price-old" data-old-price="114">114,99 ₽</h2>
-                                            <h2 class="card__price-new" data-new-price="92">92,99 ₽</h2>
-                                        </div>
-                                        <div class="card__like">
-                                            <svg height="35px" width="35px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                                     viewBox="0 0 50 50" xml:space="preserve">
-                                                <path d="M24.85,10.126c2.018-4.783,6.628-8.125,11.99-8.125c7.223,0,12.425,6.179,13.079,13.543
-                                                    c0,0,0.353,1.828-0.424,5.119c-1.058,4.482-3.545,8.464-6.898,11.503L24.85,48L7.402,32.165c-3.353-3.038-5.84-7.021-6.898-11.503
-                                                    c-0.777-3.291-0.424-5.119-0.424-5.119C0.734,8.179,5.936,2,13.159,2C18.522,2,22.832,5.343,24.85,10.126z"/>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card__conteiner">
-                                    <div class="card__top">
-                                        <h3 class="card__discount"><span class="card__discount-value"></span>%</h3>
-                                        <div class="card__rating">
-                                            <div class="card__rating-icon">
-                                                <svg height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                                         viewBox="0 0 47.94 47.94" xml:space="preserve">
-                                                    <path d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
-                                                        c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
-                                                        c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
-                                                        c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
-                                                        c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
-                                                        C22.602,0.567,25.338,0.567,26.285,2.486z"/>
-                                                </svg>
-                                            </div>
-                                            <h3 class="card__rating-value">1.7</h3>
-                                        </div>
-                                    </div>
-                                    <img class="card__img-block" src="../pics/test.jpg" alt="">
-                                    <div class="card__title">
-                                        <h4>
-                                            Сэндвич-ролл с омлетом, ветчиной и сыром Шеф Перекресток, 180г
-                                        </h4>
-                                    </div>
-                                    <div class="card__bottom">
-                                        <div class="card__price">
-                                            <h2 class="card__price-old" data-old-price="154">154,99 ₽</h2>
-                                            <h2 class="card__price-new" data-new-price="">,99 ₽</h2>
-                                        </div>
-                                        <div class="card__like">
-                                            <svg height="35px" width="35px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                                     viewBox="0 0 50 50" xml:space="preserve">
-                                                <path d="M24.85,10.126c2.018-4.783,6.628-8.125,11.99-8.125c7.223,0,12.425,6.179,13.079,13.543
-                                                    c0,0,0.353,1.828-0.424,5.119c-1.058,4.482-3.545,8.464-6.898,11.503L24.85,48L7.402,32.165c-3.353-3.038-5.84-7.021-6.898-11.503
-                                                    c-0.777-3.291-0.424-5.119-0.424-5.119C0.734,8.179,5.936,2,13.159,2C18.522,2,22.832,5.343,24.85,10.126z"/>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> 
-                <div class="cards">
-                    <h1 class="main-titles">Скидки</h1>
-                    <div class="cards__slider">
-                        <div class="cards__button cards__left">
-                            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="12pt" height="15pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
-                                <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" stroke="none">
-                                    <path d="M2496 3999 c-127 -21 -86 16 -1274 -1148 -606 -594 -1115 -1095
-                                    -1131 -1113 -127 -147 -117 -370 24 -511 115 -115 293 -144 442 -72 53 26 98
-                                    67 1467 1325 290 267 531 485 536 485 5 0 246 -218 536 -485 1369 -1258 1414
-                                    -1299 1467 -1325 230 -112 496 20 548 272 22 104 -12 230 -82 311 -56 64
-                                    -2205 2166 -2243 2193 -77 57 -194 84 -290 68z"/>
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="cards__button cards__right">
-                            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="12pt" height="15pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
-                                <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" stroke="none">
-                                    <path d="M2496 3999 c-127 -21 -86 16 -1274 -1148 -606 -594 -1115 -1095
-                                    -1131 -1113 -127 -147 -117 -370 24 -511 115 -115 293 -144 442 -72 53 26 98
-                                    67 1467 1325 290 267 531 485 536 485 5 0 246 -218 536 -485 1369 -1258 1414
-                                    -1299 1467 -1325 230 -112 496 20 548 272 22 104 -12 230 -82 311 -56 64
-                                    -2205 2166 -2243 2193 -77 57 -194 84 -290 68z"/>
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="cards__lane">
-                            <div class="card">
-                                <div class="card__conteiner">
-                                    <div class="card__top">
-                                        <h3 class="card__discount"><span class="card__discount-value"></span>%</h3>
-                                        <div class="card__rating">
-                                            <div class="card__rating-icon">
-                                                <svg height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                                         viewBox="0 0 47.94 47.94" xml:space="preserve">
-                                                    <path d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
-                                                        c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
-                                                        c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
-                                                        c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
-                                                        c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
-                                                        C22.602,0.567,25.338,0.567,26.285,2.486z"/>
-                                                </svg>
-                                            </div>
-                                            <h3 class="card__rating-value">3.7</h3>
-                                        </div>
-                                    </div>
-                                    <img class="card__img-block" src="../pics/test.jpg" alt="">
-                                    <div class="card__title">
-                                        <h4>
-                                            Сэндвич-ролл с омлетом, ветчиной и сыром Шеф Перекресток, 180г
-                                        </h4>
-                                    </div>
-                                    <div class="card__bottom">
-                                        <div class="card__price">
-                                            <h2 class="card__price-old" data-old-price="134">134,99 ₽</h2>
-                                            <h2 class="card__price-new" data-new-price="">,99 ₽</h2>
-                                        </div>
-                                        <div class="card__like">
-                                            <svg height="35px" width="35px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                                     viewBox="0 0 50 50" xml:space="preserve">
-                                                <path d="M24.85,10.126c2.018-4.783,6.628-8.125,11.99-8.125c7.223,0,12.425,6.179,13.079,13.543
-                                                    c0,0,0.353,1.828-0.424,5.119c-1.058,4.482-3.545,8.464-6.898,11.503L24.85,48L7.402,32.165c-3.353-3.038-5.84-7.021-6.898-11.503
-                                                    c-0.777-3.291-0.424-5.119-0.424-5.119C0.734,8.179,5.936,2,13.159,2C18.522,2,22.832,5.343,24.85,10.126z"/>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card__conteiner">
-                                    <div class="card__top">
-                                        <h3 class="card__discount"><span class="card__discount-value"></span>%</h3>
-                                        <div class="card__rating">
-                                            <div class="card__rating-icon">
-                                                <svg height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                                         viewBox="0 0 47.94 47.94" xml:space="preserve">
-                                                    <path d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
-                                                        c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
-                                                        c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
-                                                        c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
-                                                        c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
-                                                        C22.602,0.567,25.338,0.567,26.285,2.486z"/>
-                                                </svg>
-                                            </div>
-                                            <h3 class="card__rating-value">4.7</h3>
-                                        </div>
-                                    </div>
-                                    <img class="card__img-block" src="../pics/test.jpg" alt="">
-                                    <div class="card__title">
-                                        <h4>
-                                            Сэндвич-ролл с омлетом, ветчиной и сыром Шеф Перекресток, 180г
-                                        </h4>
-                                    </div>
-                                    <div class="card__bottom">
-                                        <div class="card__price">
-                                            <h2 class="card__price-old" data-old-price="124">124,99 ₽</h2>
-                                            <h2 class="card__price-new" data-new-price="114">114,99 ₽</h2>
-                                        </div>
-                                        <div class="card__like">
-                                            <svg height="35px" width="35px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                                     viewBox="0 0 50 50" xml:space="preserve">
-                                                <path d="M24.85,10.126c2.018-4.783,6.628-8.125,11.99-8.125c7.223,0,12.425,6.179,13.079,13.543
-                                                    c0,0,0.353,1.828-0.424,5.119c-1.058,4.482-3.545,8.464-6.898,11.503L24.85,48L7.402,32.165c-3.353-3.038-5.84-7.021-6.898-11.503
-                                                    c-0.777-3.291-0.424-5.119-0.424-5.119C0.734,8.179,5.936,2,13.159,2C18.522,2,22.832,5.343,24.85,10.126z"/>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card__conteiner">
-                                    <div class="card__top">
-                                        <h3 class="card__discount"><span class="card__discount-value"></span>%</h3>
-                                        <div class="card__rating">
-                                            <div class="card__rating-icon">
-                                                <svg height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                                         viewBox="0 0 47.94 47.94" xml:space="preserve">
-                                                    <path d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
-                                                        c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
-                                                        c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
-                                                        c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
-                                                        c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
-                                                        C22.602,0.567,25.338,0.567,26.285,2.486z"/>
-                                                </svg>
-                                            </div>
-                                            <h3 class="card__rating-value">0.7</h3>
-                                        </div>
-                                    </div>
-                                    <img class="card__img-block" src="../pics/test.jpg" alt="">
-                                    <div class="card__title">
-                                        <h4>
-                                            Сэндвич-ролл с омлетом, ветчиной и сыром Шеф Перекресток, 180г
-                                        </h4>
-                                    </div>
-                                    <div class="card__bottom">
-                                        <div class="card__price">
-                                            <h2 class="card__price-old" data-old-price="124">124,99 ₽</h2>
-                                            <h2 class="card__price-new" data-new-price="">,99 ₽</h2>
-                                        </div>
-                                        <div class="card__like">
-                                            <svg height="35px" width="35px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                                     viewBox="0 0 50 50" xml:space="preserve">
-                                                <path d="M24.85,10.126c2.018-4.783,6.628-8.125,11.99-8.125c7.223,0,12.425,6.179,13.079,13.543
-                                                    c0,0,0.353,1.828-0.424,5.119c-1.058,4.482-3.545,8.464-6.898,11.503L24.85,48L7.402,32.165c-3.353-3.038-5.84-7.021-6.898-11.503
-                                                    c-0.777-3.291-0.424-5.119-0.424-5.119C0.734,8.179,5.936,2,13.159,2C18.522,2,22.832,5.343,24.85,10.126z"/>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card__conteiner">
-                                    <div class="card__top">
-                                        <h3 class="card__discount"><span class="card__discount-value"></span>%</h3>
-                                        <div class="card__rating">
-                                            <div class="card__rating-icon">
-                                                <svg height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                                         viewBox="0 0 47.94 47.94" xml:space="preserve">
-                                                    <path d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
-                                                        c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
-                                                        c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
-                                                        c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
-                                                        c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
-                                                        C22.602,0.567,25.338,0.567,26.285,2.486z"/>
-                                                </svg>
-                                            </div>
-                                            <h3 class="card__rating-value">2.7</h3>
-                                        </div>
-                                    </div>
-                                    <img class="card__img-block" src="../pics/test.jpg" alt="">
-                                    <div class="card__title">
-                                        <h4>
-                                            Сэндвич-ролл с омлетом, ветчиной и сыром Шеф Перекресток, 180г
-                                        </h4>
-                                    </div>
-                                    <div class="card__bottom">
-                                        <div class="card__price">
-                                            <h2 class="card__price-old" data-old-price="114">114,99 ₽</h2>
-                                            <h2 class="card__price-new" data-new-price="92">92,99 ₽</h2>
-                                        </div>
-                                        <div class="card__like">
-                                            <svg height="35px" width="35px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                                     viewBox="0 0 50 50" xml:space="preserve">
-                                                <path d="M24.85,10.126c2.018-4.783,6.628-8.125,11.99-8.125c7.223,0,12.425,6.179,13.079,13.543
-                                                    c0,0,0.353,1.828-0.424,5.119c-1.058,4.482-3.545,8.464-6.898,11.503L24.85,48L7.402,32.165c-3.353-3.038-5.84-7.021-6.898-11.503
-                                                    c-0.777-3.291-0.424-5.119-0.424-5.119C0.734,8.179,5.936,2,13.159,2C18.522,2,22.832,5.343,24.85,10.126z"/>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card__conteiner">
-                                    <div class="card__top">
-                                        <h3 class="card__discount"><span class="card__discount-value"></span>%</h3>
-                                        <div class="card__rating">
-                                            <div class="card__rating-icon">
-                                                <svg height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                                         viewBox="0 0 47.94 47.94" xml:space="preserve">
-                                                    <path d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
-                                                        c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
-                                                        c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
-                                                        c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
-                                                        c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
-                                                        C22.602,0.567,25.338,0.567,26.285,2.486z"/>
-                                                </svg>
-                                            </div>
-                                            <h3 class="card__rating-value">1.7</h3>
-                                        </div>
-                                    </div>
-                                    <img class="card__img-block" src="../pics/test.jpg" alt="">
-                                    <div class="card__title">
-                                        <h4>
-                                            Сэндвич-ролл с омлетом, ветчиной и сыром Шеф Перекресток, 180г
-                                        </h4>
-                                    </div>
-                                    <div class="card__bottom">
-                                        <div class="card__price">
-                                            <h2 class="card__price-old" data-old-price="154">154,99 ₽</h2>
-                                            <h2 class="card__price-new" data-new-price="">,99 ₽</h2>
-                                        </div>
-                                        <div class="card__like">
-                                            <svg height="35px" width="35px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                                     viewBox="0 0 50 50" xml:space="preserve">
-                                                <path d="M24.85,10.126c2.018-4.783,6.628-8.125,11.99-8.125c7.223,0,12.425,6.179,13.079,13.543
-                                                    c0,0,0.353,1.828-0.424,5.119c-1.058,4.482-3.545,8.464-6.898,11.503L24.85,48L7.402,32.165c-3.353-3.038-5.84-7.021-6.898-11.503
-                                                    c-0.777-3.291-0.424-5.119-0.424-5.119C0.734,8.179,5.936,2,13.159,2C18.522,2,22.832,5.343,24.85,10.126z"/>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> 
+                <?  
+                    $category = $db->query("SELECT * FROM card WHERE category LIKE '$normaly_unique_category[$categories_counter]'"); 
+                    echo "
+                       <div class='cards'>
+                           <h1 class='main-titles'>$normaly_unique_category[$categories_counter]</h1>
+                           <div class='cards__slider'>
+                               <div class='cards__button cards__left'>
+                                   <svg version='1.0' xmlns='http://www.w3.org/2000/svg' width='12pt' height='15pt' viewBox='0 0 512.000000 512.000000' preserveAspectRatio='xMidYMid meet'>
+                                               <g transform='translate(0.000000,512.000000) scale(0.100000,-0.100000)' stroke='none'>
+                                                   <path d='M2496 3999 c-127 -21 -86 16 -1274 -1148 -606 -594 -1115 -1095
+                                                   -1131 -1113 -127 -147 -117 -370 24 -511 115 -115 293 -144 442 -72 53 26 98
+                                                   67 1467 1325 290 267 531 485 536 485 5 0 246 -218 536 -485 1369 -1258 1414
+                                                   -1299 1467 -1325 230 -112 496 20 548 272 22 104 -12 230 -82 311 -56 64
+                                                   -2205 2166 -2243 2193 -77 57 -194 84 -290 68z'/>
+                                               </g>
+                                   </svg>
+                               </div>
+                               <div class='cards__button cards__right'>
+                                   <svg version='1.0' xmlns='http://www.w3.org/2000/svg' width='12pt' height='15pt' viewBox='0 0 512.000000 512.000000' preserveAspectRatio='xMidYMid meet'>
+                                               <g transform='translate(0.000000,512.000000) scale(0.100000,-0.100000)' stroke='none'>
+                                                   <path d='M2496 3999 c-127 -21 -86 16 -1274 -1148 -606 -594 -1115 -1095
+                                                   -1131 -1113 -127 -147 -117 -370 24 -511 115 -115 293 -144 442 -72 53 26 98
+                                                   67 1467 1325 290 267 531 485 536 485 5 0 246 -218 536 -485 1369 -1258 1414
+                                                   -1299 1467 -1325 230 -112 496 20 548 272 22 104 -12 230 -82 311 -56 64
+                                                   -2205 2166 -2243 2193 -77 57 -194 84 -290 68z'/>
+                                               </g>
+                                   </svg>
+                               </div>
+                               <div class='cards__lane'>";
+                                   pseudo_destructuring_and_echo($category);
+                               echo "</div>
+                           </div>
+                       </div> 
+                    ";
+                    $categories_counter++;
+                ?>  
                 <div class="manufacture">
                     <div class="manufacture__left">
                         <h1 class="main-titles">
@@ -1000,12 +411,120 @@
                         <img class="manufacture__img" src="./pics/manufacture/manufacture_dessert.png">
                     </div>
                 </div>
+                <?  
+                    $category = $db->query("SELECT * FROM card WHERE category LIKE '$normaly_unique_category[$categories_counter]'"); 
+                    echo "
+                       <div class='cards'>
+                           <h1 class='main-titles'>$normaly_unique_category[$categories_counter]</h1>
+                           <div class='cards__slider'>
+                               <div class='cards__button cards__left'>
+                                   <svg version='1.0' xmlns='http://www.w3.org/2000/svg' width='12pt' height='15pt' viewBox='0 0 512.000000 512.000000' preserveAspectRatio='xMidYMid meet'>
+                                               <g transform='translate(0.000000,512.000000) scale(0.100000,-0.100000)' stroke='none'>
+                                                   <path d='M2496 3999 c-127 -21 -86 16 -1274 -1148 -606 -594 -1115 -1095
+                                                   -1131 -1113 -127 -147 -117 -370 24 -511 115 -115 293 -144 442 -72 53 26 98
+                                                   67 1467 1325 290 267 531 485 536 485 5 0 246 -218 536 -485 1369 -1258 1414
+                                                   -1299 1467 -1325 230 -112 496 20 548 272 22 104 -12 230 -82 311 -56 64
+                                                   -2205 2166 -2243 2193 -77 57 -194 84 -290 68z'/>
+                                               </g>
+                                   </svg>
+                               </div>
+                               <div class='cards__button cards__right'>
+                                   <svg version='1.0' xmlns='http://www.w3.org/2000/svg' width='12pt' height='15pt' viewBox='0 0 512.000000 512.000000' preserveAspectRatio='xMidYMid meet'>
+                                               <g transform='translate(0.000000,512.000000) scale(0.100000,-0.100000)' stroke='none'>
+                                                   <path d='M2496 3999 c-127 -21 -86 16 -1274 -1148 -606 -594 -1115 -1095
+                                                   -1131 -1113 -127 -147 -117 -370 24 -511 115 -115 293 -144 442 -72 53 26 98
+                                                   67 1467 1325 290 267 531 485 536 485 5 0 246 -218 536 -485 1369 -1258 1414
+                                                   -1299 1467 -1325 230 -112 496 20 548 272 22 104 -12 230 -82 311 -56 64
+                                                   -2205 2166 -2243 2193 -77 57 -194 84 -290 68z'/>
+                                               </g>
+                                   </svg>
+                               </div>
+                               <div class='cards__lane'>";
+                                   pseudo_destructuring_and_echo($category);
+                               echo "</div>
+                           </div>
+                       </div> 
+                    ";
+                    $categories_counter++;
+                ?> 
                 <div class="shops">
                     <h1 class="main-titles">
                         Карта магазинов
                     </h1>
                     <iframe class="map" src="https://yandex.ru/map-widget/v1/?um=constructor%3Ac2d0bcd212539400f3c44dc26ba0161a29984d6ea664f99d20765be353e9d3b5&amp;source=constructor" width="100%" height="620" frameborder="0"></iframe>
                 </div>
+                <?  
+                    $category = $db->query("SELECT * FROM card WHERE category LIKE '$normaly_unique_category[$categories_counter]'"); 
+                    echo "
+                       <div class='cards'>
+                           <h1 class='main-titles'>$normaly_unique_category[$categories_counter]</h1>
+                           <div class='cards__slider'>
+                               <div class='cards__button cards__left'>
+                                   <svg version='1.0' xmlns='http://www.w3.org/2000/svg' width='12pt' height='15pt' viewBox='0 0 512.000000 512.000000' preserveAspectRatio='xMidYMid meet'>
+                                               <g transform='translate(0.000000,512.000000) scale(0.100000,-0.100000)' stroke='none'>
+                                                   <path d='M2496 3999 c-127 -21 -86 16 -1274 -1148 -606 -594 -1115 -1095
+                                                   -1131 -1113 -127 -147 -117 -370 24 -511 115 -115 293 -144 442 -72 53 26 98
+                                                   67 1467 1325 290 267 531 485 536 485 5 0 246 -218 536 -485 1369 -1258 1414
+                                                   -1299 1467 -1325 230 -112 496 20 548 272 22 104 -12 230 -82 311 -56 64
+                                                   -2205 2166 -2243 2193 -77 57 -194 84 -290 68z'/>
+                                               </g>
+                                   </svg>
+                               </div>
+                               <div class='cards__button cards__right'>
+                                   <svg version='1.0' xmlns='http://www.w3.org/2000/svg' width='12pt' height='15pt' viewBox='0 0 512.000000 512.000000' preserveAspectRatio='xMidYMid meet'>
+                                               <g transform='translate(0.000000,512.000000) scale(0.100000,-0.100000)' stroke='none'>
+                                                   <path d='M2496 3999 c-127 -21 -86 16 -1274 -1148 -606 -594 -1115 -1095
+                                                   -1131 -1113 -127 -147 -117 -370 24 -511 115 -115 293 -144 442 -72 53 26 98
+                                                   67 1467 1325 290 267 531 485 536 485 5 0 246 -218 536 -485 1369 -1258 1414
+                                                   -1299 1467 -1325 230 -112 496 20 548 272 22 104 -12 230 -82 311 -56 64
+                                                   -2205 2166 -2243 2193 -77 57 -194 84 -290 68z'/>
+                                               </g>
+                                   </svg>
+                               </div>
+                               <div class='cards__lane'>";
+                                   pseudo_destructuring_and_echo($category);
+                               echo "</div>
+                           </div>
+                       </div> 
+                    ";
+                    $categories_counter++;
+                ?> 
+                <?  
+                    $category = $db->query("SELECT * FROM card WHERE category LIKE '$normaly_unique_category[$categories_counter]'"); 
+                    echo "
+                       <div class='cards'>
+                           <h1 class='main-titles'>$normaly_unique_category[$categories_counter]</h1>
+                           <div class='cards__slider'>
+                               <div class='cards__button cards__left'>
+                                   <svg version='1.0' xmlns='http://www.w3.org/2000/svg' width='12pt' height='15pt' viewBox='0 0 512.000000 512.000000' preserveAspectRatio='xMidYMid meet'>
+                                               <g transform='translate(0.000000,512.000000) scale(0.100000,-0.100000)' stroke='none'>
+                                                   <path d='M2496 3999 c-127 -21 -86 16 -1274 -1148 -606 -594 -1115 -1095
+                                                   -1131 -1113 -127 -147 -117 -370 24 -511 115 -115 293 -144 442 -72 53 26 98
+                                                   67 1467 1325 290 267 531 485 536 485 5 0 246 -218 536 -485 1369 -1258 1414
+                                                   -1299 1467 -1325 230 -112 496 20 548 272 22 104 -12 230 -82 311 -56 64
+                                                   -2205 2166 -2243 2193 -77 57 -194 84 -290 68z'/>
+                                               </g>
+                                   </svg>
+                               </div>
+                               <div class='cards__button cards__right'>
+                                   <svg version='1.0' xmlns='http://www.w3.org/2000/svg' width='12pt' height='15pt' viewBox='0 0 512.000000 512.000000' preserveAspectRatio='xMidYMid meet'>
+                                               <g transform='translate(0.000000,512.000000) scale(0.100000,-0.100000)' stroke='none'>
+                                                   <path d='M2496 3999 c-127 -21 -86 16 -1274 -1148 -606 -594 -1115 -1095
+                                                   -1131 -1113 -127 -147 -117 -370 24 -511 115 -115 293 -144 442 -72 53 26 98
+                                                   67 1467 1325 290 267 531 485 536 485 5 0 246 -218 536 -485 1369 -1258 1414
+                                                   -1299 1467 -1325 230 -112 496 20 548 272 22 104 -12 230 -82 311 -56 64
+                                                   -2205 2166 -2243 2193 -77 57 -194 84 -290 68z'/>
+                                               </g>
+                                   </svg>
+                               </div>
+                               <div class='cards__lane'>";
+                                   pseudo_destructuring_and_echo($category);
+                               echo "</div>
+                           </div>
+                       </div> 
+                    ";
+                    $categories_counter++;
+                ?> 
             </div>
             
         </main>
@@ -1013,5 +532,4 @@
     </div>
     <script src="./js/index.js"></script>
 </body>
-<? require './php/db.php' ?>
 </html>

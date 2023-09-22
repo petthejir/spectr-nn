@@ -33,7 +33,7 @@
                                 <div class='header__search-card remove' header-card>
                                     <img src='$image' alt=''>
                                     <div class='header__search-card-main'>
-                                        <h3 class='header__search-card-title'>$title</h3>
+                                        <h2 class='header__search-card-title'>$title</h2>
                                         <div class='header__search-card-rating'>
                                             <svg height='20px' width='20px' version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' 
                                                                  viewBox='0 0 47.94 47.94' xml:space='preserve'>
