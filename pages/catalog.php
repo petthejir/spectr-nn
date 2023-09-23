@@ -141,7 +141,7 @@
 
                             <? 
                                 $all_cards = $db->query("SELECT * FROM card");
-                                pseudo_destructuring_and_echo($all_cards)
+                                pseudo_destructuring_and_echo($all_cards);
                             ?>
 
                         </div>

@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/index.css">
+    <? require '../php/db.php' ?>
 </head>
 <body class="body contacts">
     <div class="choise-rating choise-rating_alternative">
@@ -107,8 +108,8 @@
                             </li>
                         </a>
                         <svg class="bread-crumbs__arrow" version="1.0" xmlns="http://www.w3.org/2000/svg"
-                        width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000"
-                        preserveAspectRatio="xMidYMid meet">
+                            width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000"
+                            preserveAspectRatio="xMidYMid meet">
     
                            <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
                            stroke="none">
@@ -126,81 +127,125 @@
                             </li>
                         </a>
                         <svg class="bread-crumbs__arrow" version="1.0" xmlns="http://www.w3.org/2000/svg"
-                    width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000"
-                    preserveAspectRatio="xMidYMid meet">
+                            width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000"
+                            preserveAspectRatio="xMidYMid meet">
 
-                       <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
-                       stroke="none">
-                       <path d="M1400 5098 c-44 -17 -77 -44 -171 -137 -144 -143 -163 -177 -164
-                       -286 0 -58 5 -91 19 -120 13 -27 333 -355 995 -1018 l976 -977 -977 -978
-                       c-760 -760 -982 -987 -997 -1022 -14 -30 -21 -67 -21 -110 0 -103 29 -153 168
-                       -291 98 -97 127 -119 175 -137 73 -28 131 -28 204 -1 56 20 108 71 1230 1193
-                       1297 1296 1223 1214 1223 1346 0 132 74 50 -1223 1346 -1123 1123 -1174 1173
-                       -1230 1193 -72 26 -136 26 -207 -1z"/>
-                       </g>
+                               <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+                               stroke="none">
+                               <path d="M1400 5098 c-44 -17 -77 -44 -171 -137 -144 -143 -163 -177 -164
+                               -286 0 -58 5 -91 19 -120 13 -27 333 -355 995 -1018 l976 -977 -977 -978
+                               c-760 -760 -982 -987 -997 -1022 -14 -30 -21 -67 -21 -110 0 -103 29 -153 168
+                               -291 98 -97 127 -119 175 -137 73 -28 131 -28 204 -1 56 20 108 71 1230 1193
+                               1297 1296 1223 1214 1223 1346 0 132 74 50 -1223 1346 -1123 1123 -1174 1173
+                               -1230 1193 -72 26 -136 26 -207 -1z"/>
+                               </g>
                         </svg>
-                        <li>
-                            <p>имя карты</p>
-                        </li>
+                        <?
+                            $card = get_card_by_id($_GET['id']);
+                            $id = $card["id"];
+                            $title = $card["title"];
+                            $old_price =  $card["old_price"];
+                            $new_price = $card["new_price"];
+                            $image = $card["image"];
+                            $description = $card["description"];
+                            $subgroup = $card["subgroup"];
+                            $category = $card["category"];  
+
+                            echo "
+                                <a href='./catalog.html'>
+                                    <li>
+                                        <p>$category</p>
+                                    </li>
+                                </a>
+                                <svg class='bread-crumbs__arrow' version='1.0' xmlns='http://www.w3.org/2000/svg'
+                                width='512.000000pt' height='512.000000pt' viewBox='0 0 512.000000 512.000000'
+                                preserveAspectRatio='xMidYMid meet'>
+
+                               <g transform='translate(0.000000,512.000000) scale(0.100000,-0.100000)'
+                               stroke='none'>
+                               <path d='M1400 5098 c-44 -17 -77 -44 -171 -137 -144 -143 -163 -177 -164
+                               -286 0 -58 5 -91 19 -120 13 -27 333 -355 995 -1018 l976 -977 -977 -978
+                               c-760 -760 -982 -987 -997 -1022 -14 -30 -21 -67 -21 -110 0 -103 29 -153 168
+                               -291 98 -97 127 -119 175 -137 73 -28 131 -28 204 -1 56 20 108 71 1230 1193
+                               1297 1296 1223 1214 1223 1346 0 132 74 50 -1223 1346 -1123 1123 -1174 1173
+                               -1230 1193 -72 26 -136 26 -207 -1z'/>
+                               </g>
+                                </svg>
+                                <a href='./catalog.html'>
+                                    <li>
+                                        <p>$subgroup</p>
+                                    </li>
+                                </a>                          
+                            ";
+                            
+
+
+                        ?>
                     </ul>
                 </div>         
                 <div class="main-card__block">
-                    <img src="../pics/test.jpg" alt="">
+                    <?      
+                        echo "<img src='$image' alt=''>"; 
+                    ?>
                     <div class="main-card__right">
-                        <div class="main-card__title">
-                            <h1>Нектар Знойный Экзотик 1л Sweet Life</h1>
-                        </div>
-                        <div class="main-card__info">
-                            <div class="main-card__article">
-                                <h2>Арт: <span>123132</span></h2>
-                            </div>
-                            <div class="main-card__rating">
-                                <div class="card__rating-icon">
-                                    <svg height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                             viewBox="0 0 47.94 47.94" xml:space="preserve">
-                                        <path d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
-                                            c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
-                                            c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
-                                            c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
-                                            c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
-                                            C22.602,0.567,25.338,0.567,26.285,2.486z"/>
-                                    </svg>
+                        <?
+                            echo "
+                                <div class='main-card__title'>
+                                    <h1>$title</h1>
                                 </div>
-                                <h3 class="main-card__rating-value">3.7</h3>
-                                <h3 class="main-card__rating-quantity">4</h3>
-                                <button class="main-card__rating-new">
-                                    <svg height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                             viewBox="0 0 47.94 47.94" xml:space="preserve">
-                                        <path d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
-                                            c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
-                                            c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
-                                            c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
-                                            c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
-                                            C22.602,0.567,25.338,0.567,26.285,2.486z"/>
-                                    </svg>
-                                    <h2>Оценить</h2>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="main-card__main-data">
-                            <div class="main-card__price-block">
-                                <h2 class="card__price-old" data-old-price="134">134,99 ₽</h2>
-                                <h2 class="card__price-new" data-new-price="">,99 ₽</h2>
-                            </div>
-                            <button class="main-card__add-to-favorite">
-                                <svg height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                                     viewBox="0 0 50 50" xml:space="preserve">
-                                                <path d="M24.85,10.126c2.018-4.783,6.628-8.125,11.99-8.125c7.223,0,12.425,6.179,13.079,13.543
-                                                    c0,0,0.353,1.828-0.424,5.119c-1.058,4.482-3.545,8.464-6.898,11.503L24.85,48L7.402,32.165c-3.353-3.038-5.84-7.021-6.898-11.503
-                                                    c-0.777-3.291-0.424-5.119-0.424-5.119C0.734,8.179,5.936,2,13.159,2C18.522,2,22.832,5.343,24.85,10.126z"/>
-                                </svg>
-                                <h2>В избранное</h2>
-                            </button>
-                        </div>
-                        <div class="main-card__description">
-                            <h2>Описание</h2>
-                            <p>Sweet Life Нектар из смеси фруктов «Экзотик» 1л. Для питания детей дошкольного и школьного возраста (от трех лет и старше)</p>
-                        </div>
+                                <div class='main-card__info'>
+                                    <div class='main-card__article'>
+                                        <h2>Арт: <span>$id</span></h2>
+                                    </div>
+                                    <div class='main-card__rating'>
+                                        <div class='card__rating-icon'>
+                                            <svg height='20px' width='20px' version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' 
+                                                     viewBox='0 0 47.94 47.94' xml:space='preserve'>
+                                                <path d='M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
+                                                    c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
+                                                    c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
+                                                    c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
+                                                    c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
+                                                    C22.602,0.567,25.338,0.567,26.285,2.486z'/>
+                                            </svg>
+                                        </div>
+                                        <h3 class='main-card__rating-value'>3.7</h3>
+                                        <h3 class='main-card__rating-quantity'>4</h3>
+                                        <button class='main-card__rating-new'>
+                                            <svg height='20px' width='20px' version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' 
+                                                     viewBox='0 0 47.94 47.94' xml:space='preserve'>
+                                                <path d='M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
+                                                    c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
+                                                    c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
+                                                    c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
+                                                    c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
+                                                    C22.602,0.567,25.338,0.567,26.285,2.486z'/>
+                                            </svg>
+                                            <h2>Оценить</h2>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class='main-card__main-data'>
+                                    <div class='main-card__price-block'>
+                                        <h2 class='card__price-old' data-old-price='$old_price'>$old_price,99 ₽</h2>
+                                        <h2 class='card__price-new' data-new-price='$new_price'>$new_price,99 ₽</h2>
+                                    </div>
+                                    <button class='main-card__add-to-favorite'>
+                                        <svg height='20px' width='20px' version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' 
+                                                             viewBox='0 0 50 50' xml:space='preserve'>
+                                                        <path d='M24.85,10.126c2.018-4.783,6.628-8.125,11.99-8.125c7.223,0,12.425,6.179,13.079,13.543
+                                                            c0,0,0.353,1.828-0.424,5.119c-1.058,4.482-3.545,8.464-6.898,11.503L24.85,48L7.402,32.165c-3.353-3.038-5.84-7.021-6.898-11.503
+                                                            c-0.777-3.291-0.424-5.119-0.424-5.119C0.734,8.179,5.936,2,13.159,2C18.522,2,22.832,5.343,24.85,10.126z'/>
+                                        </svg>
+                                        <h2>В избранное</h2>
+                                    </button>
+                                </div>
+                                <div class='main-card__description'>
+                                    <h2>Описание</h2>
+                                    <p>$description</p>
+                                </div>
+                            ";
+                        ?>
                     </div>
                 </div>
                 
