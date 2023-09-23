@@ -30,7 +30,7 @@
                             $subgroup = $all_cards["subgroup"];
                         
                             echo "
-                                <div class='header__search-card remove' header-card>
+                                <a href='/spectr-nn/pages/card.php?id=$id' class='header__search-card remove' header-card>
                                     <img src='$image' alt=''>
                                     <div class='header__search-card-main'>
                                         <h2 class='header__search-card-title'>$title</h2>
@@ -62,7 +62,7 @@
                                             </svg>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                             ";
                         }
                     
