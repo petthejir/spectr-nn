@@ -27,3 +27,19 @@ to_rate.onclick = function() {
     })
 }
 
+let card_old_price = document.querySelector('[data-card-old-price]')
+let card_new_price = document.querySelector('[data-card-new-price]')
+let card_new_price_value = card_new_price.getAttribute('data-card-new-price') 
+let card_old_price_value = card_old_price.getAttribute('data-card-old-price') 
+/* let card_card_discount = document.querySelectorAll('[header-discount]')                  
+let card_card_discount_value = document.querySelectorAll('.card__header-discount-value')  */
+
+
+if (card_new_price_value != '') {
+    card_old_price.classList.add('card__price-old_alternative') // применение классов к old
+    card_old_price.style.fontSize = '20px'
+    card_old_price.innerHTML = `<strike>${card_old_price.innerHTML}</strike>` // зачёркивание old
+/*     card_card_discount_value.innerHTML = -Math.round((card_old_price_value-card_new_price_value)/card_old_price_value * 100) // рассчёт скидки
+ *//*     card_card_discount.style.display = 'block' // отображение скидки */
+}
+else card_new_price.innerHTML = ''

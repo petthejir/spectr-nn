@@ -5,6 +5,7 @@
     display: flex;
     justify-content: center;
     margin-top: 80px;
+    padding-bottom: 50px;
     &__conteiner {
         width: 85%;
         margin-top: 30px;
@@ -20,7 +21,7 @@
     position: relative;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
-    margin-top: 10px;
+    margin-top: 30px;
     img {
         position: absolute;
         @extend %deselection;
