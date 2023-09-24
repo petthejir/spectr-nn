@@ -359,6 +359,7 @@ function search_by_value(value) {
     let hidden_header_card_counter = 0
     if (value.length > 1) {
         header_search_result.classList.remove('header__search-result_alternative')
+        body.style.overflow = 'hidden'
         for (let i = 0; i < header_cards.length; i++) {
             if (header_cards_title[i].innerHTML.toLowerCase().includes(value.toLowerCase())) {
                 header_cards[i].classList.remove('remove')
@@ -384,6 +385,7 @@ function search_by_value(value) {
         header_cards.forEach(header_card => {
             header_card.classList.add('remove')            
         })
+        body.style.overflow = 'auto'
     }
 }
 
