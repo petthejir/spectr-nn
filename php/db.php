@@ -28,6 +28,9 @@ function pseudo_destructuring_and_echo($category) {
         $subgroup = $category["subgroup"];
         $category = $category["category"];
 
+        $get_rating = rating($id);
+        $rating_avg = $get_rating[0];
+
         echo "
             <a href='/spectr-nn/pages/card.php?id=$id' class='card' main-card data-subgroup='$subgroup' data-category='$category'>
                 <div class='card__conteiner'>
@@ -45,7 +48,7 @@ function pseudo_destructuring_and_echo($category) {
                                             C22.602,0.567,25.338,0.567,26.285,2.486z'/>
                                 </svg>
                             </div>
-                            <h3 class='card__rating-value'></h3>
+                            <h3 class='card__rating-value'>$rating_avg</h3>
                         </div>
                     </div>
                     <img class='card__img-block' src='$image' alt=''>
@@ -72,5 +75,23 @@ function pseudo_destructuring_and_echo($category) {
     }
 }
 
+function rating($id) {
+    global $db;
+    $ratings = $db->query("SELECT * FROM rating WHERE card_id LIKE '$id'");
+    $empty = $ratings->rowCount() === 0;
+    if (!$empty) {
+        $rating_all = [];
+        $rating_sum = 0;
+        foreach ($ratings as $ratings) {
+            array_push($rating_all, $ratings['rate']);
+        }
+        $rating_count = count($rating_all);
+        for ($i = 0; $i < $rating_count; $i++) {
+            $rating_sum += $rating_all[$i];
+        }
+        $rating_avg = round($rating_sum/$rating_count, 1);
+        return [$rating_avg, $rating_count];
+    }
+}
 
 ?>

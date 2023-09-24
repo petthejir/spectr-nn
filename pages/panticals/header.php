@@ -28,7 +28,9 @@
                             $description = $all_cards["description"];
                             $category = $all_cards["category"];
                             $subgroup = $all_cards["subgroup"];
-                        
+                            $get_rating = rating($id);
+                            $rating_avg = $get_rating[0];
+                            
                             echo "
                                 <a href='/spectr-nn/pages/card.php?id=$id' class='header__search-card remove' header-card>
                                     <img src='$image' alt=''>
@@ -44,7 +46,7 @@
                                                                 c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
                                                                 C22.602,0.567,25.338,0.567,26.285,2.486z'/>
                                             </svg>
-                                            <h3 class='header__search-card-rating-value'></h3>
+                                            <h3 class='header__search-card-rating-value'>$rating_avg</h3>
                                         </div>
                                     </div>
                                     <div class='header__search-card-discount' header-discount><span class='card__header-discount-value'></span>%</div>

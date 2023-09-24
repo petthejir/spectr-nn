@@ -314,6 +314,8 @@ let header_price_old = [...document.querySelectorAll('[data-header-old-price]')]
 let header_price_old_value = header_price_old.map(price => price.getAttribute('data-header-old-price'))// value price old
 let header_card_discount = document.querySelectorAll('[header-discount]') // инициализация скидки
 let header_card_discount_value = document.querySelectorAll('.card__header-discount-value') // value скидки
+let header_rating_block = document.querySelectorAll('.header__search-card-rating')
+let header_rating = document.querySelectorAll('.header__search-card-rating-value')
 
 for (let i = 0; i < header_cards.length; i++) {
     if (header_price_new_value[i] != '') {
@@ -323,6 +325,9 @@ for (let i = 0; i < header_cards.length; i++) {
         header_card_discount[i].style.display = 'block' // отображение скидки
     }
     else header_price_new[i].innerHTML = ''
+    if (header_rating[i].innerHTML != 0) {
+        
+    }
 }
 
 
@@ -339,18 +344,24 @@ for (let i = 0; i < cards.length; i++) {
         else current_price = price_old_value[i]
     if (card_discount_value[i].innerHTML != '') discount = card_discount_value[i].innerHTML
         else discount = 0
+    if (rating[i].innerHTML != '') rating = rating[i]
+        else rating = 0
     cards_array.push(
         {
             title: card_title[i].innerHTML, 
             index: i,
             current_price: current_price,
             discount: discount,
-            rating: -rating[i].innerHTML,
+            rating: -rating,
             _current_price: -current_price,
             subgroup: subgroup_value[i],
         }
     )   
 }    
+
+
+
+
 
     //search
 let header_search_result = document.querySelector('.header__search-result')
@@ -359,6 +370,7 @@ function search_by_value(value) {
     let hidden_header_card_counter = 0
     if (value.length > 1) {
         header_search_result.classList.remove('header__search-result_alternative')
+        body.style.overflow = 'hidden'
         for (let i = 0; i < header_cards.length; i++) {
             if (header_cards_title[i].innerHTML.toLowerCase().includes(value.toLowerCase())) {
                 header_cards[i].classList.remove('remove')
@@ -384,6 +396,7 @@ function search_by_value(value) {
         header_cards.forEach(header_card => {
             header_card.classList.add('remove')            
         })
+        body.style.overflow = 'auto'
     }
 }
 
