@@ -435,28 +435,29 @@ cabinet.onclick = () => {
             registration_to_close()
         }
     })
-/*     return false */
+    return false
 }
+
 
     //registration 
 let registration_swap = document.querySelector('.registration__swap')
 registration_swap.onclick = () => {
-let entry_form = document.querySelector('.entry__form')
-let registration_form = document.querySelector('.registration__form')
-let registration_title = document.querySelector('.registration__title')
-let registration_question = document.querySelector('.registration__question')
-entry_form.classList.toggle('display-none')
-registration_form.classList.toggle('display-none')
-if (entry_form.classList.contains('display-none')) {
-    registration_title.innerHTML = 'Вход'
-    registration_question.innerHTML = 'Ещё нет аккаунта?'
-    registration_swap.innerHTML = 'Зарегистрироваться'
-}
-else {
-    registration_title.innerHTML = 'Регистрация'
-    registration_question.innerHTML = 'Есть аккаунт?'
-    registration_swap.innerHTML = 'Авторизоваться'
-}
+    let entry_form = document.querySelector('.entry__form')
+    let registration_form = document.querySelector('.registration__form')
+    let registration_title = document.querySelector('.registration__title')
+    let registration_question = document.querySelector('.registration__question')
+    entry_form.classList.toggle('display-none')
+    registration_form.classList.toggle('display-none')
+    if (entry_form.classList.contains('display-none')) {
+        registration_title.innerHTML = 'Вход'
+        registration_question.innerHTML = 'Ещё нет аккаунта?'
+        registration_swap.innerHTML = 'Зарегистрироваться'
+    }
+    else {
+        registration_title.innerHTML = 'Регистрация'
+        registration_question.innerHTML = 'Есть аккаунт?'
+        registration_swap.innerHTML = 'Авторизоваться'
+    }
 }
 
 let registration_eye = document.querySelectorAll('.registration__eye')

@@ -184,7 +184,7 @@
             <div class="registration__block">
                 <div class="registration__close-button"></div>
                 <h1 class="registration__title">Вход</h1>
-                <form class="registration__form" action="">
+                <form class="registration__form" method="post" action="../php/entry.php">
                     <div class="registration__form-block">
                         <input type="text" name="email" required="" data-reg-input>
                         <label for="email">Электронная почта</label>
@@ -200,7 +200,7 @@
                     </div>
                     <button class="registration__button" data-ripple>Войти</button>
                 </form>
-                <form class="registration__form entry__form display-none" action="">
+                <form class="registration__form entry__form display-none" method="post" action="../php/registration.php">
                     <div class="registration__form-block">
                         <input type="tel" name="tel" required="" data-reg-input>
                         <label for="tel">Номер телефона</label>
