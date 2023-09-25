@@ -36,7 +36,7 @@ function pseudo_destructuring_and_echo($category) {
                 <div class='card__conteiner'>
                     <div class='card__top'>
                         <h3 class='card__discount' data-discount><span class='card__discount-value'></span>%</h3>
-                        <div class='card__rating'>
+                        <div class='card__rating remove'>
                             <div class='card__rating-icon'>
                                 <svg height='20px' width='20px' version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' 
                                         viewBox='0 0 47.94 47.94' xml:space='preserve'>

@@ -45,7 +45,6 @@
                         ";
                     }
                 ?>
-
             </div>
         </div>
         <div class="choise-rating__closer"></div>
@@ -115,8 +114,16 @@
                                </g>
                         </svg>
                         <?
+                            $id = $card["id"];
+                            $title = $card["title"];
+                            $old_price =  $card["old_price"];
+                            $new_price = $card["new_price"];
+                            $image = $card["image"];
+                            $description = $card["description"];
+                            $subgroup = $card["subgroup"];
+                            $category = $card["category"];  
                             echo "
-                                <a href='./catalog.html'>
+                                <a href='/spectr-nn/pages/catalog.php?category=$category'>
                                     <li>
                                         <p>$category</p>
                                     </li>
@@ -135,28 +142,15 @@
                                -1230 1193 -72 26 -136 26 -207 -1z'/>
                                </g>
                                 </svg>
-                                <a href='./catalog.html'>
-                                    <li>
-                                        <p>$subgroup</p>
-                                    </li>
-                                </a>                          
+                                <li>
+                                    <p>$subgroup</p>
+                                </li>                        
                             ";
                         ?>
                     </ul>
                 </div>         
                 <div class="main-card__block">
                     <?  
-
-                        $id = $card["id"];
-                        $title = $card["title"];
-                        $old_price =  $card["old_price"];
-                        $new_price = $card["new_price"];
-                        $image = $card["image"];
-                        $description = $card["description"];
-                        $subgroup = $card["subgroup"];
-                        $category = $card["category"];  
-
-
                         echo "<img src='$image' alt=''>"; 
                     ?>
                     <div class="main-card__right">
@@ -174,7 +168,8 @@
                                         <h2>Арт: <span>$id</span></h2>
                                     </div>
                                     <div class='main-card__rating'>
-                                        <div class='card__rating-icon'>
+                                        <div class='main-card__rating-block'>
+                                            <div class='card__rating-icon'>
                                             <svg height='20px' width='20px' version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' 
                                                      viewBox='0 0 47.94 47.94' xml:space='preserve'>
                                                 <path d='M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
@@ -184,9 +179,10 @@
                                                     c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
                                                     C22.602,0.567,25.338,0.567,26.285,2.486z'/>
                                             </svg>
+                                            </div>
+                                            <h3 class='main-card__rating-value'>$rating_avg</h3>
+                                            <h3 class='main-card__rating-quantity'>$rating_count</h3>
                                         </div>
-                                        <h3 class='main-card__rating-value'>$rating_avg</h3>
-                                        <h3 class='main-card__rating-quantity'>$rating_count</h3>
                                         <button class='main-card__rating-new'>
                                             <svg height='20px' width='20px' version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' 
                                                      viewBox='0 0 47.94 47.94' xml:space='preserve'>
