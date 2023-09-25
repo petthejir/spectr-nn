@@ -40,17 +40,35 @@
                             </g>
                         </svg>
                     </div>
+                    <?
+                        $categories = $db->query("SELECT category FROM card");
+                        $unique_category = [];
+                        foreach ($categories as $categories) {
+                            array_push($unique_category, $categories["category"]);
+                        }
+                        $unique_category = array_unique($unique_category);
+                        $normaly_unique_category = [];
+                        foreach ($unique_category as $unique_category) {
+                            array_push($normaly_unique_category, $unique_category);
+                        }
+                        $categories_counter = 0;
+                    ?>
                     <div class="auto-slider__lane">
                         <div class="auto-slider__block auto-slider__block-1">
                             <img src="./pics/fruits.png" class="auto-slider__picture-1">
                             <div class="auto-slider__block-info">
                                 <h1>Спелые фрукты и овощи</h1>
                                 <h2>В магазинах Спектр-НН покупателей всегда ждёт большой выбор свежих фруктов и овощей</h2>
-                                <a href="#">
-                                    <button class="auto-slider__katalog-link auto-slider__katalog-link-1" data-ripple>
-                                        Перейти в каталог
-                                    </button>
-                                </a>
+                                <?
+                                    echo "
+                                        <a href='/spectr-nn/pages/catalog.php?category=$normaly_unique_category[$categories_counter]'>
+                                            <button class='auto-slider__katalog-link auto-slider__katalog-link-1' data-ripple>
+                                                Перейти в каталог
+                                            </button>
+                                        </a>
+                                    ";
+                                    $categories_counter++;
+                                ?>
                             </div>
                         </div>
                         <div class="auto-slider__block auto-slider__block-2">
@@ -58,11 +76,16 @@
                             <div class="auto-slider__block-info">
                                 <h1>Молочные продукты</h1>
                                 <h2>Широкий спектр молочных продуктов от Российских поставщиков</h2>
-                                <a href="#">
-                                    <button class="auto-slider__katalog-link auto-slider__katalog-link-2" data-ripple>
-                                        Перейти в каталог
-                                    </button>
-                                </a>
+                                <?
+                                    echo "
+                                        <a href='/spectr-nn/pages/catalog.php?category=$normaly_unique_category[$categories_counter]'>
+                                            <button class='auto-slider__katalog-link auto-slider__katalog-link-2' data-ripple>
+                                                Перейти в каталог
+                                            </button>
+                                        </a>
+                                    ";
+                                    $categories_counter++;
+                                ?>
                             </div> 
                         </div>
                         <div class="auto-slider__block auto-slider__block-3">
@@ -70,11 +93,16 @@
                             <div class="auto-slider__block-info">
                                 <h1>Мясо и колбаса</h1>
                                 <h2>Огромный выбор мясной продукции от Нижегородских фермеров</h2>
-                                <a href="#">
-                                    <button class="auto-slider__katalog-link auto-slider__katalog-link-3" data-ripple>
-                                        Перейти в каталог
-                                    </button>
-                                </a>
+                                <?
+                                    echo "
+                                        <a href='/spectr-nn/pages/catalog.php?category=$normaly_unique_category[$categories_counter]'>
+                                            <button class='auto-slider__katalog-link auto-slider__katalog-link-3' data-ripple>
+                                                Перейти в каталог
+                                            </button>
+                                        </a>
+                                    ";
+                                    $categories_counter++;
+                                ?>
                             </div>
                         </div>
                         <div class="auto-slider__block auto-slider__block-4">
@@ -82,11 +110,16 @@
                             <div class="auto-slider__block-info">
                                 <h1>Кофе</h1>
                                 <h2>В каждом магазине Спектр-НН вас ждёт свежесваренный кофе</h2>
-                                <a href="#">
-                                    <button class="auto-slider__katalog-link auto-slider__katalog-link-4" data-ripple>
-                                        Перейти в каталог
-                                    </button>
-                                </a>
+                                <?
+                                    echo "
+                                        <a href='/spectr-nn/pages/catalog.php?category=$normaly_unique_category[$categories_counter]'>
+                                            <button class='auto-slider__katalog-link auto-slider__katalog-link-4' data-ripple>
+                                                Перейти в каталог
+                                            </button>
+                                        </a>
+                                    ";
+                                    $categories_counter++;
+                                ?>
                             </div>
                         </div>
                         <div class="auto-slider__block auto-slider__block-5">
@@ -94,11 +127,16 @@
                             <div class="auto-slider__block-info">
                                 <h1>Свежая выпечка</h1>
                                 <h2>Каждого покупателя ждёт большой выбор выпечки: </br> Любимые булочки, хлеб и многое другое</h2>
-                                <a href="#">
-                                    <button class="auto-slider__katalog-link auto-slider__katalog-link-5" data-ripple>
-                                        Перейти в каталог
-                                    </button>
-                                </a>
+                                <?
+                                    echo "
+                                        <a href='/spectr-nn/pages/catalog.php?category=$normaly_unique_category[$categories_counter]'>
+                                            <button class='auto-slider__katalog-link auto-slider__katalog-link-5' data-ripple>
+                                                Перейти в каталог
+                                            </button>
+                                        </a>
+                                    ";
+                                    $categories_counter++;
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -113,16 +151,6 @@
                     <div class="auto-slider__line-active"></div>
                 </div>
                 <? 
-                    $categories = $db->query("SELECT category FROM card");
-                    $unique_category = [];
-                    foreach ($categories as $categories) {
-                        array_push($unique_category, $categories["category"]);
-                    }
-                    $unique_category = array_unique($unique_category);
-                    $normaly_unique_category = [];
-                    foreach ($unique_category as $unique_category) {
-                        array_push($normaly_unique_category, $unique_category);
-                    }
                     $categories_counter = 0;
                     $category = $db->query("SELECT * FROM card WHERE category LIKE '$normaly_unique_category[$categories_counter]'"); 
                     echo "

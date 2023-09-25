@@ -58,9 +58,43 @@
                            -1230 1193 -72 26 -136 26 -207 -1z"/>
                            </g>
                         </svg>
-                        <li>
-                            <p>Каталог</p>
-                        </li>
+                        <?
+                            $get_category = $_GET['category']; 
+                            if (isset($_GET['category'])) {
+                                echo "
+                                    <a href='/spectr-nn/pages/catalog.php'>
+                                        <li>
+                                            <p>Каталог</p>
+                                        </li>
+                                    </a>
+                                    <svg class='bread-crumbs__arrow' version='1.0' xmlns='http://www.w3.org/2000/svg'
+                                        width='512.000000pt' height='512.000000pt' viewBox='0 0 512.000000 512.000000'
+                                        preserveAspectRatio='xMidYMid meet'>
+    
+                                        <g transform='translate(0.000000,512.000000) scale(0.100000,-0.100000)'
+                                        stroke='none'>
+                                        <path d='M1400 5098 c-44 -17 -77 -44 -171 -137 -144 -143 -163 -177 -164
+                                        -286 0 -58 5 -91 19 -120 13 -27 333 -355 995 -1018 l976 -977 -977 -978
+                                        c-760 -760 -982 -987 -997 -1022 -14 -30 -21 -67 -21 -110 0 -103 29 -153 168
+                                        -291 98 -97 127 -119 175 -137 73 -28 131 -28 204 -1 56 20 108 71 1230 1193
+                                        1297 1296 1223 1214 1223 1346 0 132 74 50 -1223 1346 -1123 1123 -1174 1173
+                                        -1230 1193 -72 26 -136 26 -207 -1z'/>
+                                        </g>
+                                    </svg>
+                                    <li>
+                                        <p>$get_category</p>
+                                    </li>
+                                ";
+                            }
+                            else {
+                                echo "
+                                    <li>
+                                        <p>Каталог</p>
+                                    </li>
+                                ";
+                            }
+                        ?>
+                        
                     </ul>
                 </div>         
                 <div class="filters">
@@ -92,8 +126,7 @@
                 <div class="main-catalog__content">
                     <div class="main-catalog__left">
                         <div class="main-catalog__category">
-
-                        <? 
+                            <? 
                             $categories = $db->query("SELECT category FROM card");
                             $unique_category = [];
                             foreach ($categories as $categories) {
@@ -110,7 +143,7 @@
                                 $unique_subgroups = array_unique($unique_subgroups);
                                 echo "
                                     <div class='main-catalog__category-name'>
-                                        <p>$unique_category</p>
+                                        <p class='main-catalog__category-name-value'>$unique_category</p>
                                         <div class='main-catalog__category-name-plus'><span class='main-catalog__category-name-plus-vertical'></span></div>
                                     </div>
                                     <div class='main-catalog__category-subgroups main-catalog__category-subgroups_alternative'>
@@ -122,7 +155,7 @@
                                                 $counter++; 
                                             }
                                             echo "
-                                                <li class='subgroup-li' li-data-subgroup='$unique_subgroups'>
+                                                <li class='subgroup-li' li-data-subgroup='$unique_subgroups' data-category='$unique_category'>
                                                     <input class='subgroup-checkbox' type='checkbox'>
                                                     <p class='subgroup-p'>$unique_subgroups</p>
                                                     <h4 class='subgroup-count'>($counter)</h4>
@@ -132,18 +165,15 @@
                                     echo "</div>";
                                 ;
                             }
-                        ?>         
-
+                            ?>         
                         </div>
                     </div>
                     <div class="main-catalog__right">
                         <div class="main-catalog__cards" id="cards">
-
                             <? 
                                 $all_cards = $db->query("SELECT * FROM card");
                                 pseudo_destructuring_and_echo($all_cards);
                             ?>
-
                         </div>
                     </div>
                 </div>
@@ -204,6 +234,9 @@
             </div>
             <div class="registration__closer"></div>
         </div>
+        <?
+            echo "<div class='get-category'>$get_category</div>";
+        ?>
     </div>
     <script src="../source/js/header.js"></script>
     <script src="../source/js/sort.js"></script>

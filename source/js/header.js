@@ -126,7 +126,8 @@ let card_like = [...document.querySelectorAll('[data-like]')]
 card_like.forEach(like => like.onclick = () => like.classList.toggle('card__like_alternative'))
     
 let cards = [...document.querySelectorAll('[main-card]')] // main карты
-let rating = document.querySelectorAll('.card__rating-value') 
+let rating = document.querySelectorAll('.card__rating-value')
+let rating_block = document.querySelectorAll('.card__rating')
 let sort_value = document.querySelector('.filters__sort-value')
 let card_discount = document.querySelectorAll('[data-discount]') // инициализация скидки
 let card_discount_value = document.querySelectorAll('.card__discount-value') // value скидки
@@ -159,10 +160,10 @@ for (let i = 0; i < header_cards.length; i++) {
         header_card_discount_value[i].innerHTML = -Math.round((header_price_old_value[i]-header_price_new_value[i])/header_price_old_value[i] * 100) // рассчёт скидки
         header_card_discount[i].style.display = 'block' // отображение скидки
     }
-    else header_price_new[i].innerHTML = ''
-    if (header_rating[i].innerHTML != 0) {
-        
-    }
+        else header_price_new[i].innerHTML = ''
+
+    if (header_rating[i].innerHTML != '') header_rating_block[i].classList.remove('remove')
+        else header_rating_block[i].classList.add('remove')
 }
 
 
@@ -173,21 +174,24 @@ for (let i = 0; i < cards.length; i++) {
         card_discount_value[i].innerHTML = -Math.round((price_old_value[i]-price_new_value[i])/price_old_value[i] * 100) // рассчёт скидки
         card_discount[i].style.display = 'block' // отображение скидки
     }
-    else price_new[i].innerHTML = ''
+        else price_new[i].innerHTML = ''
+    
+    if (rating[i].innerHTML != '') rating_block[i].classList.remove('remove')
+        else rating_block[i].classList.add('remove')
+
 
     if (price_new_value[i] != '') current_price = price_new_value[i] 
         else current_price = price_old_value[i]
     if (card_discount_value[i].innerHTML != '') discount = card_discount_value[i].innerHTML
         else discount = 0
-    if (rating[i].innerHTML != '') rating = rating[i]
-        else rating = 0
+
     cards_array.push(
         {
             title: card_title[i].innerHTML, 
             index: i,
             current_price: current_price,
             discount: discount,
-            rating: -rating,
+            rating: -rating[i].innerHTML,
             _current_price: -current_price,
             subgroup: subgroup_value[i],
         }

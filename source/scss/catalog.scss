@@ -24,13 +24,16 @@
             height: 60px;
             align-items: center;
             position: relative;
-            &:hover p {
+            &:hover &-value {
+                color: lighten($purple, 8%);
+            }
+            &-value_alternative {
                 color: $purple;
             }
             &:hover &-plus {
-                background-color: $purple;
+                background-color: lighten($purple, 8%);
                 &-vertical {
-                    background-color: $purple;
+                    background-color: lighten($purple, 8%);
                 }
             }
             &-plus {
@@ -135,5 +138,8 @@
 }
 
 .remove {
+    display: none;
+}
+.get-category {
     display: none;
 }

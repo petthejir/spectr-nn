@@ -20,23 +20,15 @@
                     <?
                         $all_cards = $db->query("SELECT * FROM card");
                         foreach ($all_cards as $all_cards) {
-                            $id = $all_cards["id"];
-                            $title = $all_cards["title"];
-                            $old_price =  $all_cards["old_price"];
-                            $new_price = $all_cards["new_price"];
-                            $image = $all_cards["image"];
-                            $description = $all_cards["description"];
                             $category = $all_cards["category"];
                             $subgroup = $all_cards["subgroup"];
-                            $get_rating = rating($id);
-                            $rating_avg = $get_rating[0];
                             
                             echo "
                                 <a href='/spectr-nn/pages/card.php?id=$id' class='header__search-card remove' header-card>
                                     <img src='$image' alt=''>
                                     <div class='header__search-card-main'>
                                         <h2 class='header__search-card-title'>$title</h2>
-                                        <div class='header__search-card-rating'>
+                                        <div class='header__search-card-rating remove'>
                                             <svg height='20px' width='20px' version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' 
                                                                  viewBox='0 0 47.94 47.94' xml:space='preserve'>
                                                             <path d='M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
