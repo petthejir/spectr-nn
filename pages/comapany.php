@@ -5,11 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../pics/logo.png" type="image/x-icon">
-    <title>Магазины</title>
+    <title>О компании</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/index.css">
+    <? session_start(); ?>
     <? require '../php/db.php' ?>
 </head>
 <body class="body">
@@ -19,7 +20,7 @@
             <div class="main__conteiner">
                 <div class="bread-crumbs">
                     <ul>
-                        <a href="../index.html">
+                        <a href="/spectr-nn/index.php">
                             <li>
                                 <svg class="bread-crumbs__home" version="1.0" xmlns="http://www.w3.org/2000/svg"
                                     width="1024.000000pt" height="1024.000000pt" viewBox="0 0 1024.000000 1024.000000"
@@ -45,8 +46,8 @@
                             </li>
                         </a>
                         <svg class="bread-crumbs__arrow" version="1.0" xmlns="http://www.w3.org/2000/svg"
-                        width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000"
-                        preserveAspectRatio="xMidYMid meet">
+                            width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000"
+                            preserveAspectRatio="xMidYMid meet">
     
                            <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
                            stroke="none">
