@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/index.css">
+    <? session_start(); ?>
     <? require '../php/db.php' ?>
 </head>
 <body class="body">
@@ -19,7 +20,7 @@
             <div class="main__conteiner">
                 <div class="bread-crumbs">
                     <ul>
-                        <a href="../index.html">
+                        <a href="/spectr-nn/index.php">
                             <li>
                                 <svg class="bread-crumbs__home" version="1.0" xmlns="http://www.w3.org/2000/svg"
                                     width="1024.000000pt" height="1024.000000pt" viewBox="0 0 1024.000000 1024.000000"

@@ -108,6 +108,7 @@
         font-weight: bold;
         font-size: 16px;
         transition: 200ms;
+        overflow: hidden;
         @extend %deselection;
         &:hover {
             background-color: $purple;

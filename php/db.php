@@ -1,5 +1,8 @@
 <? 
 
+session_start();
+unset($_SESSION['email']);
+
 $db = new PDO("mysql:host=localhost; dbname=spectr", "root", "");
 
 
