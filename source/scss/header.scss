@@ -339,6 +339,8 @@ input {
     }
     &__fav-profile {
         position: relative;
+        margin-right: -30px;
+        background-color: red;
     }
     &__favorite-products-link {
         padding: 10px;
@@ -364,6 +366,7 @@ input {
         display: flex;
         flex-direction: column;
         border: 1px solid rgba($purple, .4);
+        min-width: 200px;
         &-block {
             display: flex;
             width: 100%;
@@ -526,7 +529,6 @@ input {
         bottom: 0px;
         fill: rgba(black, .1);
         transition: 200ms;
-        z-index: 10;
         &:hover {
             fill: rgba($purple, .4);
         }

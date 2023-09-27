@@ -1,6 +1,5 @@
 <?
     session_start();
-    require_once('connect.php');
     $db = new PDO("mysql:host=localhost; dbname=spectr", "root", "");
     
     $tel = $_POST['tel'];

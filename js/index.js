@@ -287,9 +287,9 @@ observ.observe(footer)
 
 
     //cards
-let card_like = [...document.querySelectorAll('[data-like]')]
-card_like.forEach(like => like.onclick = () => like.classList.toggle('card__like_alternative'))
-    
+let card_like = [...document.querySelectorAll('.card__like')]
+let header_card_like = [...document.querySelectorAll('.header__search-card-like')]
+   
 let cards = [...document.querySelectorAll('[main-card]')] // main карты
 let rating = document.querySelectorAll('.card__rating-value')
 let rating_block = document.querySelectorAll('.card__rating')
@@ -318,6 +318,7 @@ let header_card_discount_value = document.querySelectorAll('.card__header-discou
 let header_rating_block = document.querySelectorAll('.header__search-card-rating')
 let header_rating = document.querySelectorAll('.header__search-card-rating-value')
 
+
 for (let i = 0; i < header_cards.length; i++) {
     if (header_price_new_value[i] != '') {
         header_price_old[i].classList.add('card__price-old_alternative') // применение классов к old
@@ -333,6 +334,20 @@ for (let i = 0; i < header_cards.length; i++) {
 
 
 for (let i = 0; i < cards.length; i++) {
+    header_card_like[i].onclick = () => {
+        header_card_like[i].classList.toggle('card__like_alternative')
+        card_like[i].classList.toggle('card__like_alternative')
+        window.location = header_card_like[i].getAttribute('data-href')
+        return false
+    }
+    
+    card_like[i].onclick = () => {
+        card_like[i].classList.toggle('card__like_alternative')
+        header_card_like[i].classList.toggle('card__like_alternative')
+        return false
+    }
+
+
     if (price_new_value[i] != '') {
         price_old[i].classList.add('card__price-old_alternative') // применение классов к old
         price_old[i].innerHTML = `<strike>${price_old[i].innerHTML}</strike>` // зачёркивание old
@@ -411,3 +426,24 @@ header__search.oninput = function() {
     search_by_value(header__search.value)
 }
 
+let is_entry = document.querySelector('[data-is-entry]')
+if (is_entry) {
+    let profile = document.querySelector('.header__profile')  
+    is_entry.onclick = () => {
+        profile.classList.remove('remove')
+        document.addEventListener('keydown', e => {
+            if(e.key === "Escape") {
+                profile.classList.add('remove')
+            }
+        })
+    }
+    window.addEventListener('click', e => {
+        const target = e.target
+        if (!target.closest('.header__profile') && !target.closest('.header__favorite-products-link')) {
+            profile.classList.add('remove')
+        }
+    })
+}
+
+
+ 
