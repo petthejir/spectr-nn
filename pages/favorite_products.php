@@ -1,3 +1,8 @@
+<? 
+    session_start(); 
+    $email = $_SESSION['email'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,10 +15,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/index.css">
-    <? 
-        session_start(); 
-        $email = $_SESSION['email'];
-    ?>
     <? require '../php/db.php' ?>
 </head>
 <body class="body contacts">

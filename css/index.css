@@ -529,6 +529,8 @@ input::placeholder {
 }
 .header__fav-profile {
   position: relative;
+  margin-right: -30px;
+  background-color: red;
 }
 .header__favorite-products-link {
   padding: 10px;
@@ -560,6 +562,7 @@ input::placeholder {
       -ms-flex-direction: column;
           flex-direction: column;
   border: 1px solid rgba(115, 72, 255, 0.4);
+  min-width: 200px;
 }
 .header__profile-block {
   display: -webkit-box;
@@ -782,7 +785,6 @@ input::placeholder {
   fill: rgba(0, 0, 0, 0.1);
   -webkit-transition: 200ms;
   transition: 200ms;
-  z-index: 10;
 }
 .card__like:hover {
   fill: rgba(115, 72, 255, 0.4);

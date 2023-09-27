@@ -18,6 +18,7 @@
                 <div class="header__search-cards">
                     <h1 class="header__search-no-card remove">Товары не найдены, попробуйте изменить запрос</h1>
                     <?
+                        $email = $_SESSION['email'];
                         $all_cards = $db->query("SELECT * FROM card");
                         foreach ($all_cards as $all_cards) {
                             $id = $all_cards["id"];
@@ -55,7 +56,7 @@
                                             <h2 class='header__search-card-price-old' data-header-old-price='$old_price'>$old_price,99 ₽</h2>
                                             <h2 class='header__search-card-price-new' data-header-new-price='$new_price'>$new_price,99 ₽</h2>
                                         </div>
-                                        <div class='header__search-card-like' data-like>
+                                        <div class='header__search-card-like' data-href='/spectr-nn/php/add_favorite_card.php?email=$email&card_id=$id' data-like>
                                             <svg height='35px' width='35px' version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' 
                                                                  viewBox='0 0 50 50' xml:space='preserve'>
                                                             <path d='M24.85,10.126c2.018-4.783,6.628-8.125,11.99-8.125c7.223,0,12.425,6.179,13.079,13.543
@@ -86,10 +87,11 @@
                 </button>
             </div>
             <?
+                $email = $_SESSION['email'];
                 if($_SERVER['REQUEST_URI'] === '/spectr-nn/pages/favorite_products.php') {
                     echo "
                         <div class='header__fav-profile'>
-                            <a class='header__favorite-products-link'>
+                            <a class='header__favorite-products-link' data-is-entry>
                                 <svg class='header__right-svg' height='18px' width='18px' version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' 
                                      viewBox='0 0 50 50' xml:space='preserve'>
                                     <path d='M24.85,10.126c2.018-4.783,6.628-8.125,11.99-8.125c7.223,0,12.425,6.179,13.079,13.543
@@ -97,10 +99,10 @@
                                     c-0.777-3.291-0.424-5.119-0.424-5.119C0.734,8.179,5.936,2,13.159,2C18.522,2,22.832,5.343,24.85,10.126z'/>
                                 </svg>
                             </a>
-                            <div class='header__profile'>
+                            <div class='header__profile remove'>
                                 <div class='header__profile-block header__profile-info'>
                                     <svg width='16' height='16' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg' color='#B6BAC2'><path d='M12 0c1.73 0 3.299.62 4.421 1.745 1.137 1.14 1.69 2.674 1.56 4.318C17.72 9.337 15.04 12 12 12c-3.042 0-5.725-2.664-5.981-5.938-.13-1.66.42-3.196 1.55-4.327C8.687.616 10.26 0 12 0zM1.846 24h20.308c.265.003.529-.049.77-.152.242-.103.455-.255.626-.445.375-.416.526-.985.414-1.56-.487-2.508-2.007-4.614-4.395-6.093-2.122-1.313-4.81-2.036-7.569-2.036-2.76 0-5.447.723-7.569 2.036C2.043 17.229.523 19.336.036 21.844c-.112.575.04 1.143.414 1.56.17.19.384.34.626.444.241.103.505.155.77.152z' fill='#B6BAC2'></path></svg>
-                                    <h2>bulawetov@yandex.ru</h2>
+                                    <h2>$email</h2>
                                 </div>
                                 <a class='header__profile-block' href='/spectr-nn/php/unset_entry.php' header__profile-out'>
                                     <h2>Выйти</h2>
@@ -111,7 +113,7 @@
                     ";
                 }
                 else {
-                    if ($_SESSION['email']) {
+                    if ($email) {
                         echo "
                             <a class='header__favorite-products-link' href='/spectr-nn/pages/favorite_products.php'>
                                 <svg class='header__right-svg' height='18px' width='18px' version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' 
