@@ -6,11 +6,10 @@
     
     if ($check_favorite_card->rowCount() === 0) {
         $db->query("INSERT INTO favorite_card (email, card_id) VALUES ($email, $card_id)");
+        header('Location: '. '/spectr-nn/pages/favorite_products.php');
     }
     else {
         $db->query("DELETE FROM favorite_card WHERE email=$email AND card_id=$card_id");
+        header("Location: ".$_SERVER['HTTP_REFERER']);
     }
-
-
-
 ?>
