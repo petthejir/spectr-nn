@@ -56,7 +56,7 @@
             <div class="main__conteiner">
                 <div class="bread-crumbs">
                     <ul>
-                        <a href="../index.html">
+                        <a href="/spectr-nn/index.php">
                             <li>
                                 <svg class="bread-crumbs__home" version="1.0" xmlns="http://www.w3.org/2000/svg"
                                     width="1024.000000pt" height="1024.000000pt" viewBox="0 0 1024.000000 1024.000000"
@@ -132,18 +132,18 @@
                                     </li>
                                 </a>
                                 <svg class='bread-crumbs__arrow' version='1.0' xmlns='http://www.w3.org/2000/svg'
-                                width='512.000000pt' height='512.000000pt' viewBox='0 0 512.000000 512.000000'
-                                preserveAspectRatio='xMidYMid meet'>
+                                    width='512.000000pt' height='512.000000pt' viewBox='0 0 512.000000 512.000000'
+                                    preserveAspectRatio='xMidYMid meet'>
 
-                               <g transform='translate(0.000000,512.000000) scale(0.100000,-0.100000)'
-                               stroke='none'>
-                               <path d='M1400 5098 c-44 -17 -77 -44 -171 -137 -144 -143 -163 -177 -164
-                               -286 0 -58 5 -91 19 -120 13 -27 333 -355 995 -1018 l976 -977 -977 -978
-                               c-760 -760 -982 -987 -997 -1022 -14 -30 -21 -67 -21 -110 0 -103 29 -153 168
-                               -291 98 -97 127 -119 175 -137 73 -28 131 -28 204 -1 56 20 108 71 1230 1193
-                               1297 1296 1223 1214 1223 1346 0 132 74 50 -1223 1346 -1123 1123 -1174 1173
-                               -1230 1193 -72 26 -136 26 -207 -1z'/>
-                               </g>
+                                    <g transform='translate(0.000000,512.000000) scale(0.100000,-0.100000)'
+                                    stroke='none'>
+                                    <path d='M1400 5098 c-44 -17 -77 -44 -171 -137 -144 -143 -163 -177 -164
+                                    -286 0 -58 5 -91 19 -120 13 -27 333 -355 995 -1018 l976 -977 -977 -978
+                                    c-760 -760 -982 -987 -997 -1022 -14 -30 -21 -67 -21 -110 0 -103 29 -153 168
+                                    -291 98 -97 127 -119 175 -137 73 -28 131 -28 204 -1 56 20 108 71 1230 1193
+                                    1297 1296 1223 1214 1223 1346 0 132 74 50 -1223 1346 -1123 1123 -1174 1173
+                                    -1230 1193 -72 26 -136 26 -207 -1z'/>
+                                    </g>
                                 </svg>
                                 <li>
                                     <p>$subgroup</p>
@@ -154,7 +154,15 @@
                 </div>         
                 <div class="main-card__block">
                     <?  
-                        echo "<img src='$image' alt=''>"; 
+                        if ($new_price != '') {
+                            $discount =  round(($old_price-$new_price)/$old_price*100);
+                            echo "
+                                <h2 class='main-card__discount'>-$discount%</h2>
+                            ";
+                        }
+                        echo "
+                            <img src='$image' alt=''>
+                        "; 
                     ?>
                     <div class="main-card__right">
                         <?
@@ -186,17 +194,30 @@
                                             <h3 class='main-card__rating-value'>$rating_avg</h3>
                                             <h3 class='main-card__rating-quantity'>$rating_count</h3>
                                         </div>
-                                        <button class='main-card__rating-new'>
-                                            <svg height='20px' width='20px' version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' 
-                                                     viewBox='0 0 47.94 47.94' xml:space='preserve'>
-                                                <path d='M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
-                                                    c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
-                                                    c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
-                                                    c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
-                                                    c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
-                                                    C22.602,0.567,25.338,0.567,26.285,2.486z'/>
-                                            </svg>
-                                            <h2>Оценить</h2>
+                                        <button class='main-card__rating-new'>";
+                                        $check_rating_by_email = $db->query("SELECT * FROM `rating` WHERE email = '$email' AND card_id = '$id'");
+                                        if ($check_rating_by_email->rowCount() === 0) {
+                                            echo "
+                                                    <svg height='20px' width='20px' version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' 
+                                                        viewBox='0 0 47.94 47.94' xml:space='preserve'>
+                                                        <path d='M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
+                                                        c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
+                                                        c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
+                                                        c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
+                                                        c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
+                                                        C22.602,0.567,25.338,0.567,26.285,2.486z'/>
+                                                    </svg>
+                                                    <h2>Оценить</h2>
+                                                ";
+                                            }
+                                            else {
+                                                foreach ($check_rating_by_email as $check_rating_by_email) {
+                                                    echo "
+                                                        <h2>$check_rating_by_email[rate] - Моя оценка</h2>
+                                                    ";
+                                                }
+                                            }
+                                            echo "
                                         </button>
                                     </div>
                                 </div>
