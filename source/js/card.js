@@ -11,7 +11,6 @@ to_rate.onclick = function() {
     stars.forEach(star => {
         star.onclick = () => {
             star_block.setAttribute('data-total-value', star.getAttribute('data-item-value'))
-            this.innerHTML = `<h2>${star_block.getAttribute('data-total-value')} - моя оценка</h2>`
             setTimeout(() => {
                 show_or_unshow_choise_rating()
             }, 300)
