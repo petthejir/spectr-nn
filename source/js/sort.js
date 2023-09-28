@@ -45,23 +45,29 @@
     function discont_active() {
         if (discont_filter_input.checked === true) {
             for (let i = 0; i < cards.length; i++) {
-                if (card_discount_value[i].innerHTML === '') {
-                    cards[i].classList.add('remove')
+                if (typeof card_discount_value[i] != 'undefined') {
+                    if (card_discount_value[i].innerHTML === '') {
+                        cards[i].classList.add('remove')
+                    }
                 }
             }
         }
         else {
             for (let i = 0; i < cards.length; i++) {
-                if (card_discount_value[i].innerHTML === '') {
-                    cards[i].classList.remove('remove')
-                }
-                subgroup_()
+                if (typeof card_discount_value[i] != 'undefined') {
+                    if (card_discount_value[i].innerHTML === '') {
+                        cards[i].classList.remove('remove')
+                    }
+                    if (window.location === 'http://localhost/spectr-nn/pages/catalog.php') {
+                        subgroup_()
+                    }
+                } 
             }
         }
     }
     discont_filter.onclick = () => {
         if (discont_filter_input.checked === true) discont_filter_input.checked = false
-        else discont_filter_input.checked = true
+            else discont_filter_input.checked = true
         discont_active()
     }
     

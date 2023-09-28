@@ -72,7 +72,7 @@ document.addEventListener('keydown', e => {
         header_search_closer_full_size_remove()
         header__search_buttons_remove()
         header__search_buttons_empty_alt_remove()
-        slider_underline()
+        if (document.querySelector('.auto-slider') != null) slider_underline()
     }
 })
 
@@ -179,6 +179,7 @@ for (let i = 0; i < cards.length; i++) {
     card_like[i].onclick = () => {
         card_like[i].classList.toggle('card__like_alternative')
         header_card_like[i].classList.toggle('card__like_alternative')
+        window.location = card_like[i].getAttribute('data-href')
         return false
     }
 

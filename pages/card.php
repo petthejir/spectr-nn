@@ -115,6 +115,7 @@
                                </g>
                         </svg>
                         <?
+                            $email = $_SESSION['email'];
                             $id = $card["id"];
                             $title = $card["title"];
                             $old_price =  $card["old_price"];
@@ -122,7 +123,8 @@
                             $image = $card["image"];
                             $description = $card["description"];
                             $subgroup = $card["subgroup"];
-                            $category = $card["category"];  
+                            $category = $card["category"];
+                            $check_favorite_card = $db->query("SELECT * FROM favorite_card WHERE `email` = '$email' AND `card_id` = '$id'");  
                             echo "
                                 <a href='/spectr-nn/pages/catalog.php?category=$category'>
                                     <li>
@@ -159,6 +161,7 @@
                             $get_rating = rating($id);
                             $rating_avg = $get_rating[0];
                             $rating_count = $get_rating[1];
+
                             echo "
                                 <div class='main-card__title'>
                                     <h1>$title</h1>
@@ -202,15 +205,25 @@
                                         <h2 class='card__price-old' data-card-old-price='$old_price'>$old_price,99 ₽</h2>
                                         <h2 class='card__price-new' data-card-new-price='$new_price'>$new_price,99 ₽</h2>
                                     </div>
-                                    <button class='main-card__add-to-favorite' data-ripple>
+                                    <a class='main-card__add-to-favorite' href='/spectr-nn/php/add_favorite_card.php?email=$email&card_id=$id' data-ripple>
                                         <svg height='20px' width='20px' version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' 
-                                                             viewBox='0 0 50 50' xml:space='preserve'>
-                                                        <path d='M24.85,10.126c2.018-4.783,6.628-8.125,11.99-8.125c7.223,0,12.425,6.179,13.079,13.543
-                                                            c0,0,0.353,1.828-0.424,5.119c-1.058,4.482-3.545,8.464-6.898,11.503L24.85,48L7.402,32.165c-3.353-3.038-5.84-7.021-6.898-11.503
-                                                            c-0.777-3.291-0.424-5.119-0.424-5.119C0.734,8.179,5.936,2,13.159,2C18.522,2,22.832,5.343,24.85,10.126z'/>
-                                        </svg>
-                                        <h2>В избранное</h2>
-                                    </button>
+                                            viewBox='0 0 50 50' xml:space='preserve'>
+                                            <path d='M24.85,10.126c2.018-4.783,6.628-8.125,11.99-8.125c7.223,0,12.425,6.179,13.079,13.543
+                                            c0,0,0.353,1.828-0.424,5.119c-1.058,4.482-3.545,8.464-6.898,11.503L24.85,48L7.402,32.165c-3.353-3.038-5.84-7.021-6.898-11.503
+                                            c-0.777-3.291-0.424-5.119-0.424-5.119C0.734,8.179,5.936,2,13.159,2C18.522,2,22.832,5.343,24.85,10.126z'/>
+                                        </svg>";
+                                        if ($check_favorite_card->rowCount() === 0) {
+                                            echo "
+                                                <h2>В избранное</h2>
+                                            ";
+                                        }
+                                        else {
+                                            echo "
+                                                <h2>В избранном</h2>
+                                            ";
+                                        }
+                                        echo "
+                                    </a>
                                 </div>
                                 <div class='main-card__description'>
                                     <h2>Описание</h2>

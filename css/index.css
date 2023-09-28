@@ -592,6 +592,11 @@ input::placeholder {
 .header__profile a {
   color: rgb(255, 92, 87);
 }
+.header__profile a svg {
+  fill: rgb(255, 92, 87);
+  width: 14px;
+  margin-right: 5px;
+}
 .header__profile-out {
   cursor: pointer;
 }
@@ -2479,6 +2484,37 @@ h1, h2, h3, h4, h5, h6 {
           column-gap: 47px;
   row-gap: 30px;
   margin-top: 20px;
+}
+
+.favorite__no-card {
+  margin-top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.favorite__no-card svg {
+  width: 150px;
+}
+.favorite__no-card h1 {
+  font-weight: bold;
+  margin-top: 30px;
+  font-size: 22px;
+}
+.favorite__no-card h2 {
+  margin-top: 20px;
+  font-size: 16px;
+  text-align: center;
+  line-height: 25px;
 }
 
 .filters-block {

@@ -387,6 +387,11 @@ input {
             }
         }
         & a {
+            & svg {
+                fill: rgb(255,92,87);
+                width: 14px;
+                margin-right: 5px;
+            }
             color: rgb(255,92,87);
         }
         &-out {
