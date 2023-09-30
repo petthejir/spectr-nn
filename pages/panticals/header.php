@@ -2,7 +2,7 @@
     <div id="header-search-closer"></div>
     <div class="conteiner header__conteiner">
         <a class="title header__title" href="/spectr-nn/">
-            <img src="/spectr-nn/pics/logo.png" width="35px">
+            <img class="logo" src="/spectr-nn/pics/logo.png" width="35px">
             <h1>пектр-НН</h1>   
         </a>
         <ul class="header__list">

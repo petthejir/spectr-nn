@@ -6,14 +6,14 @@
         margin-top: 20px;
     }
     &__left {
-        width: 20%;
+        min-width: 20%;
         display: flex;
         flex-direction: column;
     }
     &__category {
         display: flex;
         align-items: center;
-        width: 100%;
+        min-width: 230px;
         cursor: pointer;
         position: relative;
         @extend %deselection;
@@ -123,12 +123,20 @@
     &__right {
         width: 80%;
         margin-left: 40px;
+        position: relative;
+        &-content {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+/*             background-color: rgba(red, .1); */
+        }
     }
     &__cards {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         column-gap: 40px;
         row-gap: 30px;
+/*         background-color: rgba($purple, .1); */
     }
 }
 .subgroup-count {

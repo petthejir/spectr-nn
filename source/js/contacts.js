@@ -84,6 +84,7 @@ function coll_close() {
     }, 150);
     call_closer.classList.add('call__closer_alt-2')
     call_closer.classList.remove('call__closer_alt')
+    body.style.overflow = 'auto'
     setTimeout(()=> {
         call_block.classList.remove('call_show')
     }, 250)
