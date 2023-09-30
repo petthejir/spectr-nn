@@ -158,6 +158,12 @@
     }
 }
 
+.favorite__block {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
 .favorite__cards {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
