@@ -94,37 +94,38 @@
                         </div>
                     </div>
                 </div>
+                <div class="favorite__block">
                     <?
-                        $favorite_cards_id = $db->query("SELECT * FROM favorite_card WHERE `email` = '$email'");
-                        $favorite_cards_id_array = [];
-                        foreach ($favorite_cards_id as $favorite_cards_id) {
-                            array_push($favorite_cards_id_array, $favorite_cards_id['card_id']);
-                        }
-                        if (count($favorite_cards_id_array) != 0) {
-                            echo "<div class='favorite__cards' id='cards'> ";
-                            foreach ($favorite_cards_id_array as $favorite_cards_id_array) {
-                            $cards_by_id = $db->query("SELECT * FROM card WHERE id LIKE '$favorite_cards_id_array'");
-                            foreach ($cards_by_id as $cards_by_id) {
-                                $id = $cards_by_id["id"];
-                                $title = $cards_by_id["title"];
-                                $old_price =  $cards_by_id["old_price"];
-                                $new_price = $cards_by_id["new_price"];
-                                $image = $cards_by_id["image"];
-                                $description = $cards_by_id["description"];
-                                $subgroup = $cards_by_id["subgroup"];
-                                $category = $cards_by_id["category"];
-                        
-                                $get_rating = rating($id);
-                                $rating_avg = $get_rating[0];
-                           
-                                echo "
-                                    <a href='/spectr-nn/pages/card.php?id=$id' class='card' main-card data-subgroup='$subgroup' data-category='$category'>
-                                        <div class='card__conteiner'>
-                                            <div class='card__top'>
-                                                <h3 class='card__discount' data-discount><span class='card__discount-value'></span>%</h3>
-                                                <div class='card__rating remove'>
-                                                    <div class='card__rating-icon'>
-                                                        <svg height='20px' width='20px' version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' 
+                    $favorite_cards_id = $db->query("SELECT * FROM favorite_card WHERE `email` = '$email'");
+                    $favorite_cards_id_array = [];
+                    foreach ($favorite_cards_id as $favorite_cards_id) {
+                        array_push($favorite_cards_id_array, $favorite_cards_id['card_id']);
+                    }
+                    if (count($favorite_cards_id_array) != 0) {
+                        echo "<div class='favorite__cards' id='cards'> ";
+                        foreach ($favorite_cards_id_array as $favorite_cards_id_array) {
+                        $cards_by_id = $db->query("SELECT * FROM card WHERE id LIKE '$favorite_cards_id_array'");
+                        foreach ($cards_by_id as $cards_by_id) {
+                            $id = $cards_by_id["id"];
+                            $title = $cards_by_id["title"];
+                            $old_price =  $cards_by_id["old_price"];
+                            $new_price = $cards_by_id["new_price"];
+                            $image = $cards_by_id["image"];
+                            $description = $cards_by_id["description"];
+                            $subgroup = $cards_by_id["subgroup"];
+                            $category = $cards_by_id["category"];
+                    
+                            $get_rating = rating($id);
+                            $rating_avg = $get_rating[0];
+                       
+                            echo "
+                                <a href='/spectr-nn/pages/card.php?id=$id' class='card' main-card data-subgroup='$subgroup' data-category='$category'>
+                                    <div class='card__conteiner'>
+                                        <div class='card__top'>
+                                            <h3 class='card__discount' data-discount><span class='card__discount-value'></span>%</h3>
+                                            <div class='card__rating remove'>
+                                                <div class='card__rating-icon'>
+                                                    <svg height='20px' width='20px' version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' 
                                                                 viewBox='0 0 47.94 47.94' xml:space='preserve'>
                                                                 <path d='M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
                                                                     c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
@@ -132,41 +133,41 @@
                                                                     c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
                                                                     c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
                                                                     C22.602,0.567,25.338,0.567,26.285,2.486z'/>
-                                                        </svg>
-                                                    </div>
-                                                    <h3 class='card__rating-value'>$rating_avg</h3>
-                                                </div>
-                                            </div>
-                                            <img class='card__img-block' src='$image' alt=''>
-                                            <div class='card__title'>
-                                                <h4 class='card__title-value'>$title</h4>
-                                            </div>
-                                            <div class='card__bottom'>
-                                                <div class='card__price'>
-                                                    <h2 class='card__price-old' data-old-price='$old_price'>$old_price,99 ₽</h2>
-                                                    <h2 class='card__price-new' data-new-price='$new_price'>$new_price,99 ₽</h2>
-                                                </div>
-                                                <div class='card__like card__like_alternative' data-href='/spectr-nn/php/add_favorite_card.php?email=$email&card_id=$id'>
-                                                    <svg height='35px' width='35px' version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' 
-                                                                 viewBox='0 0 50 50' xml:space='preserve'>
-                                                                <path d='M24.85,10.126c2.018-4.783,6.628-8.125,11.99-8.125c7.223,0,12.425,6.179,13.079,13.543
-                                                                c0,0,0.353,1.828-0.424,5.119c-1.058,4.482-3.545,8.464-6.898,11.503L24.85,48L7.402,32.165c-3.353-3.038-5.84-7.021-6.898-11.503
-                                                                c-0.777-3.291-0.424-5.119-0.424-5.119C0.734,8.179,5.936,2,13.159,2C18.522,2,22.832,5.343,24.85,10.126z'/>
                                                     </svg>
-                                                </div> 
+                                                </div>
+                                                <h3 class='card__rating-value'>$rating_avg</h3>
                                             </div>
                                         </div>
-                                    </a>
-                                ";
-                            }
-                            
-                            }
-                            echo "</div>";
+                                        <img class='card__img-block' src='$image' alt=''>
+                                        <div class='card__title'>
+                                            <h4 class='card__title-value'>$title</h4>
+                                        </div>
+                                        <div class='card__bottom'>
+                                            <div class='card__price'>
+                                                <h2 class='card__price-old' data-old-price='$old_price'>$old_price,99 ₽</h2>
+                                                <h2 class='card__price-new' data-new-price='$new_price'>$new_price,99 ₽</h2>
+                                            </div>
+                                            <div class='card__like card__like_alternative' data-href='/spectr-nn/php/add_favorite_card.php?email=$email&card_id=$id'>
+                                                <svg height='35px' width='35px' version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' 
+                                                             viewBox='0 0 50 50' xml:space='preserve'>
+                                                            <path d='M24.85,10.126c2.018-4.783,6.628-8.125,11.99-8.125c7.223,0,12.425,6.179,13.079,13.543
+                                                            c0,0,0.353,1.828-0.424,5.119c-1.058,4.482-3.545,8.464-6.898,11.503L24.85,48L7.402,32.165c-3.353-3.038-5.84-7.021-6.898-11.503
+                                                            c-0.777-3.291-0.424-5.119-0.424-5.119C0.734,8.179,5.936,2,13.159,2C18.522,2,22.832,5.343,24.85,10.126z'/>
+                                                </svg>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </a>
+                            ";
                         }
-                        else {
-                            echo "
-                                <div class='favorite__no-card'>
-                                    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 39 32'><symbol xmlns='http://www.w3.org/2000/svg' id='85051' viewBox='0 0 39 32'>
+                        
+                        }
+                        echo "</div>";
+                    }
+                    else {
+                        echo "
+                            <div class='favorite__no-card'>
+                                <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 39 32'><symbol xmlns='http://www.w3.org/2000/svg' id='85051' viewBox='0 0 39 32'>
                                         <path fill='#8864ff' style='fill: var(--color1, #8864ff)' d='M36.557 16.207h-34.408l1.475 12.158c0.246 1.842 1.782 3.254 3.687 3.254h24.209c1.843 0 3.441-1.412 3.687-3.254l1.352-12.158z'></path>
                                         <path fill='#7348ff' style='fill: var(--color2, #7348ff)' d='M16.649 23.883c-5.038 0-9.524 2.272-12.535 5.895 0.676 1.105 1.843 1.781 3.134 1.781h24.209c1.843 0 3.441-1.412 3.687-3.254l1.475-12.096h-6.083c-2.949 4.667-8.049 7.675-13.886 7.675z'></path>
                                         <path fill='#7348ff' style='fill: var(--color2, #7348ff)' d='M19.404 11.989c-0.029 0.027-0.075 0.027-0.104-0l-0.788-0.74c-2.982-2.792-4.951-4.634-4.951-6.894 0-1.842 1.401-3.288 3.185-3.288 0.976 0 1.915 0.455 2.546 1.179 0.031 0.036 0.088 0.036 0.119 0 0.631-0.724 1.57-1.179 2.546-1.179 1.783 0 3.185 1.447 3.185 3.288 0 2.26-1.969 4.102-4.951 6.9l-0.788 0.735z'></path>
@@ -179,16 +180,16 @@
                                         <path fill='none' stroke='#505852' style='stroke: var(--color3, #505852)' stroke-linejoin='miter' stroke-linecap='butt' stroke-miterlimit='4' stroke-width='0.6095' d='M37.785 16.208h-36.866c-0.307 0-0.614-0.246-0.614-0.614v-2.579c0-0.307 0.246-0.614 0.614-0.614h36.866c0.307 0 0.614 0.246 0.614 0.614v2.64c0 0.307-0.246 0.553-0.614 0.553z'></path>
                                         <path fill='#fffbef' style='fill: var(--color4, #fffbef); stroke: var(--color3, #505852)' stroke='#505852' stroke-linejoin='miter' stroke-linecap='butt' stroke-miterlimit='4' stroke-width='0.6095' d='M19.352 13.629c-0.307 0-0.614-0.123-0.86-0.368-0.492-0.491-0.492-1.228 0-1.719l10.876-10.868c0.491-0.491 1.229-0.491 1.72 0s0.492 1.228 0 1.719l-10.876 10.868c-0.246 0.246-0.553 0.368-0.86 0.368z'></path>
                                         </symbol><use xlink:href='#85051'></use>
-                                    </svg>
-                                    <h1>Любимых товаров нет</h1>
-                                    <h2>Составляйте список любимых товаров, чтобы они всегда <br> были под рукой</h2>
-                                
-                                </div>
-                            ";                           
-                        }
-                    
-                    ?>
+                                </svg>
+                                <h1>Любимых товаров нет</h1>
+                                <h2>Составляйте список любимых товаров, чтобы они всегда <br> были под рукой</h2>
+                            
+                            </div>
+                        ";                           
+                    }
                 
+                    ?>
+                </div>
             </div>
         </main>
         <? require './panticals/footer.php' ?>
