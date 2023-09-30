@@ -170,11 +170,13 @@
                         </div>
                     </div>
                     <div class="main-catalog__right">
-                        <div class="main-catalog__cards" id="cards">
-                            <? 
-                                $all_cards = $db->query("SELECT * FROM card");
-                                pseudo_destructuring_and_echo($all_cards);
-                            ?>
+                        <div class="main-catalog__right-content">
+                            <div class="main-catalog__cards" id="cards">
+                                <? 
+                                    $all_cards = $db->query("SELECT * FROM card");
+                                    pseudo_destructuring_and_echo($all_cards);
+                                ?>
+                            </div>
                         </div>
                     </div>
                 </div>

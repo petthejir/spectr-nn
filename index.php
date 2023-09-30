@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="./css/index.css">
     <? session_start(); ?>
     <? require './php/db.php' ?>
+    <meta name="viewport" content="width=device-width">
 </head>
 <body class="body">
     <div class="wrapper">
@@ -156,7 +157,7 @@
                     $category = $db->query("SELECT * FROM card WHERE category LIKE '$normaly_unique_category[$categories_counter]'"); 
                     echo "
                         <div class='cards'>
-                            <h1 class='main-titles'>$normaly_unique_category[$categories_counter]</h1>
+                            <h1 class='main-titles main-titles-adapt'>$normaly_unique_category[$categories_counter]</h1>
                             <div class='cards__slider'>
                                 <div class='cards__button cards__left'>
                                     <svg version='1.0' xmlns='http://www.w3.org/2000/svg' width='12pt' height='15pt' viewBox='0 0 512.000000 512.000000' preserveAspectRatio='xMidYMid meet'>
