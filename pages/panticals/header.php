@@ -1,4 +1,46 @@
 <header class="header">
+    <div class="sidebar">
+        <ul>
+            <a href="/spectr-nn/pages/catalog.php">
+                <li>Каталог</li>
+            </a>
+            <a href="/spectr-nn/pages/shops.php">
+                <li>Магазины</li>
+            </a>
+            <a href="/spectr-nn/pages/contacts.php">
+                <li>Контакты</li>
+            </a>
+            <a href="/spectr-nn/pages/comapany.php">
+                <li>О компании</li>
+            </a>
+            <?
+                $email = $_SESSION['email'];
+                if($_SERVER['REQUEST_URI'] === '/spectr-nn/pages/favorite_products.php') {
+                    echo "
+                        <a class='entry' data-is-entry>
+                            <li>Избранные товары</li>
+                        </a>
+                    ";
+                }
+                else {
+                    if ($email) {
+                        echo "
+                            <a href='/spectr-nn/pages/favorite_products.php'>
+                                <li>Избранные товары</li>
+                            </a>   
+                        ";
+                    }
+                    else {
+                        echo "
+                            <a href='/spectr-nn/pages/registration.php'>
+                                <li>Избранные товары</li>
+                            </a>   
+                        ";
+                    }
+                }
+            ?>
+        </ul>
+    </div>
     <div id="header-search-closer"></div>
     <div class="conteiner header__conteiner">
         <a class="title header__title" href="/spectr-nn/">
@@ -13,6 +55,12 @@
         </ul>
         <div class="header__right">
             <input class="header__search" placeholder="Поиск">
+
+            <div class="berger">
+                <div class="berger__stick berger__stick-1"></div>
+                <div class="berger__stick berger__stick-2"></div>
+                <div class="berger__stick berger__stick-3"></div>
+            </div>
 
             <div class="header__search-result header__search-result_alternative">
                 <div class="header__search-cards">
@@ -95,17 +143,13 @@
             </div>           
 
 
-            <div class="header__search-buttons">
+            <div class="header__search-buttons header__search-buttons_alt">
                 <div class="header__search-buttons-empty">
                     <button class="header__search-value-del">
                         <span class="header__search-value-del-left"></span>
                         <span class="header__search-value-del-right"></span>
                     </button>
-                    <div class="header__search-line"></div>
                 </div>
-                <button class="header__search-search-button">
-                    <svg width="19" height="19" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" color="#50b946" class="search-form__search-icon"><path d="M10.526 3a7.526 7.526 0 017.527 7.526 7.485 7.485 0 01-.7 3.156l3.29 4.429a1.81 1.81 0 01-2.532 2.532l-4.427-3.292a7.488 7.488 0 01-3.158.701 7.526 7.526 0 110-15.052zm0 12.744a5.217 5.217 0 100-10.436 5.218 5.218 0 000 10.436z"></path></svg>
-                </button>
             </div>
             <?
                 $email = $_SESSION['email'];
@@ -158,10 +202,10 @@
                         ";
                     }
                 }
-                
-            
-            
             ?>
+
+            
+
         </div>
     </div>
 </header>
