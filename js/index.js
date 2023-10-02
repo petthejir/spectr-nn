@@ -166,9 +166,9 @@ for (let i = 0; i < cards__sliders.length; i++) {
 const header__search = document.querySelector('.header__search')
 const header__list = document.querySelector('.header__list')
 const header_search_closer = document.querySelector('#header-search-closer')
+const header__search_buttons = document.querySelector('.header__search-buttons')
 const header__search_buttons_empty = document.querySelector('.header__search-buttons-empty')
 const header__search_value_del = document.querySelector('.header__search-value-del')
-const header__search_search_button = document.querySelector('.header__search-search-button')
 let body = document.querySelector('.body')
 
 function header__search_value_do_empty() {
@@ -180,9 +180,6 @@ function header__search_value_remove() {
     search_by_value(header__search.value)
 }
 
-function header__search_buttons_remove() {
-    header__search_search_button.classList.remove('header__search-search-button_alt')
-}
 
 function header__search_buttons_empty_alt_remove() {
     header__search_buttons_empty.classList.remove('header__search-buttons-empty_alt')
@@ -197,25 +194,17 @@ function header_search_closer_full_size_remove() {
 }
 
 header__search.onclick = () => { 
+    header__search_buttons.classList.remove('header__search-buttons_alt')
     header__search.classList.add('header__search_alt')
     header__list.classList.add('header__list_alt')
     header_search_closer.classList.add('header-search-closer')
     header_search_closer.classList.add('header-search-closer_alt')
-    header__search_search_button.classList.add('header__search-search-button_alt')
     if (document.querySelector('.auto-slider') != null) {
         clearTimeout(timeout)
         slider_line_active_0()
     }
 }
 
-header__search_search_button.onclick = () => {
-    header__search_search_button.classList.remove('header__search-search-button_alt-2')
-    setInterval(() => {
-        if (header__search_value_do_empty()) {
-            header__search_search_button.classList.add('header__search-search-button_alt-2') 
-        }
-    }, 0)
-}
 
 header__search_value_del.onclick = () => {
     header__search_value_remove()
@@ -224,7 +213,7 @@ header__search_value_del.onclick = () => {
 } 
 
 header_search_closer.onclick = () => {
-    header__search_buttons_remove()
+    header__search_buttons.classList.add('header__search-buttons_alt')
     header_search_closer_full_size_remove()
     header__search_value_remove()
     header__search_buttons_empty_alt_remove()
@@ -233,9 +222,9 @@ header_search_closer.onclick = () => {
 
 document.addEventListener('keydown', e => {
     if(e.key === "Escape" && header__search.classList.contains('header__search_alt')) {
+        header__search_buttons.classList.add('header__search-buttons_alt')
         header__search_value_remove()
         header_search_closer_full_size_remove()
-        header__search_buttons_remove()
         header__search_buttons_empty_alt_remove()
         if (document.querySelector('.auto-slider') != null) slider_underline()
     }
@@ -427,24 +416,77 @@ header__search.oninput = function() {
     search_by_value(header__search.value)
 }
 
-let is_entry = document.querySelector('[data-is-entry]')
+let is_entry = [...document.querySelectorAll('[data-is-entry]')]
+let profile = document.querySelector('.header__profile')  
 if (is_entry) {
-    let profile = document.querySelector('.header__profile')  
-    is_entry.onclick = () => {
-        profile.classList.remove('remove')
-        document.addEventListener('keydown', e => {
-            if(e.key === "Escape") {
-                profile.classList.add('remove')
+    for (let i = 0; i < is_entry.length; i++) {
+        if (i === 0) {
+            is_entry[i].onclick = () => {
+                sticks_animation()
+                profile.classList.remove('remove')
+                document.addEventListener('keydown', e => {
+                    if(e.key === "Escape") {
+                        profile.classList.add('remove')
+                    }
+                })
             }
-        })
+        }
+        else {
+            is_entry[i].onclick = () => {
+                profile.classList.remove('remove')
+                document.addEventListener('keydown', e => {
+                    if(e.key === "Escape") {
+                        profile.classList.add('remove')
+                    }
+                })
+            }
+        }
+        
     }
     window.addEventListener('click', e => {
         const target = e.target
-        if (!target.closest('.header__profile') && !target.closest('.header__favorite-products-link')) {
+        if (!target.closest('.header__profile') && !target.closest('.header__favorite-products-link') && !target.closest('.entry')) {
             profile.classList.add('remove')
         }
     })
 }
 
+    //бургер
+let sidebar = document.querySelector('.sidebar')
+function sticks_animation() {
+    let sticks = [...document.querySelectorAll('.berger__stick')]
+    sticks.forEach(stick => {
+        if (stick.classList.contains('open')) {
+            stick.classList.add('close')
+            stick.classList.remove('open')
+        }
+        else {
+            stick.classList.remove('close')
+            stick.classList.add('open')
+        }
+    })
+    sidebar.classList.toggle('sidebar_alternative')
+    body.style.overflow = 'hidden'
+}
+if (window.location.href == 'http://localhost/spectr-nn/pages/favorite_products.php') {
+    document.querySelector('.header__right').style.marginRight = '30px'
+    profile.style.marginRight = '-10px'
+}
+document.querySelector('.berger').onclick = () => {
+    sticks_animation()
+    window.addEventListener('click', e => {
+        const target = e.target
+        if (!target.closest('.sidebar_alternative') && !target.closest('.berger') && sidebar.classList.contains('sidebar_alternative')) {
+            sticks_animation()
+            body.style.overflow = 'visible'
+        }
+    })
+    document.addEventListener('keydown', e => {
+        if(e.key === "Escape" && sidebar.classList.contains('sidebar_alternative')) {
+            sticks_animation()
+            body.style.overflow = 'visible'
+        }
+    })
+}
 
  
